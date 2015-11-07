@@ -1,32 +1,35 @@
 package dsa.common.data;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Geld {
-	private int dukaten;
-	private int silbertaler;
-	private int heller;
-	private int kreuzer;
-	public int getDukaten() {
+	private Integer dukaten;
+	private Integer silbertaler;
+	private Integer heller;
+	private Integer kreuzer;
+	public Integer getDukaten() {
 		return dukaten;
 	}
-	public void setDukaten(int dukaten) {
+	public void setDukaten(Integer dukaten) {
 		this.dukaten = dukaten;
 	}
-	public int getSilbertaler() {
+	public Integer getSilbertaler() {
 		return silbertaler;
 	}
-	public void setSilbertaler(int silbertaler) {
+	public void setSilbertaler(Integer silbertaler) {
 		this.silbertaler = silbertaler;
 	}
-	public int getHeller() {
+	public Integer getHeller() {
 		return heller;
 	}
-	public void setHeller(int heller) {
+	public void setHeller(Integer heller) {
 		this.heller = heller;
 	}
-	public int getKreuzer() {
+	public Integer getKreuzer() {
 		return kreuzer;
 	}
-	public void setKreuzer(int kreuzer) {
+	public void setKreuzer(Integer kreuzer) {
 		this.kreuzer = kreuzer;
 	}
 }

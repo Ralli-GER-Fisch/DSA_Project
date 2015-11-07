@@ -3,6 +3,13 @@ package dsa.common.data;
 
 import java.util.List;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -10,18 +17,29 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NaturalId;
+
 import dsa.common.data.util.adapter.GeschlechtAdapter;
 import dsa.common.data.util.enums.Geschlecht;
 
+@Entity
+@Table(schema="DSA", name="CHARAKTER")
 @XmlRootElement(namespace = "http://ralliGERfisch/DSA_project.com/")
 public class Charakter {
-
+	@Id
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment",strategy="increment")
+	private Long id;
+	
+	@NaturalId
 	private String name;
-	private int	alter;
+	private Integer	alter;
+	@Enumerated(EnumType.STRING)
 	@XmlJavaTypeAdapter(GeschlechtAdapter.class)
 	private Geschlecht geschlecht;
-	private int groesse;
-	private int gewicht;
+	private Integer groesse;
+	private Integer gewicht;
 	
 	@XmlElement(name = "augenfarbe")
 	private String augenFarbe;
@@ -38,19 +56,19 @@ public class Charakter {
 	@XmlElement(name = "eigenschaft")
 	private List<Eigenschaft> eigenschaften;
 	
-	private int lebenspunkte;
-	private int ausdauer;
-	private int astralenergie;
-	private int karmalenergie;
-	private int magieresistenz;
+	private Integer lebenspunkte;
+	private Integer ausdauer;
+	private Integer astralenergie;
+	private Integer karmalenergie;
+	private Integer magieresistenz;
 	
-	private int beherrschungswert;
-	private int artefaktkontrolle;
-	private int entrueckung;
-	private int geschwindigkeit;
+	private Integer beherrschungswert;
+	private Integer artefaktkontrolle;
+	private Integer entrueckung;
+	private Integer geschwindigkeit;
 	
-	private int abenteuerpunkte;
-	private int abenteuerpunkteVerbraucht;
+	private Integer abenteuerpunkte;
+	private Integer abenteuerpunkteVerbraucht;
 	
 	
 	@XmlElementWrapper(name = "vorteile")
@@ -62,10 +80,10 @@ public class Charakter {
 	private List<Nachteil> nachteile;
 	
 	
-	private int attackeBasis;
-	private int paradeBasis;
-	private int fernkampfBasis;
-	private int initativeBasis;
+	private Integer attackeBasis;
+	private Integer paradeBasis;
+	private Integer fernkampfBasis;
+	private Integer initativeBasis;
 	
 	
 	@XmlElementWrapper(name = "sonderfertigkeiten")
@@ -76,7 +94,7 @@ public class Charakter {
 	@XmlElement(name = "talent")
 	private List<Talent> talente;
 	
-	
+	@Embedded
 	private Geld geld;
 	
 	@XmlElementWrapper(name = "ausruestung")
@@ -85,20 +103,22 @@ public class Charakter {
 		@XmlElementRef(type = AusruestungsGegenstand.class )
 	})
 	private List<Ausruestung> ausruestung;
+		
+	
+	/*--------------------    Function   Area --------------------*/
+	public Charakter() {
+		// TODO Auto-generated constructor stub
+	}
 
+	/*-------------------- Getter/Setter Area --------------------*/
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
-	
-	
-//	@XmlElementRefs(
-//			  {
-//				    @XmlElementRef( type = Player.class ),
-//				    @XmlElementRef( type = Key.class ),
-//				  } )
-	
-	
-	
-	
-	/*-------------------- Getter/Setter Area --------------------*/	
 	public String getName() {
 		return name;
 	}
@@ -107,11 +127,11 @@ public class Charakter {
 		this.name = name;
 	}
 
-	public int getAlter() {
+	public Integer getAlter() {
 		return alter;
 	}
 
-	public void setAlter(int alter) {
+	public void setAlter(Integer alter) {
 		this.alter = alter;
 	}
 
@@ -123,19 +143,19 @@ public class Charakter {
 		this.geschlecht = geschlecht;
 	}
 
-	public int getGroesse() {
+	public Integer getGroesse() {
 		return groesse;
 	}
 
-	public void setGroesse(int groesse) {
+	public void setGroesse(Integer groesse) {
 		this.groesse = groesse;
 	}
 
-	public int getGewicht() {
+	public Integer getGewicht() {
 		return gewicht;
 	}
 
-	public void setGewicht(int gewicht) {
+	public void setGewicht(Integer gewicht) {
 		this.gewicht = gewicht;
 	}
 
@@ -199,91 +219,91 @@ public class Charakter {
 		this.eigenschaften.add(eigenschaft);
 	}
 
-	public int getLebenspunkte() {
+	public Integer getLebenspunkte() {
 		return lebenspunkte;
 	}
 
-	public void setLebenspunkte(int lebenspunkte) {
+	public void setLebenspunkte(Integer lebenspunkte) {
 		this.lebenspunkte = lebenspunkte;
 	}
 
-	public int getAusdauer() {
+	public Integer getAusdauer() {
 		return ausdauer;
 	}
 
-	public void setAusdauer(int ausdauer) {
+	public void setAusdauer(Integer ausdauer) {
 		this.ausdauer = ausdauer;
 	}
 
-	public int getAstralenergie() {
+	public Integer getAstralenergie() {
 		return astralenergie;
 	}
 
-	public void setAstralenergie(int astralenergie) {
+	public void setAstralenergie(Integer astralenergie) {
 		this.astralenergie = astralenergie;
 	}
 
-	public int getKarmalenergie() {
+	public Integer getKarmalenergie() {
 		return karmalenergie;
 	}
 
-	public void setKarmalenergie(int karmalenergie) {
+	public void setKarmalenergie(Integer karmalenergie) {
 		this.karmalenergie = karmalenergie;
 	}
 
-	public int getMagieresistenz() {
+	public Integer getMagieresistenz() {
 		return magieresistenz;
 	}
 
-	public void setMagieresistenz(int magieresistenz) {
+	public void setMagieresistenz(Integer magieresistenz) {
 		this.magieresistenz = magieresistenz;
 	}
 
-	public int getBeherrschungswert() {
+	public Integer getBeherrschungswert() {
 		return beherrschungswert;
 	}
 
-	public void setBeherrschungswert(int beherrschungswert) {
+	public void setBeherrschungswert(Integer beherrschungswert) {
 		this.beherrschungswert = beherrschungswert;
 	}
 
-	public int getArtefaktkontrolle() {
+	public Integer getArtefaktkontrolle() {
 		return artefaktkontrolle;
 	}
 
-	public void setArtefaktkontrolle(int artefaktkontrolle) {
+	public void setArtefaktkontrolle(Integer artefaktkontrolle) {
 		this.artefaktkontrolle = artefaktkontrolle;
 	}
 
-	public int getEntrueckung() {
+	public Integer getEntrueckung() {
 		return entrueckung;
 	}
 
-	public void setEntrueckung(int entrueckung) {
+	public void setEntrueckung(Integer entrueckung) {
 		this.entrueckung = entrueckung;
 	}
 
-	public int getGeschwindigkeit() {
+	public Integer getGeschwindigkeit() {
 		return geschwindigkeit;
 	}
 
-	public void setGeschwindigkeit(int geschwindigkeit) {
+	public void setGeschwindigkeit(Integer geschwindigkeit) {
 		this.geschwindigkeit = geschwindigkeit;
 	}
 
-	public int getAbenteuerpunkte() {
+	public Integer getAbenteuerpunkte() {
 		return abenteuerpunkte;
 	}
 
-	public void setAbenteuerpunkte(int abenteuerpunkte) {
+	public void setAbenteuerpunkte(Integer abenteuerpunkte) {
 		this.abenteuerpunkte = abenteuerpunkte;
 	}
 
-	public int getAbenteuerpunkteVerbraucht() {
+	public Integer getAbenteuerpunkteVerbraucht() {
 		return abenteuerpunkteVerbraucht;
 	}
 
-	public void setAbenteuerpunkteVerbraucht(int abenteuerpunkteVerbraucht) {
+	public void setAbenteuerpunkteVerbraucht(Integer abenteuerpunkteVerbraucht) {
 		this.abenteuerpunkteVerbraucht = abenteuerpunkteVerbraucht;
 	}
 
@@ -311,35 +331,35 @@ public class Charakter {
 		this.nachteile.add(nachteil);
 	}
 
-	public int getAttackeBasis() {
+	public Integer getAttackeBasis() {
 		return attackeBasis;
 	}
 
-	public void setAttackeBasis(int attackeBasis) {
+	public void setAttackeBasis(Integer attackeBasis) {
 		this.attackeBasis = attackeBasis;
 	}
 
-	public int getParadeBasis() {
+	public Integer getParadeBasis() {
 		return paradeBasis;
 	}
 
-	public void setParadeBasis(int paradeBasis) {
+	public void setParadeBasis(Integer paradeBasis) {
 		this.paradeBasis = paradeBasis;
 	}
 
-	public int getFernkampfBasis() {
+	public Integer getFernkampfBasis() {
 		return fernkampfBasis;
 	}
 
-	public void setFernkampfBasis(int fernkampfBasis) {
+	public void setFernkampfBasis(Integer fernkampfBasis) {
 		this.fernkampfBasis = fernkampfBasis;
 	}
 
-	public int getInitativeBasis() {
+	public Integer getInitativeBasis() {
 		return initativeBasis;
 	}
 
-	public void setInitativeBasis(int initativeBasis) {
+	public void setInitativeBasis(Integer initativeBasis) {
 		this.initativeBasis = initativeBasis;
 	}
 

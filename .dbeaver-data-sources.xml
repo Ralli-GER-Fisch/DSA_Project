@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-sources>
+	<data-source id="derby-150e1e5a2ec-4d9d4fe9b0c769f1" provider="generic" driver="derby" name="Derby DSA DB" create-date="1446899051148" update-date="1446899934796" save-password="true" show-system-objects="true" read-only="false">
+		<connection server="" database="H:\home\git\DSA_Project\derby" url="jdbc:derby:H:\home\git\DSA_Project\derby" user="" type="dev">
+			<bootstrap txnIsolation="2" defaultObject="DSA"/>
+		</connection>
+	</data-source>
+</data-sources>

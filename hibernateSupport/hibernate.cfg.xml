@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory name="DSA_DB">
+  <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</property>
+  <property name="hibernate.connection.url">jdbc:derby:H:\home\git\DSA_Project\derby</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.default_schema">DSA</property>
+  <property name="hibernate.connection.release_mode">auto</property>
+  <property name="hibernate.transaction.auto_close_session">true</property>
+
+  <!-- MAPPINGS -->
+  <mapping class="dsa.common.data.Charakter"/>
+  
+ </session-factory>
+</hibernate-configuration>
