@@ -32,5 +32,35 @@ public class Behaelter extends Ausruestung{
 		@XmlElementRef(type = AusruestungsGegenstand.class)
 	})
 	private List<Ausruestung> inhalt;
+	/*--------------------   Constructor Area --------------------*/
+	public Behaelter() {
+		// TODO Auto-generated constructor stub
+	}
+	/*--------------------    Function   Area --------------------*/
+	
+	/*-------------------- Getter/Setter Area --------------------*/
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getGewicht() {
+		return gewicht;
+	}
+
+	public void setGewicht(Integer gewicht) {
+		this.gewicht = gewicht;
+	}
+
+	public List<Ausruestung> getInhalt() {
+		return inhalt;
+	}
+
+	public void setInhalt(List<Ausruestung> inhalt) {
+		this.inhalt = inhalt;
+	}
 
 }
