@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="F:/EclipseLibs/db-derby-10.12.1.1-bin/lib/derby.jar"/>
 	<classpathentry kind="lib" path="F:/EclipseLibs/db-derby-10.12.1.1-bin/lib/derbyclient.jar"/>
 	<classpathentry kind="lib" path="F:/EclipseLibs/db-derby-10.12.1.1-bin/lib/derbynet.jar"/>
@@ -49,6 +44,11 @@
 	<classpathentry kind="lib" path="F:/EclipseLibs/hibernate-release-5.0.2.Final/lib/required/jboss-logging-3.3.0.Final.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="file:/F:/EclipseLibs/hibernate-release-5.0.2.Final/documentation/javadocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
