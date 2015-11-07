@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="F:/EclipseLibs/db-derby-10.12.1.1-bin/lib/derby.jar"/>
+	<classpathentry kind="lib" path="F:/EclipseLibs/db-derby-10.12.1.1-bin/lib/derbyclient.jar"/>
+	<classpathentry kind="lib" path="F:/EclipseLibs/db-derby-10.12.1.1-bin/lib/derbynet.jar"/>
+	<classpathentry kind="lib" path="F:/EclipseLibs/db-derby-10.12.1.1-bin/lib/derbytools.jar"/>
+	<classpathentry kind="lib" path="F:/EclipseLibs/hibernate-release-5.0.2.Final/lib/required/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="F:/EclipseLibs/hibernate-release-5.0.2.Final/lib/required/dom4j-1.6.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/F:/EclipseLibs/hibernate-release-5.0.2.Final/documentation/javadocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="F:/EclipseLibs/hibernate-release-5.0.2.Final/lib/required/geronimo-jta_1.1_spec-1.1.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/F:/EclipseLibs/hibernate-release-5.0.2.Final/documentation/javadocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="F:/EclipseLibs/hibernate-release-5.0.2.Final/lib/required/hibernate-commons-annotations-5.0.0.Final.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/F:/EclipseLibs/hibernate-release-5.0.2.Final/documentation/javadocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="F:/EclipseLibs/hibernate-release-5.0.2.Final/lib/required/hibernate-core-5.0.2.Final.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/F:/EclipseLibs/hibernate-release-5.0.2.Final/documentation/javadocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="F:/EclipseLibs/hibernate-release-5.0.2.Final/lib/required/hibernate-jpa-2.1-api-1.0.0.Final.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/F:/EclipseLibs/hibernate-release-5.0.2.Final/documentation/javadocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="F:/EclipseLibs/hibernate-release-5.0.2.Final/lib/required/jandex-1.2.2.Final.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/F:/EclipseLibs/hibernate-release-5.0.2.Final/documentation/javadocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="F:/EclipseLibs/hibernate-release-5.0.2.Final/lib/required/javassist-3.18.1-GA.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/F:/EclipseLibs/hibernate-release-5.0.2.Final/documentation/javadocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="F:/EclipseLibs/hibernate-release-5.0.2.Final/lib/required/jboss-logging-3.3.0.Final.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/F:/EclipseLibs/hibernate-release-5.0.2.Final/documentation/javadocs/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
