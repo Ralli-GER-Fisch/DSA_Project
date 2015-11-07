@@ -1,16 +1,30 @@
 package dsa.common.data;
 
 import java.util.List;
-import java.util.Vector;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
-public class Behaelter {
-	private String name;
-	private int gewicht;
-	private Vector<Integer> dimensionen;
+import org.hibernate.annotations.GenericGenerator;
+@Entity
+@Table(name="AUSRUESTUNGBEHAELTER")
+@PrimaryKeyJoinColumn(name="AUSRUESTUNG_ID")
+public class Behaelter extends Ausruestung{
+	@Id
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment",strategy="increment")
+	@Column(name="AUSRUESTUNGBEHAELTER_ID")
+	private Long id;
+	//Muss anders organisiert werden um Behälter nur einfach zu definieren, aber das Mapping für viele Charakter offen zu lassen.
+	private Integer gewicht;
+	//private Vector<Integer> dimensionen;
 	
 	@XmlElementWrapper(name = "inhalt")
 	@XmlElementRefs({
@@ -19,41 +33,4 @@ public class Behaelter {
 	})
 	private List<Ausruestung> inhalt;
 
-	
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getGewicht() {
-		return gewicht;
-	}
-
-	public void setGewicht(int gewicht) {
-		this.gewicht = gewicht;
-	}
-
-	public Vector<Integer> getDimensionen() {
-		return dimensionen;
-	}
-
-	public void setDimensionen(Vector<Integer> dimensionen) {
-		this.dimensionen = dimensionen;
-	}
-
-	public List<Ausruestung> getInhalt() {
-		return inhalt;
-	}
-
-	public void setInhalt(List<Ausruestung> inhalt) {
-		this.inhalt = inhalt;
-	}
-	
-	public void addInhalt(Ausruestung objekt) {
-		this.inhalt.add(objekt);
-	}
 }

@@ -3,13 +3,17 @@ package dsa.common.data;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -20,6 +24,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 
+import dsa.common.data.charaktermappings.CharakterAusruestung;
+import dsa.common.data.charaktermappings.CharakterEigenschaft;
+import dsa.common.data.charaktermappings.CharakterNachteil;
+import dsa.common.data.charaktermappings.CharakterTalent;
+import dsa.common.data.charaktermappings.CharakterVorteil;
 import dsa.common.data.util.adapter.GeschlechtAdapter;
 import dsa.common.data.util.enums.Geschlecht;
 
@@ -30,6 +39,7 @@ public class Charakter {
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment",strategy="increment")
+	@Column(name="CHARAKTER_ID")
 	private Long id;
 	
 	@NaturalId
@@ -51,10 +61,10 @@ public class Charakter {
 	private Kultur kultur;
 	private Profession profession;
 	
-	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.charakter")
 	@XmlElementWrapper(name = "eigenschaften")
 	@XmlElement(name = "eigenschaft")
-	private List<Eigenschaft> eigenschaften;
+	private List<CharakterEigenschaft> charakterEigenschaften;
 	
 	private Integer lebenspunkte;
 	private Integer ausdauer;
@@ -70,14 +80,15 @@ public class Charakter {
 	private Integer abenteuerpunkte;
 	private Integer abenteuerpunkteVerbraucht;
 	
-	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.charakter")
 	@XmlElementWrapper(name = "vorteile")
 	@XmlElement(name = "vorteil")
-	private List<Vorteil> vorteile;
+	private List<CharakterVorteil> charakterVorteile;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.charakter")
 	@XmlElementWrapper(name = "nachteile")
 	@XmlElement(name = "nachteil")
-	private List<Nachteil> nachteile;
+	private List<CharakterNachteil> charakterNachteile;
 	
 	
 	private Integer attackeBasis;
@@ -85,31 +96,35 @@ public class Charakter {
 	private Integer fernkampfBasis;
 	private Integer initativeBasis;
 	
-	
+	@OneToMany
 	@XmlElementWrapper(name = "sonderfertigkeiten")
 	@XmlElement(name = "sonderfertigkeit")
 	private List<Sonderfertigkeit> sonderfertigkeiten;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.charakter")
 	@XmlElementWrapper(name = "talente")
 	@XmlElement(name = "talent")
-	private List<Talent> talente;
+	private List<CharakterTalent> charakterTalente;
 	
 	@Embedded
 	private Geld geld;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.charakter")
 	@XmlElementWrapper(name = "ausruestung")
 	@XmlElementRefs({
 		@XmlElementRef(type = Behaelter.class ),
 		@XmlElementRef(type = AusruestungsGegenstand.class )
 	})
-	private List<Ausruestung> ausruestung;
+	private List<CharakterAusruestung> charakterAusruestung;
 		
 	
-	/*--------------------    Function   Area --------------------*/
+	/*--------------------   Constructor Area --------------------*/
 	public Charakter() {
 		// TODO Auto-generated constructor stub
 	}
 
+	/*--------------------    Function   Area --------------------*/
+	
 	/*-------------------- Getter/Setter Area --------------------*/
 	public Long getId() {
 		return id;
@@ -207,16 +222,12 @@ public class Charakter {
 		this.profession = profession;
 	}
 
-	public List<Eigenschaft> getEigenschaften() {
-		return eigenschaften;
+	public List<CharakterEigenschaft> getCharakterEigenschaften() {
+		return charakterEigenschaften;
 	}
 
-	public void setEigenschaften(List<Eigenschaft> eigenschaften) {
-		this.eigenschaften = eigenschaften;
-	}
-	
-	public void addEigenschaften(Eigenschaft eigenschaft) {
-		this.eigenschaften.add(eigenschaft);
+	public void setCharakterEigenschaften(List<CharakterEigenschaft> charakterEigenschaften) {
+		this.charakterEigenschaften = charakterEigenschaften;
 	}
 
 	public Integer getLebenspunkte() {
@@ -307,28 +318,20 @@ public class Charakter {
 		this.abenteuerpunkteVerbraucht = abenteuerpunkteVerbraucht;
 	}
 
-	public List<Vorteil> getVorteile() {
-		return vorteile;
+	public List<CharakterVorteil> getCharakterVorteile() {
+		return charakterVorteile;
 	}
 
-	public void setVorteile(List<Vorteil> vorteile) {
-		this.vorteile = vorteile;
-	}
-	
-	public void addVorteil(Vorteil vorteil) {
-		this.vorteile.add(vorteil);
+	public void setCharakterVorteile(List<CharakterVorteil> charakterVorteile) {
+		this.charakterVorteile = charakterVorteile;
 	}
 
-	public List<Nachteil> getNachteile() {
-		return nachteile;
+	public List<CharakterNachteil> getCharakterNachteile() {
+		return charakterNachteile;
 	}
 
-	public void setNachteile(List<Nachteil> nachteile) {
-		this.nachteile = nachteile;
-	}
-	
-	public void addNachteil(Nachteil nachteil) {
-		this.nachteile.add(nachteil);
+	public void setCharakterNachteile(List<CharakterNachteil> charakterNachteile) {
+		this.charakterNachteile = charakterNachteile;
 	}
 
 	public Integer getAttackeBasis() {
@@ -370,21 +373,13 @@ public class Charakter {
 	public void setSonderfertigkeiten(List<Sonderfertigkeit> sonderfertigkeiten) {
 		this.sonderfertigkeiten = sonderfertigkeiten;
 	}
-
-	public void addSonderfertigkeit(Sonderfertigkeit sonderfertigkeit) {
-		this.sonderfertigkeiten.add(sonderfertigkeit);
-	}
 	
-	public List<Talent> getTalente() {
-		return talente;
+	public List<CharakterTalent> getCharakterTalente() {
+		return charakterTalente;
 	}
 
-	public void setTalente(List<Talent> talente) {
-		this.talente = talente;
-	}
-	
-	public void addTalente(Talent talent) {
-		this.talente.add(talent);
+	public void setCharakterTalente(List<CharakterTalent> charakterTalente) {
+		this.charakterTalente = charakterTalente;
 	}
 
 	public Geld getGeld() {
@@ -394,16 +389,44 @@ public class Charakter {
 	public void setGeld(Geld geld) {
 		this.geld = geld;
 	}
-
-	public List<Ausruestung> getAusruestung() {
-		return ausruestung;
+	
+	@Transient
+	public Integer getDukaten() {
+		return getGeld().getDukaten();
 	}
-
-	public void setAusruestung(List<Ausruestung> ausruestung) {
-		this.ausruestung = ausruestung;
+	public void setDukaten(Integer dukaten){
+		getGeld().setDukaten(dukaten);
 	}
 	
-	public void addAusruestung(Ausruestung ausruestung) {
-		this.ausruestung.add(ausruestung);
+	@Transient
+	public Integer getSilbertaler() {
+		return getGeld().getSilbertaler();
+	}
+	public void setSilbertaler(Integer silbertaler){
+		getGeld().setSilbertaler(silbertaler);
+	}
+	
+	@Transient
+	public Integer getHeller() {
+		return getGeld().getHeller();
+	}
+	public void setHeller(Integer heller){
+		getGeld().setHeller(heller);
+	}
+	
+	@Transient
+	public Integer getKreuzer() {
+		return getGeld().getKreuzer();
+	}
+	public void setKreuzer(Integer kreuzer){
+		getGeld().setKreuzer(kreuzer);
+	}
+
+	public List<CharakterAusruestung> getCharakterAusruestung() {
+		return charakterAusruestung;
+	}
+
+	public void setCharakterAusruestung(List<CharakterAusruestung> charakterAusruestung) {
+		this.charakterAusruestung = charakterAusruestung;
 	}
 }

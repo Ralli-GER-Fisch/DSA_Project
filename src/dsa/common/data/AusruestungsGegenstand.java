@@ -1,29 +1,46 @@
 package dsa.common.data;
 
-import java.util.Vector;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
-public class AusruestungsGegenstand {
-	private String name;
-	private int gewicht;
-	private Vector<Integer> dimensionen;
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="AUSRUESTUNGSGEGENSTAND")
+@PrimaryKeyJoinColumn(name="AUSRUESTUNG_ID")
+public class AusruestungsGegenstand extends Ausruestung{
+	@Id
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment",strategy="increment")
+	@Column(name="AUSRUESTUNGSGEGENSTAND_ID")
+	private Long id;
 	
+	private Integer gewicht;
+	//private Vector<Integer> dimensionen;
+	/*--------------------   Constructor Area --------------------*/
+	public AusruestungsGegenstand() {
+		// TODO Auto-generated constructor stub
+	}
+	/*--------------------    Function   Area --------------------*/
 	
-	public String getName() {
-		return name;
+	/*-------------------- Getter/Setter Area --------------------*/
+	public Long getId() {
+		return id;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setId(Long id) {
+		this.id = id;
 	}
-	public int getGewicht() {
+
+	public Integer getGewicht() {
 		return gewicht;
 	}
-	public void setGewicht(int gewicht) {
+
+	public void setGewicht(Integer gewicht) {
 		this.gewicht = gewicht;
-	}
-	public Vector<Integer> getDimensionen() {
-		return dimensionen;
-	}
-	public void setDimensionen(Vector<Integer> dimensionen) {
-		this.dimensionen = dimensionen;
 	}
 }

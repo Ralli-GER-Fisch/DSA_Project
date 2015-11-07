@@ -10,9 +10,8 @@
   <property name="hibernate.default_schema">DSA</property>
   <property name="hibernate.connection.release_mode">auto</property>
   <property name="hibernate.transaction.auto_close_session">true</property>
-
+  <property name="hibernate.hbm2ddl.auto">create</property>
   <!-- MAPPINGS -->
   <mapping class="dsa.common.data.Charakter"/>
-  
  </session-factory>
 </hibernate-configuration>
