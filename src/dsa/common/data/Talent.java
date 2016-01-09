@@ -30,14 +30,19 @@ public abstract class Talent {
 	private String name;
 	private String beschreibung;
 	private Integer typ;
-	final static Integer	TYP_GABE = 1,
+	private Integer gruppe;
+	final static Integer	TYP_KAMPF = 0,
+							TYP_KOERPERLICH = 1,
 							TYP_GESELLSCHAFTLICH = 2,
-							TYP_HANDWERK = 3,
-							TYP_KAMPF = 4,
-							TYP_KOERPERLICH = 5,
-							TYP_NATUR = 6,
-							TYP_SPRACHE = 7,
-							TYP_WISSEN = 8;
+							TYP_NATUR = 3,
+							TYP_WISSEN = 4,
+							TYP_HANDWERK = 5,
+							TYP_SPRACHE = 6,
+							TYP_SCHRIFT = 7,
+							TYP_GABE = 8;
+	final static Integer	GRUPPE_BASIS = 0,
+							GRUPPE_SPEZIAL = 1,
+							GRUPPE_BERUF = 2;
 	/*--------------------   Constructor Area --------------------*/
 	public Talent() {
 		// TODO Auto-generated constructor stub
@@ -74,5 +79,11 @@ public abstract class Talent {
 	}
 	public void setTyp(Integer typ) {
 		this.typ = typ;
+	}
+	public Integer getGruppe() {
+		return gruppe;
+	}
+	public void setGruppe(Integer gruppe) {
+		this.gruppe = gruppe;
 	}
 }
