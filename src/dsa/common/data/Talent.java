@@ -28,6 +28,16 @@ public abstract class Talent {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.talent")
 	private List<CharakterTalent> charakterTalent;
 	private String name;
+	private String beschreibung;
+	private Integer typ;
+	final static Integer	TYP_GABE = 1,
+							TYP_GESELLSCHAFTLICH = 2,
+							TYP_HANDWERK = 3,
+							TYP_KAMPF = 4,
+							TYP_KOERPERLICH = 5,
+							TYP_NATUR = 6,
+							TYP_SPRACHE = 7,
+							TYP_WISSEN = 8;
 	/*--------------------   Constructor Area --------------------*/
 	public Talent() {
 		// TODO Auto-generated constructor stub
@@ -52,5 +62,17 @@ public abstract class Talent {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getBeschreibung() {
+		return beschreibung;
+	}
+	public void setBeschreibung(String beschreibung) {
+		this.beschreibung = beschreibung;
+	}
+	public Integer getTyp() {
+		return typ;
+	}
+	public void setTyp(Integer typ) {
+		this.typ = typ;
 	}
 }

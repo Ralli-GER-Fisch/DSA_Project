@@ -2,16 +2,57 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
                                          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
- <session-factory name="DSA_DB">
-  <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</property>
-  <property name="hibernate.connection.url">jdbc:derby:H:\home\git\DSA_Project\derby</property>
-  <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
-  <property name="hibernate.show_sql">true</property>
-  <property name="hibernate.default_schema">DSA</property>
-  <property name="hibernate.connection.release_mode">auto</property>
-  <property name="hibernate.transaction.auto_close_session">true</property>
-  <property name="hibernate.hbm2ddl.auto">create</property>
-  <!-- MAPPINGS -->
-  <mapping class="dsa.common.data.Charakter"/>
- </session-factory>
+	<session-factory name="DSA_DB">
+		<property name="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</property>
+		<property name="hibernate.connection.url">jdbc:derby:H:\home\git\DSA_Project\derby</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.default_schema">DSA</property>
+		<property name="hibernate.connection.release_mode">auto</property>
+		<property name="hibernate.transaction.auto_close_session">true</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
+		<!-- #################### MAPPINGS #################### -->
+		<!-- data -->
+		<mapping class="dsa.common.data.Charakter" />
+		<mapping class="dsa.common.data.Ausruestung" />
+		<mapping class="dsa.common.data.AusruestungsGegenstand" />
+		<mapping class="dsa.common.data.Behaelter" />
+		<mapping class="dsa.common.data.Eigenschaft" />
+		<mapping class="dsa.common.data.Geld" />
+		<mapping class="dsa.common.data.Kultur" />
+		<mapping class="dsa.common.data.Nachteil" />
+		<mapping class="dsa.common.data.Profession" />
+		<mapping class="dsa.common.data.Rasse" />
+		<mapping class="dsa.common.data.Sonderfertigkeit" />
+		<mapping class="dsa.common.data.Talent" />
+		<mapping class="dsa.common.data.Vorteil" />
+		<mapping class="dsa.common.data.Wirkung" />
+		
+		<mapping class="dsa.common.data.talente.Gabe" />
+		<mapping class="dsa.common.data.talente.GesellschaftlichesTalent" />
+		<mapping class="dsa.common.data.talente.Handwerkstalent" />
+		<mapping class="dsa.common.data.talente.Kampftalent" />
+		<mapping class="dsa.common.data.talente.KoerperlichesTalent" />
+		<mapping class="dsa.common.data.talente.Naturtalent" />
+		<mapping class="dsa.common.data.talente.Sprache" />
+		<mapping class="dsa.common.data.talente.Wissenstalent" />
+		
+		
+		<!-- charmappings -->
+		<mapping class="dsa.common.data.charaktermappings.CharakterAusruestung" />
+		<mapping class="dsa.common.data.charaktermappings.CharakterEigenschaft" />
+		<mapping class="dsa.common.data.charaktermappings.CharakterNachteil" />
+		<mapping class="dsa.common.data.charaktermappings.CharakterTalent" />
+		<mapping class="dsa.common.data.charaktermappings.CharakterVorteil" />
+		
+		<!-- embeddedids -->
+		<mapping class="dsa.common.data.charaktermappings.embeddedids.CharakterAusruestungId" />
+		<mapping class="dsa.common.data.charaktermappings.embeddedids.CharakterEigenschaftId" />
+		<mapping class="dsa.common.data.charaktermappings.embeddedids.CharakterNachteilId" />
+		<mapping class="dsa.common.data.charaktermappings.embeddedids.CharakterTalentId" />
+		<mapping class="dsa.common.data.charaktermappings.embeddedids.CharakterVorteilId" />
+		
+		
+
+	</session-factory>
 </hibernate-configuration>

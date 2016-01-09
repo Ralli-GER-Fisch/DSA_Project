@@ -24,6 +24,7 @@ public class Eigenschaft {
 	private Long id;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.eigenschaft")
 	private List<CharakterEigenschaft> charakterEigenschaften;
+	private String name;
 	private String beschreibung;
 	/*--------------------   Constructor Area --------------------*/
 	public Eigenschaft() {
@@ -43,6 +44,12 @@ public class Eigenschaft {
 	}
 	public void setCharakterEigenschaften(List<CharakterEigenschaft> charakterEigenschaften) {
 		this.charakterEigenschaften = charakterEigenschaften;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getBeschreibung() {
 		return beschreibung;

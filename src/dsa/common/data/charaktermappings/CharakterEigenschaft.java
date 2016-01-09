@@ -24,7 +24,7 @@ import dsa.common.data.charaktermappings.embeddedids.CharakterEigenschaftId;
 public class CharakterEigenschaft implements java.io.Serializable {
 	@EmbeddedId
 	private CharakterEigenschaftId pk = new CharakterEigenschaftId();
-	@Column(name="EIGENSCHAFTSWERT", nullable = false)
+	@Column(name="WERT", nullable = false)
 	private Byte wert;
 	
 	/*--------------------   Constructor Area --------------------*/

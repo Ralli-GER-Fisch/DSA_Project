@@ -25,8 +25,8 @@ import dsa.common.data.charaktermappings.embeddedids.CharakterTalentId;
 public abstract class CharakterTalent implements java.io.Serializable{
 	@EmbeddedId
 	private CharakterTalentId pk = new CharakterTalentId();
-	@Column(name="TALENTWERT", nullable = false)
-	private Byte talentwert;
+	@Column(name="WERT", nullable = false)
+	private Byte wert;
 	// TODO: Typ etc.
 	/*--------------------   Constructor Area --------------------*/
 
@@ -53,10 +53,10 @@ public abstract class CharakterTalent implements java.io.Serializable{
 	public void setTalent(Talent talent){
 		getPk().setTalent(talent);
 	}
-	public Byte getTalentwert() {
-		return talentwert;
+	public Byte getWert() {
+		return wert;
 	}
-	public void setTalentwert(Byte talentwert) {
-		this.talentwert = talentwert;
+	public void setWert(Byte wert) {
+		this.wert = wert;
 	}
 }

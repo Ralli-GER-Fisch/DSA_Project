@@ -17,11 +17,12 @@ public class Sonderfertigkeit implements java.io.Serializable {
 	@GenericGenerator(name="increment",strategy="increment")
 	@Column(name="SONDERFERTIGKEIT_ID")
 	private Long id;
-	private Integer name;
+	private String name;
+	private String beschreibung;
 	// TODO: Kosten
 	private String voraussetzung;
 	// TODO: Auswirkung als Wirkung-Object
-	private String auswirkung;
+	//private String auswirkung;
 	/*--------------------   Constructor Area --------------------*/
 	public Sonderfertigkeit() {
 		// TODO Auto-generated constructor stub
@@ -35,11 +36,17 @@ public class Sonderfertigkeit implements java.io.Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Integer getName() {
+	public String getName() {
 		return name;
 	}
-	public void setName(Integer name) {
+	public void setName(String name) {
 		this.name = name;
+	}
+	public String getBeschreibung() {
+		return beschreibung;
+	}
+	public void setBeschreibung(String beschreibung) {
+		this.beschreibung = beschreibung;
 	}
 	public String getVoraussetzung() {
 		return voraussetzung;
@@ -47,10 +54,10 @@ public class Sonderfertigkeit implements java.io.Serializable {
 	public void setVoraussetzung(String voraussetzung) {
 		this.voraussetzung = voraussetzung;
 	}
-	public String getAuswirkung() {
+	/*public String getAuswirkung() {
 		return auswirkung;
 	}
 	public void setAuswirkung(String auswirkung) {
 		this.auswirkung = auswirkung;
-	}
+	}*/
 }

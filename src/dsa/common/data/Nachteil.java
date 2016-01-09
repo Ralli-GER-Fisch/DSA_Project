@@ -26,7 +26,7 @@ public class Nachteil {
 	private List<CharakterNachteil> charakterNachteil;
 	private String name;
 	private String beschreibung;
-	private String auswirkung;
+	//private String auswirkung;
 	//TODO: private Wirkung auswirkung;
 	/*--------------------   Constructor Area --------------------*/
 	public Nachteil() {
@@ -59,11 +59,11 @@ public class Nachteil {
 	public void setBeschreibung(String beschreibung) {
 		this.beschreibung = beschreibung;
 	}
-	public String getAuswirkung() {
+	/*public String getAuswirkung() {
 		return auswirkung;
 	}
 	public void setAuswirkung(String auswirkung) {
 		this.auswirkung = auswirkung;
-	}
+	}*/
 	
 }
