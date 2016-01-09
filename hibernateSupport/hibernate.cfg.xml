@@ -3,14 +3,15 @@
                                          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory name="DSA_DB">
-		<property name="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</property>
-		<property name="hibernate.connection.url">jdbc:derby:H:\home\git\DSA_Project\derby</property>
-		<property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/DSA_user</property>
+		<property name="hibernate.connection.username">DSA_user</property>
+		<property name="hibernate.connection.password">#####</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.show_sql">true</property>
-		<property name="hibernate.default_schema">DSA</property>
+		<property name="hibernate.default_schema">dsa</property>
 		<property name="hibernate.connection.release_mode">auto</property>
 		<property name="hibernate.transaction.auto_close_session">true</property>
-		<property name="hibernate.hbm2ddl.auto">create</property>
 		<!-- #################### MAPPINGS #################### -->
 		<!-- data -->
 		<mapping class="dsa.common.data.Charakter" />
