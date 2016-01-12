@@ -31,6 +31,9 @@ public abstract class Talent {
 	private String beschreibung;
 	private Integer typ;
 	private Integer gruppe;
+	private String spalte;
+	@Column(name="EFFEKTIVE_BEHINDERUNG")
+	private String eBe;
 	final static Integer	TYP_KAMPF = 0,
 							TYP_KOERPERLICH = 1,
 							TYP_GESELLSCHAFTLICH = 2,
@@ -85,5 +88,21 @@ public abstract class Talent {
 	}
 	public void setGruppe(Integer gruppe) {
 		this.gruppe = gruppe;
+	}
+
+	public String getSpalte() {
+		return spalte;
+	}
+
+	public void setSpalte(String spalte) {
+		this.spalte = spalte;
+	}
+
+	public String geteBe() {
+		return eBe;
+	}
+
+	public void seteBe(String eBe) {
+		this.eBe = eBe;
 	}
 }

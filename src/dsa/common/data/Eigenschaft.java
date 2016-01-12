@@ -22,10 +22,11 @@ public class Eigenschaft {
 	@GenericGenerator(name="increment",strategy="increment")
 	@Column(name="EIGENSCHAFT_ID")
 	private Long id;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.eigenschaft")
-	private List<CharakterEigenschaft> charakterEigenschaften;
+	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.eigenschaft")
+	//private List<CharakterEigenschaft> charakterEigenschaften;
 	private String name;
 	private String beschreibung;
+	private String kuerzel;
 	/*--------------------   Constructor Area --------------------*/
 	public Eigenschaft() {
 		// TODO Auto-generated constructor stub
@@ -39,12 +40,12 @@ public class Eigenschaft {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<CharakterEigenschaft> getCharakterEigenschaften() {
+	/*public List<CharakterEigenschaft> getCharakterEigenschaften() {
 		return charakterEigenschaften;
 	}
 	public void setCharakterEigenschaften(List<CharakterEigenschaft> charakterEigenschaften) {
 		this.charakterEigenschaften = charakterEigenschaften;
-	}
+	}*/
 	public String getName() {
 		return name;
 	}
@@ -56,5 +57,16 @@ public class Eigenschaft {
 	}
 	public void setBeschreibung(String beschreibung) {
 		this.beschreibung = beschreibung;
+	}
+	public String getKuerzel() {
+		return kuerzel;
+	}
+	public void setKuerzel(String kuerzel) {
+		this.kuerzel = kuerzel;
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.getClass().toString() +"{\nID: "+ id+"\nName: "+name+"\nKuerzel: "+kuerzel+"\nBeschreibung: "+ beschreibung+"\n}\n";
 	}
 }
