@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 
 import org.hibernate.annotations.GenericGenerator;
 @Entity
-@Table(name="AUSRUESTUNGBEHAELTER")
+@Table(name="ausruestungsbehaelter")
 @PrimaryKeyJoinColumn(name="AUSRUESTUNG_ID")
 public class Behaelter extends Ausruestung{
 	@Id

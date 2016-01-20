@@ -14,7 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import dsa.common.data.charaktermappings.CharakterVorteil;
 @Entity
-@Table(name="VORTEIL")
+@Table(name="vorteil")
 public class Vorteil {
 	@Id
 	@GeneratedValue(generator="increment")

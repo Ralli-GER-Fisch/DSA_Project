@@ -33,7 +33,7 @@ import dsa.common.data.util.adapter.GeschlechtAdapter;
 import dsa.common.data.util.enums.Geschlecht;
 
 @Entity
-@Table(schema="DSA", name="CHARAKTER")
+@Table(name="charakter")
 @XmlRootElement(namespace = "http://ralliGERfisch/DSA_project.com/")
 public class Charakter {
 	@Id

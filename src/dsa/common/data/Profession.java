@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="PROFESSION")
+@Table(name="profession")
 public class Profession {
 	@Id
 	@GeneratedValue(generator="increment")

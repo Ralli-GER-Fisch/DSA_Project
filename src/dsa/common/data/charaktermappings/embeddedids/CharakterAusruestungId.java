@@ -1,11 +1,14 @@
 package dsa.common.data.charaktermappings.embeddedids;
 
+import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
 import dsa.common.data.Ausruestung;
 import dsa.common.data.Charakter;
 
-public class CharakterAusruestungId {
+@SuppressWarnings("serial")
+@Embeddable
+public class CharakterAusruestungId implements java.io.Serializable {
 	@ManyToOne
 	private Charakter charakter;
 	@ManyToOne

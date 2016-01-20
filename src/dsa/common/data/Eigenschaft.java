@@ -1,21 +1,15 @@
 package dsa.common.data;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import dsa.common.data.charaktermappings.CharakterEigenschaft;
-
 @Entity
-@Table(name="EIGENSCHAFT")
+@Table(name="eigenschaft")
 public class Eigenschaft {
 	@Id
 	@GeneratedValue(generator="increment")

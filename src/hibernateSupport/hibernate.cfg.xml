@@ -4,9 +4,9 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/dsa</property>
-		<property name="hibernate.connection.username">DSA_User</property>
-		<property name="hibernate.connection.password">user4.1_RuLeZ</property>
+		<property name="hibernate.connection.url">jdbc:mysql://dsa-project.spdns.eu:3306/dsa</property>
+		<property name="hibernate.connection.username">*****</property>
+		<property name="hibernate.connection.password">*****</property>
 		<property name="hibernate.dialect">MySQL5InnoDB</property>
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.default_schema">dsa</property>

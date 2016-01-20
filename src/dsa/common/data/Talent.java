@@ -17,7 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 import dsa.common.data.charaktermappings.CharakterTalent;
 
 @Entity
-@Table(name="TALENT")
+@Table(name="talent")
 @Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Talent {
 	@Id
@@ -46,6 +46,18 @@ public abstract class Talent {
 	final static Integer	GRUPPE_BASIS = 0,
 							GRUPPE_SPEZIAL = 1,
 							GRUPPE_BERUF = 2;
+	final static String		TYP_KAMPF_STR = "Kampf-Talent",
+							TYP_KOERPERLICH_STR= "Körperliches Talent",
+							TYP_GESELLSCHAFTLICH_STR = "Gesellschaftliches Talent",
+							TYP_NATUR_STR = "Natur-Talent",
+							TYP_WISSEN_STR= "Wissenstalent",
+							TYP_HANDWERK_STR = "Handwerks-Talent",
+							TYP_SPRACHE_STR = "Sprache",
+							TYP_SCHRIFT_STR = "Schrift",
+							TYP_GABE_STR = "Gabe";
+	final static String		GRUPPE_BASIS_STR = "Basistalent",
+							GRUPPE_SPEZIAL_STR = "Spezialtalent",
+							GRUPPE_BERUF_STR = "Berufstalent";
 	/*--------------------   Constructor Area --------------------*/
 	public Talent() {
 		// TODO Auto-generated constructor stub

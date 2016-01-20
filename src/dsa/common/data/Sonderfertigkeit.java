@@ -10,7 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name="SONDERFERTIGKEIT")
+@Table(name="sonderfertigkeit")
 public class Sonderfertigkeit implements java.io.Serializable {
 	@Id
 	@GeneratedValue(generator="increment")

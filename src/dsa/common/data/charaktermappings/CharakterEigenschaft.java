@@ -15,7 +15,7 @@ import dsa.common.data.charaktermappings.embeddedids.CharakterEigenschaftId;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name="CHARAKTER_EIGENSCHAFT")
+@Table(name="charakter_eigenschaft")
 @AssociationOverrides({
 	@AssociationOverride(name = "pk.charakter", 
 		joinColumns = @JoinColumn(name = "CHARAKTER_ID")),

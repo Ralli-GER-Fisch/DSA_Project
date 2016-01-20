@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="AUSRUESTUNGSGEGENSTAND")
+@Table(name="ausruestungsgegenstand")
 @PrimaryKeyJoinColumn(name="AUSRUESTUNG_ID")
 public class AusruestungsGegenstand extends Ausruestung{
 	@Id

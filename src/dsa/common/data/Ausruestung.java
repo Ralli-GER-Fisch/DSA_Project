@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="AUSRUESTUNG")
+@Table(name="ausruestung")
 @Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Ausruestung {
 	@Id
