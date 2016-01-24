@@ -25,7 +25,6 @@ public class MainMenuFrame extends JFrame {
 	public MainMenuFrame() {
 		super();
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Image.class.getResource("/resources/icon.png")));
-		setDefaultLookAndFeelDecorated(true);
 		setTitle("DSA-Project");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(new Dimension(800,600));
@@ -48,12 +47,20 @@ public class MainMenuFrame extends JFrame {
 		menuFileExit.setActionCommand(GUIControlMenuBarActionListener.ACTION_QUIT);
 		menuFile.add(menuFileExit);
 		
+		//menuCreator Items
 		JMenuItem menuCreatorEigenschaft = new JMenuItem("Eigenschaften");
 		menuCreatorEigenschaft.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK, true));
 		menuCreatorEigenschaft.addActionListener(menuBarActionListener);
 		menuCreatorEigenschaft.setArmed(true);
 		menuCreatorEigenschaft.setActionCommand(GUIControlMenuBarActionListener.ACTION_OPEN_ATTRIBUTE_EDITOR);
 		menuCreator.add(menuCreatorEigenschaft);
+		
+		JMenuItem menuCreatorTalent = new JMenuItem("Talente");
+		menuCreatorTalent.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK, true));
+		menuCreatorTalent.addActionListener(menuBarActionListener);
+		menuCreatorTalent.setArmed(true);
+		menuCreatorTalent.setActionCommand(GUIControlMenuBarActionListener.ACTION_OPEN_TALENT_EDITOR);
+		menuCreator.add(menuCreatorTalent);
 		
 		menuBar.add(menuFile);
 		menuBar.add(menuEdit);

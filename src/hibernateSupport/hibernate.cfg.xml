@@ -5,8 +5,6 @@
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.url">jdbc:mysql://dsa-project.spdns.eu:3306/dsa</property>
-		<property name="hibernate.connection.username">*****</property>
-		<property name="hibernate.connection.password">*****</property>
 		<property name="hibernate.dialect">MySQL5InnoDB</property>
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.default_schema">dsa</property>
@@ -14,18 +12,20 @@
 		<property name="hibernate.transaction.auto_close_session">true</property>
 		<!-- #################### MAPPINGS #################### -->
 		<!-- data -->
+		
+		<mapping class="dsa.common.data.Eigenschaft" />
+		<mapping class="dsa.common.data.Talent" />
 		<!-- <mapping class="dsa.common.data.Charakter" />
 		<mapping class="dsa.common.data.Ausruestung" />
 		<mapping class="dsa.common.data.AusruestungsGegenstand" />
-		<mapping class="dsa.common.data.Behaelter" /> -->
-		<mapping class="dsa.common.data.Eigenschaft" />
-		<!-- <mapping class="dsa.common.data.Geld" />
+		<mapping class="dsa.common.data.Behaelter" />
+		<mapping class="dsa.common.data.Geld" />
 		<mapping class="dsa.common.data.Kultur" />
 		<mapping class="dsa.common.data.Nachteil" />
 		<mapping class="dsa.common.data.Profession" />
 		<mapping class="dsa.common.data.Rasse" />
 		<mapping class="dsa.common.data.Sonderfertigkeit" />
-		<mapping class="dsa.common.data.Talent" />
+		
 		<mapping class="dsa.common.data.Vorteil" />
 		<mapping class="dsa.common.data.Wirkung" /> -->
 		

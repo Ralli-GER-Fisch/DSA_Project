@@ -18,6 +18,7 @@ public class AttributeListGUI extends JScrollPane {
 		AttributeTableModel aTM = new AttributeTableModel(DbManager.getCurrentDbManager().getAllOfClass(Eigenschaft.class));
 		attributeTable = new JTable(aTM);
 		attributeTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		attributeTable.setAutoCreateRowSorter(true);
 		setViewportView(attributeTable);
 	}
 

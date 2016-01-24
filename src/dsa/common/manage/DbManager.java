@@ -15,8 +15,8 @@ public class DbManager {
 	private HibernateUtil hibernate;
 	private SessionFactory sessionFactory;
 	private Session session;
-	public DbManager() {
-		init();
+	public DbManager(String username, String password) {
+		init(username, password);
 	}
 	/* Data Retrieval Methods*/
 	
@@ -76,10 +76,7 @@ public class DbManager {
 	/* Utility Methods*/
 	private Session getSession(){
 		if (sessionFactory == null)
-			if(hibernate == null)
-				init();
-			else
-				sessionFactory = hibernate.getSessionFactory();
+			sessionFactory = hibernate.getSessionFactory();
 					
 		return sessionFactory.openSession();
 	}
@@ -88,10 +85,10 @@ public class DbManager {
 			session.close();
 	}
 	
-	public void init(){
+	public void init(String username, String password){
 		if(hibernate != null){
 			try {
-				hibernate.setUp();
+				hibernate.setUp(username,password);
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.exit(1);
@@ -100,7 +97,7 @@ public class DbManager {
 			hibernate = new HibernateUtil();
 				
 			try {
-				hibernate.setUp();
+				hibernate.setUp(username,password);
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.exit(1);
@@ -125,8 +122,12 @@ public class DbManager {
 	}
 
 	public static DbManager getCurrentDbManager() {
+		return currentDbManager;
+	}
+	
+	public static DbManager getNewDbManager(String username, String password) {
 		if(currentDbManager == null)
-			new DbManager();
+			new DbManager(username,password);
 		return currentDbManager;
 	}
 

@@ -13,36 +13,36 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import dsa.common.data.Eigenschaft;
-import dsa.common.gui.editableLists.editPanel.frames.AttributeEditFrame;
-import dsa.common.gui.editableLists.tableModels.AttributeTableModel;
+import dsa.common.data.Talent;
+import dsa.common.gui.editableLists.editPanel.frames.TalentEditFrame;
+import dsa.common.gui.editableLists.tableModels.TalentTableModel;
 import dsa.common.manage.DbManager;
 
 
 @SuppressWarnings("serial")
-public class AttributeEditGUI extends JPanel {
+public class TalentEditGUI extends JPanel {
 	private static final String ACTION_NEW = "new",
 								ACTION_EDIT = "edit",
 								ACTION_DELETE = "del";
-	public AttributeEditGUI(JTable attributeTable) {
+	public TalentEditGUI(JTable talentTable) {
 		ActionListener buttonListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				switch(e.getActionCommand()){
 					case ACTION_NEW:
-						new AttributeEditFrame(new Eigenschaft(),attributeTable);
+						new TalentEditFrame(new Talent(),talentTable);
 						break;
 					case ACTION_EDIT:
-						if(attributeTable.getSelectedRow() >= 0)
-							new AttributeEditFrame(((AttributeTableModel)attributeTable.getModel())
-														.getRowObject(attributeTable.convertRowIndexToModel(attributeTable.getSelectedRow())),attributeTable);
+						if(talentTable.getSelectedRow() >= 0)
+							new TalentEditFrame(((TalentTableModel)talentTable.getModel())
+														.getRowObject(talentTable.convertRowIndexToModel(talentTable.getSelectedRow())),talentTable);
 						break;
 					case ACTION_DELETE:
-						if(attributeTable.getSelectedRow()>=0){
-							DbManager.getCurrentDbManager().deleteObject(((AttributeTableModel)attributeTable.getModel())
-									.getRowObject(attributeTable.convertRowIndexToModel(attributeTable.getSelectedRow())));
-							((AttributeTableModel)attributeTable.getModel()).removeRow(attributeTable.convertRowIndexToModel(attributeTable.getSelectedRow()));
-							((AttributeTableModel)attributeTable.getModel()).fireTableDataChanged();
+						if(talentTable.getSelectedRow()>=0){
+							DbManager.getCurrentDbManager().deleteObject(((TalentTableModel)talentTable.getModel())
+									.getRowObject(talentTable.convertRowIndexToModel(talentTable.getSelectedRow())));
+							((TalentTableModel)talentTable.getModel()).removeRow(talentTable.convertRowIndexToModel(talentTable.getSelectedRow()));
+							((TalentTableModel)talentTable.getModel()).fireTableDataChanged();
 						}
 						break;
 				}
@@ -55,6 +55,7 @@ public class AttributeEditGUI extends JPanel {
 		newButton.setActionCommand(ACTION_NEW);
 		editButton.setActionCommand(ACTION_EDIT);
 		deleteButton.setActionCommand(ACTION_DELETE);
+		
 		editButton.setEnabled(false);
 		deleteButton.setEnabled(false);
 		
@@ -62,8 +63,7 @@ public class AttributeEditGUI extends JPanel {
 		editButton.addActionListener(buttonListener);
 		deleteButton.addActionListener(buttonListener);
 
-		
-		attributeTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+		talentTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if(e.getFirstIndex()>=0){

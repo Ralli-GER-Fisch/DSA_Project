@@ -5,11 +5,13 @@ import java.awt.event.ActionListener;
 
 import dsa.common.gui.AttributeCreatorFrame;
 import dsa.common.gui.MainMenuFrame;
+import dsa.common.gui.TalentCreatorFrame;
 
 public class GUIControlMenuBarActionListener implements ActionListener {
 	
 	public static final String ACTION_QUIT = "quitAction";
 	public static final String ACTION_OPEN_ATTRIBUTE_EDITOR = "openAttribEditAction";
+	public static final String ACTION_OPEN_TALENT_EDITOR = "openTalentEditAction";
 	
 	public GUIControlMenuBarActionListener() {
 		super();
@@ -23,6 +25,9 @@ public class GUIControlMenuBarActionListener implements ActionListener {
 				break;
 			case ACTION_OPEN_ATTRIBUTE_EDITOR:
 				MainMenuFrame.getCurrentMainMenuFrame().setContentPanel(AttributeCreatorFrame.getCurrentAttributeCreatorFrame());
+				break;
+			case ACTION_OPEN_TALENT_EDITOR:
+				MainMenuFrame.getCurrentMainMenuFrame().setContentPanel(TalentCreatorFrame.getCurrentTalentCreatorFrame());
 				break;
 			default:
 				break;
