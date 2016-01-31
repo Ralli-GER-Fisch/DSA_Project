@@ -51,10 +51,14 @@ public class GenericCollectionTCR implements TableCellRenderer {
 				retval.setBackground(Constants.MOUSEOVER_ROW_BG_COLOR);
 				retval.setForeground(Constants.MOUSEOVER_ROW_TEXT_COLOR);
 		} else {
-			if(row%2 == 0)
+			if(row%2 == 0){
 				retval.setBackground(Constants.EVEN_ROW_BG_COLOR);
-			else
+				retval.setForeground(Constants.EVEN_ROW_TEXT_COLOR);
+			}
+			else{
 				retval.setBackground(Constants.ODD_ROW_BG_COLOR);
+				retval.setForeground(Constants.ODD_ROW_TEXT_COLOR);
+			}
 		}
 		
 		
