@@ -60,7 +60,7 @@ public class Talent {
 								GRUPPE_SPEZIAL = 1,
 								GRUPPE_BERUF = 2;
 	public final static String	TYP_KAMPF_STR = "Kampf-Talent",
-								TYP_KOERPERLICH_STR= "Körperliches Talent",
+								TYP_KOERPERLICH_STR= "KÃ¶rperliches Talent",
 								TYP_GESELLSCHAFTLICH_STR = "Gesellschaftliches Talent",
 								TYP_NATUR_STR = "Natur-Talent",
 								TYP_WISSEN_STR= "Wissenstalent",

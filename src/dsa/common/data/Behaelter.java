@@ -22,7 +22,7 @@ public class Behaelter extends Ausruestung{
 	@GenericGenerator(name="increment",strategy="increment")
 	@Column(name="AUSRUESTUNGBEHAELTER_ID")
 	private Long id;
-	//Muss anders organisiert werden um Behälter nur einfach zu definieren, aber das Mapping für viele Charakter offen zu lassen.
+	//Muss anders organisiert werden um BehÃ¤lter nur einfach zu definieren, aber das Mapping fÃ¼r viele Charakter offen zu lassen.
 	private Integer gewicht;
 	//private Vector<Integer> dimensionen;
 	

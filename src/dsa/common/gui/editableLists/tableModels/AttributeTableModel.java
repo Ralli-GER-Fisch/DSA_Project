@@ -8,7 +8,7 @@ import dsa.common.data.Eigenschaft;
 @SuppressWarnings("serial")
 public class AttributeTableModel extends AbstractCustomTableModel<Eigenschaft> {
 	private List<Eigenschaft> data;
-	private List<String> columnNames = Arrays.asList("ID","Name","Kürzel","Beschreibung");
+	private List<String> columnNames = Arrays.asList("ID","Name","KÃ¼rzel","Beschreibung");
 	private List<Class<?>> columnClasses = Arrays.asList(Long.class,String.class,String.class,String.class);
 	
 	public static final int COL_ID = 0,

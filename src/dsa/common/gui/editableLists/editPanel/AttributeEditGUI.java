@@ -51,7 +51,7 @@ public class AttributeEditGUI extends JPanel {
 		};
 		JButton newButton = new JButton("Neu");
 		JButton editButton = new JButton("Editieren");
-		JButton deleteButton = new JButton("Löschen");
+		JButton deleteButton = new JButton("LÃ¶schen");
 		newButton.setActionCommand(ACTION_NEW);
 		editButton.setActionCommand(ACTION_EDIT);
 		deleteButton.setActionCommand(ACTION_DELETE);

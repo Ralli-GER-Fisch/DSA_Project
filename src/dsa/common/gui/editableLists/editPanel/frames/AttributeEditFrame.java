@@ -54,7 +54,7 @@ public class AttributeEditFrame extends JFrame {
 		nameTF.getActionMap().put("undo",new UndoAction(nameUndoManager));
 		nameTF.getActionMap().put("redo",new RedoAction(nameUndoManager));
 		
-		JLabel kuerzelLabel = new JLabel("Kürzel");
+		JLabel kuerzelLabel = new JLabel("KÃ¼rzel");
 		kuerzelLabel.setAlignmentY(0);
 		JTextField kuerzelTF = new JTextField(eigenschaft.getKuerzel());
 		kuerzelTF.getDocument().addDocumentListener(new LimitDocumentSizeListener(2));
