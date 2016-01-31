@@ -6,18 +6,22 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
 
 import dsa.common.ctrl.actionlisteners.GUIControlMenuBarActionListener;
 
 @SuppressWarnings("serial")
 public class MainMenuFrame extends JFrame {
 	
+	public static final JLabel LOADING_GIF = new JLabel("",new ImageIcon(Image.class.getResource("/resources/load.gif")),SwingConstants.CENTER);;
 	private static MainMenuFrame currentMainMenuFrame;
 	private static GUIControlMenuBarActionListener menuBarActionListener;
 	private static JPanel contentPanel;

@@ -25,8 +25,12 @@ public class Eigenschaft {
 	public Eigenschaft() {
 		// TODO Auto-generated constructor stub
 	}
+	public Eigenschaft(long id) {
+		setId(id);
+	}
 	/*--------------------    Function   Area --------------------*/
-	
+
+
 	/*-------------------- Getter/Setter Area --------------------*/
 	public Long getId() {
 		return id;

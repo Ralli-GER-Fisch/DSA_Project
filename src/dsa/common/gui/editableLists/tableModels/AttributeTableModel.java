@@ -3,14 +3,13 @@ package dsa.common.gui.editableLists.tableModels;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.table.AbstractTableModel;
-
 import dsa.common.data.Eigenschaft;
 
 @SuppressWarnings("serial")
-public class AttributeTableModel extends AbstractTableModel {
+public class AttributeTableModel extends AbstractCustomTableModel<Eigenschaft> {
 	private List<Eigenschaft> data;
 	private List<String> columnNames = Arrays.asList("ID","Name","Kürzel","Beschreibung");
+	private List<Class<?>> columnClasses = Arrays.asList(Long.class,String.class,String.class,String.class);
 	
 	public static final int COL_ID = 0,
 							COL_NAME = 1,
@@ -53,6 +52,15 @@ public class AttributeTableModel extends AbstractTableModel {
 			break;
 		}
 		return retval;
+	}
+	
+	@Override
+	public Class<?> getColumnClass(int col) {
+		return columnClasses.get(col);
+	}
+	
+	public List<Class<?>> getColumnClasses() {
+		return columnClasses;
 	}
 	
 	@Override

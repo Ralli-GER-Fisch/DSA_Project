@@ -27,6 +27,7 @@ import dsa.common.ctrl.util.CustomUndoableEditListener;
 import dsa.common.ctrl.util.actions.RedoAction;
 import dsa.common.ctrl.util.actions.UndoAction;
 import dsa.common.data.Talent;
+import dsa.common.gui.editableLists.editPanel.AddProbePanel;
 import dsa.common.gui.util.NameIdComboBox;
 import dsa.common.manage.DbManager;
 
@@ -61,13 +62,13 @@ public class TalentEditFrame extends JFrame {
 		JLabel typLabel = new JLabel("Typ");
 		typLabel.setAlignmentY(0);
 		NameIdComboBox typSF = new NameIdComboBox(Talent.getTypTalentItemList());
-		typSF.setSelectedIndex(talent.getTyp());
+		typSF.setSelectedIndex(talent.getTyp().intValue());
 		AutoCompleteDecorator.decorate(typSF);
 		
 		JLabel gruppeLabel = new JLabel("Gruppe");
 		gruppeLabel.setAlignmentY(0);
 		NameIdComboBox gruppeSF = new NameIdComboBox(Talent.getGruppeTalentItemList());
-		gruppeSF.setSelectedIndex(talent.getGruppe());
+		gruppeSF.setSelectedIndex(talent.getGruppe().intValue());
 		AutoCompleteDecorator.decorate(gruppeSF);
 		
 		JLabel spalteLabel = new JLabel("Spalte");
@@ -97,6 +98,18 @@ public class TalentEditFrame extends JFrame {
 		ebeTF.getActionMap().put("undo",new UndoAction(ebeUndoManager));
 		ebeTF.getActionMap().put("redo",new RedoAction(ebeUndoManager));
 		
+		JLabel kurzinfoLabel = new JLabel("Kurzinfo");
+		kurzinfoLabel.setAlignmentY(0);
+		JTextField kurzinfoTF = new JTextField(talent.getKurzinfo());
+		UndoManager kurzinfoUndoManager = new UndoManager();
+		kurzinfoTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(kurzinfoUndoManager));
+		kurzinfoTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
+		kurzinfoTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "redo");
+		kurzinfoTF.getActionMap().put("undo",new UndoAction(kurzinfoUndoManager));
+		kurzinfoTF.getActionMap().put("redo",new RedoAction(kurzinfoUndoManager));
+		
+		
+		
 		JLabel beschreibungLabel = new JLabel("Beschreibung");
 		beschreibungLabel.setAlignmentY(0);
 		
@@ -111,7 +124,14 @@ public class TalentEditFrame extends JFrame {
 		beschreibungTF.getActionMap().put("redo",new RedoAction(beschreibungUndoManager));
 		JScrollPane beschreibungScrollPane = new JScrollPane(beschreibungTF);
 		beschreibungScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		beschreibungScrollPane.setPreferredSize(new Dimension(200,100));
+		beschreibungScrollPane.setPreferredSize(new Dimension(300,100));
+		
+		JLabel probeLabel = new JLabel("Proben");
+		probeLabel.setAlignmentY(0);
+		AddProbePanel probeAP = new AddProbePanel(talent,DbManager.getCurrentDbManager().getProbenOfTalent(talent));
+		JScrollPane probeScrollPane = new JScrollPane(probeAP);
+		probeScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		probeScrollPane.setPreferredSize(new Dimension(300,100));
 		
 		JButton saveButton = new JButton("Speichern");
 		saveButton.setActionCommand("edit");
@@ -133,7 +153,9 @@ public class TalentEditFrame extends JFrame {
 						talent.setGruppe(gruppeSF.getSelectedItem().getId());
 						talent.setSpalte(spalteSF.getSelectedItem().toString());
 						talent.seteBe(ebeTF.getText());
+						talent.setProben(probeAP.getProben());
 						talent.setBeschreibung(beschreibungTF.getText());
+						talent.setKurzinfo(kurzinfoTF.getText());
 						DbManager.getCurrentDbManager().createNewObject(talent);
 						dispose();
 						((AbstractTableModel)talentTable.getModel()).fireTableDataChanged();
@@ -144,8 +166,10 @@ public class TalentEditFrame extends JFrame {
 						talent.setGruppe(gruppeSF.getSelectedItem().getId());
 						talent.setSpalte(spalteSF.getSelectedItem().toString());
 						talent.seteBe(ebeTF.getText());
+						talent.setProben(probeAP.getProben());
 						talent.setBeschreibung(beschreibungTF.getText());
-						DbManager.getCurrentDbManager().updateObject(talent);
+						talent.setKurzinfo(kurzinfoTF.getText());
+						DbManager.getCurrentDbManager().mergeObject(talent);
 						dispose();
 						((AbstractTableModel)talentTable.getModel()).fireTableDataChanged();
 						break;
@@ -183,13 +207,23 @@ public class TalentEditFrame extends JFrame {
 		cons.gridx = 0;
 		cons.weightx = 0;
 		cons.gridwidth = 1;
+		getContentPane().add(kurzinfoLabel,cons);
+		cons.gridwidth = 2;
+		cons.weightx = 1;
+		cons.gridx = 1;
+		getContentPane().add(kurzinfoTF,cons);
+		
+		cons.gridy = 3;
+		cons.gridx = 0;
+		cons.weightx = 0;
+		cons.gridwidth = 1;
 		getContentPane().add(typLabel,cons);
 		cons.gridwidth = 2;
 		cons.weightx = 1;
 		cons.gridx = 1;
 		getContentPane().add(typSF,cons);
 		
-		cons.gridy = 3;
+		cons.gridy = 4;
 		cons.gridx = 0;
 		cons.weightx = 0;
 		cons.gridwidth = 1;
@@ -199,7 +233,7 @@ public class TalentEditFrame extends JFrame {
 		cons.gridx = 1;
 		getContentPane().add(gruppeSF,cons);
 		
-		cons.gridy = 4;
+		cons.gridy = 5;
 		cons.gridx = 0;
 		cons.weightx = 0;
 		cons.gridwidth = 1;
@@ -209,7 +243,7 @@ public class TalentEditFrame extends JFrame {
 		cons.gridx = 1;
 		getContentPane().add(spalteSF,cons);
 		
-		cons.gridy = 5;
+		cons.gridy = 6;
 		cons.gridx = 0;
 		cons.weightx = 0;
 		cons.gridwidth = 1;
@@ -219,7 +253,17 @@ public class TalentEditFrame extends JFrame {
 		cons.gridx = 1;
 		getContentPane().add(ebeTF,cons);
 		
-		cons.gridy = 6;		
+		cons.gridy = 7;
+		cons.gridx = 0;
+		cons.weightx = 0;
+		cons.gridwidth = 1;
+		getContentPane().add(probeLabel,cons);
+		cons.gridwidth = 2;
+		cons.weightx = 1;
+		cons.gridx = 1;
+		getContentPane().add(probeScrollPane,cons);
+		
+		cons.gridy = 8;		
 		cons.gridx = 0;
 		cons.weightx = 0;
 		cons.gridwidth = 1;
@@ -229,7 +273,7 @@ public class TalentEditFrame extends JFrame {
 		cons.gridx = 1;
 		getContentPane().add(beschreibungScrollPane,cons);
 		
-		cons.gridy = 7;
+		cons.gridy = 9;
 		cons.gridx = 0;
 		cons.weightx = 0;
 		cons.gridwidth = 1;

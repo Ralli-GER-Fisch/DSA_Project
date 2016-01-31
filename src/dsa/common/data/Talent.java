@@ -1,22 +1,31 @@
 package dsa.common.data;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
+import dsa.common.data.mappings.Probe;
 import dsa.common.data.wrapper.TalentItem;
 
 @Entity
 @Table(name="talent")
 @Inheritance(strategy=InheritanceType.JOINED)
+@DynamicUpdate
+@DynamicInsert
 public class Talent {
 	@Id
 	@GeneratedValue(generator="increment")
@@ -26,12 +35,18 @@ public class Talent {
 	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.talent")
 	//private List<CharakterTalent> charakterTalent;
 	private String name;
+	private String kurzinfo;
 	private String beschreibung;
-	private Integer typ;
-	private Integer gruppe;
+	private Long typ;
+	private Long gruppe;
 	private String spalte;
 	@Column(name="EFFEKTIVE_BEHINDERUNG")
 	private String eBe;
+	@MapsId("talent")
+	//@JoinColumn(name = "TALENT_ID", referencedColumnName = "TALENT_ID")
+	@OneToMany(mappedBy="pk.talent",cascade=CascadeType.ALL,orphanRemoval=true)
+	private Set<Probe> proben;
+	
 	public final static int		TYP_KAMPF = 0,
 								TYP_KOERPERLICH = 1,
 								TYP_GESELLSCHAFTLICH = 2,
@@ -59,61 +74,12 @@ public class Talent {
 	
 	/*--------------------   Constructor Area --------------------*/
 	public Talent() {
-		// TODO Auto-generated constructor stub
 	}
 	/*--------------------    Function   Area --------------------*/
 	
-	/*-------------------- Getter/Setter Area --------------------*/
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-//	public List<CharakterTalent> getCharakterTalent() {
-//		return charakterTalent;
-//	}
-//	public void setCharakterTalent(List<CharakterTalent> charakterTalent) {
-//		this.charakterTalent = charakterTalent;
-//	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getBeschreibung() {
-		return beschreibung;
-	}
-	public void setBeschreibung(String beschreibung) {
-		this.beschreibung = beschreibung;
-	}
-	public Integer getTyp() {
-		return typ;
-	}
-	public void setTyp(Integer typ) {
-		this.typ = typ;
-	}
-	public Integer getGruppe() {
-		return gruppe;
-	}
-	public void setGruppe(Integer gruppe) {
-		this.gruppe = gruppe;
-	}
-	public String getSpalte() {
-		return spalte;
-	}
-	public void setSpalte(String spalte) {
-		this.spalte = spalte;
-	}
-	public String geteBe() {
-		return eBe;
-	}
-	public void seteBe(String eBe) {
-		this.eBe = eBe;
-	}
-	public static String getGruppeStringById(Integer id){
-		switch(id){
+	/**#################### util ####################**/
+	public static String getGruppeStringById(Long id){
+		switch(id.intValue()){
 			case GRUPPE_BASIS:
 				return GRUPPE_BASIS_STR;
 			case GRUPPE_BERUF:
@@ -136,8 +102,8 @@ public class Talent {
 				return -1;
 		}
 	}
-	public static String getTypStringById(int id){
-		switch(id){
+	public static String getTypStringById(Long id){
+		switch(id.intValue()){
 			case TYP_GABE:
 				return TYP_GABE_STR;
 			case TYP_GESELLSCHAFTLICH:
@@ -189,5 +155,68 @@ public class Talent {
 	}
 	public static List<TalentItem> getGruppeTalentItemList(){
 		return TalentItem.getGruppeTalentItemList();
+	}
+	
+	
+	/*-------------------- Getter/Setter Area --------------------*/
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+//	public List<CharakterTalent> getCharakterTalent() {
+//		return charakterTalent;
+//	}
+//	public void setCharakterTalent(List<CharakterTalent> charakterTalent) {
+//		this.charakterTalent = charakterTalent;
+//	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getBeschreibung() {
+		return beschreibung;
+	}
+	public void setBeschreibung(String beschreibung) {
+		this.beschreibung = beschreibung;
+	}
+	public Long getTyp() {
+		return typ;
+	}
+	public void setTyp(Long typ) {
+		this.typ = typ;
+	}
+	public Long getGruppe() {
+		return gruppe;
+	}
+	public void setGruppe(Long gruppe) {
+		this.gruppe = gruppe;
+	}
+	public String getSpalte() {
+		return spalte;
+	}
+	public void setSpalte(String spalte) {
+		this.spalte = spalte;
+	}
+	public String geteBe() {
+		return eBe;
+	}
+	public void seteBe(String eBe) {
+		this.eBe = eBe;
+	}
+	public Set<Probe> getProben() {
+		return proben;
+	}
+	public void setProben(Set<Probe> proben) {
+		this.proben = proben;
+	}
+	public String getKurzinfo() {
+		return kurzinfo;
+	}
+	public void setKurzinfo(String kurzinfo) {
+		this.kurzinfo = kurzinfo;
 	}
 }

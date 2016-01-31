@@ -8,15 +8,16 @@ import javax.swing.ListSelectionModel;
 
 import dsa.common.data.Talent;
 import dsa.common.gui.editableLists.tableModels.TalentTableModel;
+import dsa.common.gui.editableLists.tables.CustomRenderedTable;
 import dsa.common.manage.DbManager;
 
 @SuppressWarnings("serial")
 public class TalentListGUI extends JScrollPane {
-	private JTable talentTable;
+	private CustomRenderedTable<Talent> talentTable;
 	public TalentListGUI() {
 		super();
 		TalentTableModel tTM = new TalentTableModel(DbManager.getCurrentDbManager().getAllOfClass(Talent.class));
-		talentTable = new JTable(tTM);
+		talentTable = new CustomRenderedTable<Talent>(tTM);
 		talentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		talentTable.setAutoCreateRowSorter(true);
 		setViewportView(talentTable);

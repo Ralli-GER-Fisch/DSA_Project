@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="F:/EclipseLibs/db-derby-10.12.1.1-bin/lib/derby.jar"/>
-	<classpathentry kind="lib" path="F:/EclipseLibs/db-derby-10.12.1.1-bin/lib/derbyclient.jar"/>
-	<classpathentry kind="lib" path="F:/EclipseLibs/db-derby-10.12.1.1-bin/lib/derbynet.jar"/>
-	<classpathentry kind="lib" path="F:/EclipseLibs/db-derby-10.12.1.1-bin/lib/derbytools.jar"/>
 	<classpathentry kind="lib" path="F:/EclipseLibs/hibernate-release-5.0.2.Final/lib/required/antlr-2.7.7.jar"/>
 	<classpathentry kind="lib" path="F:/EclipseLibs/hibernate-release-5.0.2.Final/lib/required/dom4j-1.6.1.jar">
 		<attributes>

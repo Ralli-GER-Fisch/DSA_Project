@@ -32,7 +32,6 @@ public class AttributeEditFrame extends JFrame {
 			setTitle("Neue Eigenschaft");
 		else
 			setTitle("Eigenschaft "+ eigenschaft.getName() +" editieren");
-		//setSize(new Dimension(800, 600));
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new GridBagLayout());
 		GridBagConstraints cons = new GridBagConstraints();
