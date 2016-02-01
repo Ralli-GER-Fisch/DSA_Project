@@ -1,12 +1,22 @@
 package dsa.common.data;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import dsa.common.data.mappings.Rasse_Eigenschaft_Mod;
+import dsa.common.data.mappings.Rasse_Kultur;
+import dsa.common.data.mappings.Rasse_Nachteile;
+import dsa.common.data.mappings.Rasse_Talent_Mod;
+import dsa.common.data.mappings.Rasse_Vorteile;
 
 @Entity
 @Table(name="rasse")
@@ -19,7 +29,7 @@ public class Rasse {
 	private String name;
 	private Integer generierungskosten;
 	private String koerpergroesse_regel;
-	private String geweicht_regel;
+	private String gewicht_regel;
 	@Column(name="LE_MOD")
 	private Integer lebenspunkte_modifikator;
 	@Column(name="AU_MOD")
@@ -29,6 +39,23 @@ public class Rasse {
 	private String herkunft_verbreitung;
 	private String koerperbau_aussehen;
 	private String beschreibung;
+	@OneToMany(mappedBy="pk.rasse",cascade=CascadeType.ALL,orphanRemoval=true)
+	private Set<Rasse_Eigenschaft_Mod> eigenschafts_modifikatoren;
+	@OneToMany(mappedBy="pk.rasse",cascade=CascadeType.ALL,orphanRemoval=true)
+	private Set<Rasse_Vorteile> rasse_vorteile;
+	@OneToMany(mappedBy="pk.rasse",cascade=CascadeType.ALL,orphanRemoval=true)
+	private Set<Rasse_Nachteile> rasse_nachteile;
+	@OneToMany(mappedBy="pk.rasse",cascade=CascadeType.ALL,orphanRemoval=true)
+	private Set<Rasse_Kultur> rasse_kulturen;
+	@OneToMany(mappedBy="pk.rasse",cascade=CascadeType.ALL,orphanRemoval=true)
+	private Set<Rasse_Talent_Mod> rasse_talente;
+	//@OneToMany(mappedBy="pk.rasse",cascade=CascadeType.ALL,orphanRemoval=true)
+	//private Set<Rasse_Sonderfertigkeit> rasse_sonderfertigkeiten;
+	
+	
+
+	
+	
 	/*--------------------   Constructor Area --------------------*/
 	public Rasse() {
 		// TODO Auto-generated constructor stub
@@ -71,12 +98,12 @@ public class Rasse {
 		this.koerpergroesse_regel = koerpergroesse_regel;
 	}
 
-	public String getGeweicht_regel() {
-		return geweicht_regel;
+	public String getGewicht_regel() {
+		return gewicht_regel;
 	}
 
-	public void setGeweicht_regel(String geweicht_regel) {
-		this.geweicht_regel = geweicht_regel;
+	public void setGewicht_regel(String gewicht_regel) {
+		this.gewicht_regel = gewicht_regel;
 	}
 
 	public Integer getLebenspunkte_modifikator() {
@@ -117,5 +144,45 @@ public class Rasse {
 
 	public void setKoerperbau_aussehen(String koerperbau_aussehen) {
 		this.koerperbau_aussehen = koerperbau_aussehen;
+	}
+
+	public Set<Rasse_Eigenschaft_Mod> getEigenschafts_modifikatoren() {
+		return eigenschafts_modifikatoren;
+	}
+
+	public void setEigenschafts_modifikatoren(Set<Rasse_Eigenschaft_Mod> eigenschafts_modifikatoren) {
+		this.eigenschafts_modifikatoren = eigenschafts_modifikatoren;
+	}
+
+	public Set<Rasse_Vorteile> getRasse_vorteile() {
+		return rasse_vorteile;
+	}
+
+	public void setRasse_vorteile(Set<Rasse_Vorteile> rasse_vorteile) {
+		this.rasse_vorteile = rasse_vorteile;
+	}
+
+	public Set<Rasse_Nachteile> getRasse_nachteile() {
+		return rasse_nachteile;
+	}
+
+	public void setRasse_nachteile(Set<Rasse_Nachteile> rasse_nachteile) {
+		this.rasse_nachteile = rasse_nachteile;
+	}
+
+	public Set<Rasse_Kultur> getRasse_kulturen() {
+		return rasse_kulturen;
+	}
+
+	public void setRasse_kulturen(Set<Rasse_Kultur> rasse_kulturen) {
+		this.rasse_kulturen = rasse_kulturen;
+	}
+
+	public Set<Rasse_Talent_Mod> getRasse_talente() {
+		return rasse_talente;
+	}
+
+	public void setRasse_talente(Set<Rasse_Talent_Mod> rasse_talente) {
+		this.rasse_talente = rasse_talente;
 	}
 }

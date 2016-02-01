@@ -1,5 +1,6 @@
 package dsa.common.gui.editableLists.editPanel;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -49,7 +50,6 @@ public class AddProbePanel extends JPanel {
 					proben.add(new Probe(talent));
 				}
 				else if(e.getActionCommand().startsWith("del")){
-					//proben.get(new Integer(e.getActionCommand().split("_")[1]).intValue()).setTalent(null);
 					proben.remove(new Integer(e.getActionCommand().split("_")[1]).intValue());
 				}
 				reCreate();
@@ -68,14 +68,17 @@ public class AddProbePanel extends JPanel {
 			NameIdComboBox e1SF = new NameIdComboBox(attributeItems);
 			e1SF.setSelectedIndex(curP.getEigenschaft1().getId()!=null?curP.getEigenschaft1().getId().intValue()-1:0);
 			AutoCompleteDecorator.decorate(e1SF);
+			e1SF.setPreferredSize(new Dimension(75,25));
 			//E2
 			NameIdComboBox e2SF = new NameIdComboBox(attributeItems);
 			e2SF.setSelectedIndex(curP.getEigenschaft2().getId()!=null?curP.getEigenschaft2().getId().intValue()-1:0);
 			AutoCompleteDecorator.decorate(e2SF);
+			e2SF.setPreferredSize(new Dimension(75,25));
 			//E3
 			NameIdComboBox e3SF = new NameIdComboBox(attributeItems);
 			e3SF.setSelectedIndex(curP.getEigenschaft3().getId()!=null?curP.getEigenschaft3().getId().intValue()-1:0);
 			AutoCompleteDecorator.decorate(e3SF);
+			e3SF.setPreferredSize(new Dimension(75,25));
 			
 			e1SF.addItemListener(new ItemListener() {
 				int pos = ii;
@@ -99,7 +102,6 @@ public class AddProbePanel extends JPanel {
 				public void itemStateChanged(ItemEvent e2) {
 					if(e2.getStateChange() == ItemEvent.SELECTED)
 						proben.get(pos).setEigenschaft3(new Eigenschaft(((NameIdWrapper)e2.getItem()).getId()));
-						//proben.get(pos).getEigenschaft3().setId(((NameIdWrapper)e2.getItem()).getId());
 				}
 			});
 			

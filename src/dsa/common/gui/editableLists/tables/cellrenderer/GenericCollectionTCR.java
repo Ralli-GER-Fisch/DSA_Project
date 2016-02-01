@@ -34,7 +34,6 @@ public class GenericCollectionTCR implements TableCellRenderer {
 					if(!retvalString.isEmpty())
 						retvalString += ", ";
 					retvalString += p.getEigenschaft1().getKuerzel()+"/"+p.getEigenschaft2().getKuerzel()+"/"+p.getEigenschaft3().getKuerzel();
-					
 				}
 			}
 			
