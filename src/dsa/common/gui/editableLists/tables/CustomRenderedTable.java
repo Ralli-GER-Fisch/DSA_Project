@@ -10,6 +10,7 @@ import javax.swing.table.TableCellRenderer;
 import dsa.common.data.wrapper.CollectionGenericWrapper;
 import dsa.common.gui.editableLists.tableModels.AbstractCustomTableModel;
 import dsa.common.gui.editableLists.tables.cellrenderer.GenericCollectionTCR;
+import dsa.common.gui.editableLists.tables.cellrenderer.IntegerTCR;
 import dsa.common.gui.editableLists.tables.cellrenderer.LongTCR;
 import dsa.common.gui.editableLists.tables.cellrenderer.StringTCR;
 
@@ -18,6 +19,7 @@ public class CustomRenderedTable<T> extends JTable {
 	private static final TableCellRenderer	TCR_DEFAULT = new DefaultTableCellRenderer(),
 											TCR_LONG = new LongTCR(),
 											TCR_STRING = new StringTCR(),
+											TCR_INTEGER = new IntegerTCR(),
 											TCR_GENERICCOLLECTION = new GenericCollectionTCR();
 	private int mouseOverRow = -1, mouseOverCol = -1;
 	public CustomRenderedTable() {
@@ -49,6 +51,9 @@ public class CustomRenderedTable<T> extends JTable {
 		if(c.equals(String.class)){
 			return TCR_STRING;
 		}
+		if(c.equals(Integer.class)){
+			return TCR_INTEGER;
+		}
 		if(c.equals(CollectionGenericWrapper.class)){
 			return TCR_GENERICCOLLECTION;
 		}
@@ -67,16 +72,4 @@ public class CustomRenderedTable<T> extends JTable {
 	public void setMouseOverCol(int mouseOverCol) {
 		this.mouseOverCol = mouseOverCol;
 	}
-	/*
-	private Object toProbenString(Set<Probe> proben) {
-		String retval = "";
-		for(Probe p : proben){
-			if(!retval.isEmpty())
-				retval+=", ";
-			retval += p.getEigenschaft1().getKuerzel()+"/"+
-					p.getEigenschaft2().getKuerzel()+"/"+
-					p.getEigenschaft3().getKuerzel();
-		}
-		return retval;
-	}*/
 }

@@ -14,9 +14,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import dsa.common.data.mappings.Rasse_Eigenschaft_Mod;
 import dsa.common.data.mappings.Rasse_Kultur;
-import dsa.common.data.mappings.Rasse_Nachteile;
+import dsa.common.data.mappings.Rasse_Nachteil;
 import dsa.common.data.mappings.Rasse_Talent_Mod;
-import dsa.common.data.mappings.Rasse_Vorteile;
+import dsa.common.data.mappings.Rasse_Vorteil;
 
 @Entity
 @Table(name="rasse")
@@ -27,8 +27,11 @@ public class Rasse {
 	@Column(name="RASSE_ID")
 	private Long id;
 	private String name;
+	@Column(name="GENERIERUNGSKOSTEN")
 	private Integer generierungskosten;
+	@Column(name="KOERPERGROESSE_REGEL")
 	private String koerpergroesse_regel;
+	@Column(name="GEWICHT_REGEL")
 	private String gewicht_regel;
 	@Column(name="LE_MOD")
 	private Integer lebenspunkte_modifikator;
@@ -36,15 +39,18 @@ public class Rasse {
 	private Integer ausdauer_modifikator;
 	@Column(name="MR_MOD")
 	private Integer magieresistenz_modifikator;
+	@Column(name="HERKUNFT_VERBREITUNG")
 	private String herkunft_verbreitung;
+	@Column(name="KOERPERBAU_AUSSEHEN")
 	private String koerperbau_aussehen;
+	@Column(name="BESCHREIBUNG")
 	private String beschreibung;
 	@OneToMany(mappedBy="pk.rasse",cascade=CascadeType.ALL,orphanRemoval=true)
 	private Set<Rasse_Eigenschaft_Mod> eigenschafts_modifikatoren;
 	@OneToMany(mappedBy="pk.rasse",cascade=CascadeType.ALL,orphanRemoval=true)
-	private Set<Rasse_Vorteile> rasse_vorteile;
+	private Set<Rasse_Vorteil> rasse_vorteile;
 	@OneToMany(mappedBy="pk.rasse",cascade=CascadeType.ALL,orphanRemoval=true)
-	private Set<Rasse_Nachteile> rasse_nachteile;
+	private Set<Rasse_Nachteil> rasse_nachteile;
 	@OneToMany(mappedBy="pk.rasse",cascade=CascadeType.ALL,orphanRemoval=true)
 	private Set<Rasse_Kultur> rasse_kulturen;
 	@OneToMany(mappedBy="pk.rasse",cascade=CascadeType.ALL,orphanRemoval=true)
@@ -154,19 +160,19 @@ public class Rasse {
 		this.eigenschafts_modifikatoren = eigenschafts_modifikatoren;
 	}
 
-	public Set<Rasse_Vorteile> getRasse_vorteile() {
+	public Set<Rasse_Vorteil> getRasse_vorteile() {
 		return rasse_vorteile;
 	}
 
-	public void setRasse_vorteile(Set<Rasse_Vorteile> rasse_vorteile) {
+	public void setRasse_vorteile(Set<Rasse_Vorteil> rasse_vorteile) {
 		this.rasse_vorteile = rasse_vorteile;
 	}
 
-	public Set<Rasse_Nachteile> getRasse_nachteile() {
+	public Set<Rasse_Nachteil> getRasse_nachteile() {
 		return rasse_nachteile;
 	}
 
-	public void setRasse_nachteile(Set<Rasse_Nachteile> rasse_nachteile) {
+	public void setRasse_nachteile(Set<Rasse_Nachteil> rasse_nachteile) {
 		this.rasse_nachteile = rasse_nachteile;
 	}
 

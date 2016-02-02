@@ -9,6 +9,9 @@ import javax.swing.SwingConstants;
 import javax.swing.table.TableCellRenderer;
 
 import dsa.common.data.mappings.Probe;
+import dsa.common.data.mappings.Rasse_Eigenschaft_Mod;
+import dsa.common.data.mappings.Rasse_Nachteil;
+import dsa.common.data.mappings.Rasse_Vorteil;
 import dsa.common.data.wrapper.CollectionGenericWrapper;
 import dsa.common.gui.editableLists.tables.CustomRenderedTable;
 import dsa.common.main.constants.Constants;
@@ -36,8 +39,72 @@ public class GenericCollectionTCR implements TableCellRenderer {
 					retvalString += p.getEigenschaft1().getKuerzel()+"/"+p.getEigenschaft2().getKuerzel()+"/"+p.getEigenschaft3().getKuerzel();
 				}
 			}
-			
-			
+			if(valueClass.equals(Rasse_Eigenschaft_Mod.class)){
+				
+				for(Rasse_Eigenschaft_Mod e: ((Collection<Rasse_Eigenschaft_Mod>)valueData)){
+					if(!retvalString.isEmpty())
+						retvalString += ", ";
+					retvalString += e.getEigenschaft().getKuerzel() +": "+e.getModifikator().toString();
+				}
+			}
+			if(valueClass.equals(Rasse_Vorteil.class)){
+				String autoRet = "", posRet = "", badRet = "";
+				for(Rasse_Vorteil v: ((Collection<Rasse_Vorteil>)valueData)){
+					switch(v.getTyp().byteValue()){
+						case Rasse_Vorteil.RASSE_VORTEIL_AUTOMATISCH:
+							if(!autoRet.isEmpty())
+								autoRet += ", ";
+							else
+								autoRet += "Automatisch: ";
+							autoRet += v.getVorteil().getName()+(v.getWert().equals(new Integer(-1))?"":("("+v.getWert()+")"));
+							break;
+						case Rasse_Vorteil.RASSE_VORTEIL_EMPFOHLEN:
+							if(!posRet.isEmpty())
+								posRet += ", ";
+							else
+								posRet += "Empfohlen: ";
+							posRet += v.getVorteil().getName()+(v.getWert().equals(new Integer(-1))?"":("("+v.getWert()+")"));
+							break;
+						case Rasse_Vorteil.RASSE_VORTEIL_UNGEEIGNET:
+							if(!badRet.isEmpty())
+								badRet += ", ";
+							else
+								badRet += "Ungeeignet: ";
+							badRet += v.getVorteil().getName()+(v.getWert().equals(new Integer(-1))?"":("("+v.getWert()+")"));
+							break;
+					}
+					retvalString += autoRet+"|"+posRet+"|"+badRet;
+				}
+			}
+			if(valueClass.equals(Rasse_Nachteil.class)){
+				String autoRet = "", posRet = "", badRet = "";
+				for(Rasse_Nachteil v: ((Collection<Rasse_Nachteil>)valueData)){
+					switch(v.getTyp().byteValue()){
+						case Rasse_Nachteil.RASSE_NACHTEIL_AUTOMATISCH:
+							if(!autoRet.isEmpty())
+								autoRet += ", ";
+							else
+								autoRet += "Automatisch: ";
+							autoRet += v.getNachteil().getName()+(v.getWert().equals(new Integer(-1))?"":("("+v.getWert()+")"));
+							break;
+						case Rasse_Nachteil.RASSE_NACHTEIL_EMPFOHLEN:
+							if(!posRet.isEmpty())
+								posRet += ", ";
+							else
+								posRet += "Empfohlen: ";
+							posRet += v.getNachteil().getName()+(v.getWert().equals(new Integer(-1))?"":("("+v.getWert()+")"));
+							break;
+						case Rasse_Nachteil.RASSE_NACHTEIL_UNGEEIGNET:
+							if(!badRet.isEmpty())
+								badRet += ", ";
+							else
+								badRet += "Ungeeignet: ";
+							badRet += v.getNachteil().getName()+(v.getWert().equals(new Integer(-1))?"":("("+v.getWert()+")"));
+							break;
+					}
+					retvalString += autoRet+"|"+posRet+"|"+badRet;
+				}
+			}
 		}
 		JLabel retval = new JLabel(retvalString);
 		retval.setOpaque(true);

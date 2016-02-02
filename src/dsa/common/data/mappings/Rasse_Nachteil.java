@@ -7,35 +7,35 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
-import dsa.common.data.Vorteil;
+import dsa.common.data.Nachteil;
 import dsa.common.data.Rasse;
-import dsa.common.data.mappings.ids.Rasse_VorteilID;
+import dsa.common.data.mappings.ids.Rasse_NachteilID;
 
 @Entity
-@Table(name="rasse_vorteil_mod")
+@Table(name="rasse_nachteil_mod")
 @AssociationOverrides({
 	@AssociationOverride(name = "pk.rasse", 
 		joinColumns = @JoinColumn(name = "RASSE_ID")),
-	@AssociationOverride(name = "pk.vorteil", 
-		joinColumns = @JoinColumn(name = "VORTEIL_ID"))})
-public class Rasse_Vorteile {
-	public static Byte	RASSE_VORTEIL_AUTOMATISCH = 0,
-						RASSE_VORTEIL_EMPFOHLEN = 1,
-						RASSE_VORTEIL_UNGEEIGNET = 2;
+	@AssociationOverride(name = "pk.nachteil", 
+		joinColumns = @JoinColumn(name = "NACHTEIL_ID"))})
+public class Rasse_Nachteil {
+	public final static byte	RASSE_NACHTEIL_AUTOMATISCH = 0,
+								RASSE_NACHTEIL_EMPFOHLEN = 1,
+								RASSE_NACHTEIL_UNGEEIGNET = 2;
 	private Integer wert;
 	private String information;
 	private Byte typ;
 	
-	public Rasse_Vorteile() {
-		this.pk = new Rasse_VorteilID();
+	public Rasse_Nachteil() {
+		this.pk = new Rasse_NachteilID();
 	}
-	public Rasse_Vorteile(Rasse r) {
-		this.pk = new Rasse_VorteilID();
+	public Rasse_Nachteil(Rasse r) {
+		this.pk = new Rasse_NachteilID();
 		this.setRasse(r);
 	}
 	
 	@EmbeddedId
-	private Rasse_VorteilID pk;
+	private Rasse_NachteilID pk;
 	
 	public Rasse getRasse() {
 		return pk.getRasse();
@@ -43,11 +43,11 @@ public class Rasse_Vorteile {
 	public void setRasse(Rasse rasse) {
 		this.pk.setRasse(rasse);
 	}
-	public Vorteil getVorteil() {
-		return pk.getVorteil();
+	public Nachteil getNachteil() {
+		return pk.getNachteil();
 	}
-	public void setVorteil(Vorteil vorteil) {
-		this.pk.setVorteil(vorteil);
+	public void setNachteil(Nachteil nachteil) {
+		this.pk.setNachteil(nachteil);
 	}
 	public Integer getWert() {
 		return wert;
@@ -74,8 +74,8 @@ public class Rasse_Vorteile {
 	}
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Rasse_Vorteile)
-			return pk.equals(((Rasse_Vorteile)obj).pk);
+		if(obj instanceof Rasse_Nachteil)
+			return pk.equals(((Rasse_Nachteil)obj).pk);
 		return false;
 	}
 }

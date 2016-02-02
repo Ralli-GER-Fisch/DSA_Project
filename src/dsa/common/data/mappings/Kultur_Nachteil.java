@@ -8,40 +8,40 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import dsa.common.data.Nachteil;
-import dsa.common.data.Rasse;
-import dsa.common.data.mappings.ids.Rasse_NachteilID;
+import dsa.common.data.Kultur;
+import dsa.common.data.mappings.ids.Kultur_NachteilID;
 
 @Entity
-@Table(name="rasse_nachteil_mod")
+@Table(name="kultur_nachteil_mod")
 @AssociationOverrides({
-	@AssociationOverride(name = "pk.rasse", 
-		joinColumns = @JoinColumn(name = "RASSE_ID")),
+	@AssociationOverride(name = "pk.kultur", 
+		joinColumns = @JoinColumn(name = "KULTUR_ID")),
 	@AssociationOverride(name = "pk.nachteil", 
 		joinColumns = @JoinColumn(name = "NACHTEIL_ID"))})
-public class Rasse_Nachteile {
-	public static Byte	RASSE_NACHTEIL_AUTOMATISCH = 0,
-						RASSE_NACHTEIL_EMPFOHLEN = 1,
-						RASSE_NACHTEIL_UNGEEIGNET = 2;
+public class Kultur_Nachteil {
+	public static Byte	KULTUR_NACHTEIL_AUTOMATISCH = 0,
+						KULTUR_NACHTEIL_EMPFOHLEN = 1,
+						KULTUR_NACHTEIL_UNGEEIGNET = 2;
 	private Integer wert;
 	private String information;
 	private Byte typ;
 	
-	public Rasse_Nachteile() {
-		this.pk = new Rasse_NachteilID();
+	public Kultur_Nachteil() {
+		this.pk = new Kultur_NachteilID();
 	}
-	public Rasse_Nachteile(Rasse r) {
-		this.pk = new Rasse_NachteilID();
-		this.setRasse(r);
+	public Kultur_Nachteil(Kultur r) {
+		this.pk = new Kultur_NachteilID();
+		this.setKultur(r);
 	}
 	
 	@EmbeddedId
-	private Rasse_NachteilID pk;
+	private Kultur_NachteilID pk;
 	
-	public Rasse getRasse() {
-		return pk.getRasse();
+	public Kultur getKultur() {
+		return pk.getKultur();
 	}
-	public void setRasse(Rasse rasse) {
-		this.pk.setRasse(rasse);
+	public void setKultur(Kultur kultur) {
+		this.pk.setKultur(kultur);
 	}
 	public Nachteil getNachteil() {
 		return pk.getNachteil();
@@ -74,8 +74,8 @@ public class Rasse_Nachteile {
 	}
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Rasse_Nachteile)
-			return pk.equals(((Rasse_Nachteile)obj).pk);
+		if(obj instanceof Kultur_Nachteil)
+			return pk.equals(((Kultur_Nachteil)obj).pk);
 		return false;
 	}
 }

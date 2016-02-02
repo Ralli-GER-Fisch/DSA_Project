@@ -65,6 +65,13 @@ public class MainMenuFrame extends JFrame {
 		menuCreatorTalent.setArmed(true);
 		menuCreatorTalent.setActionCommand(GUIControlMenuBarActionListener.ACTION_OPEN_TALENT_EDITOR);
 		menuCreator.add(menuCreatorTalent);
+
+		JMenuItem menuCreatorRasse = new JMenuItem("Rassen");
+		menuCreatorRasse.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK, true));
+		menuCreatorRasse.addActionListener(menuBarActionListener);
+		menuCreatorRasse.setArmed(true);
+		menuCreatorRasse.setActionCommand(GUIControlMenuBarActionListener.ACTION_OPEN_RASSE_EDITOR);
+		menuCreator.add(menuCreatorRasse);
 		
 		menuBar.add(menuFile);
 		menuBar.add(menuEdit);

@@ -15,8 +15,19 @@
 		
 		<mapping class="dsa.common.data.Eigenschaft" />
 		<mapping class="dsa.common.data.Talent" />
+		<mapping class="dsa.common.data.Rasse" />
 		<mapping class="dsa.common.data.mappings.Probe" />
 		<mapping class="dsa.common.data.mappings.ids.ProbeID" />
+		<mapping class="dsa.common.data.mappings.Rasse_Eigenschaft_Mod" />
+		<mapping class="dsa.common.data.mappings.ids.Rasse_Eigenschaft_ModID" />
+		<mapping class="dsa.common.data.mappings.Rasse_Nachteil" />
+		<mapping class="dsa.common.data.mappings.ids.Rasse_NachteilID" />
+		<mapping class="dsa.common.data.mappings.Rasse_Vorteil" />
+		<mapping class="dsa.common.data.mappings.ids.Rasse_VorteilID" />
+		<mapping class="dsa.common.data.mappings.Rasse_Kultur" />
+		<mapping class="dsa.common.data.mappings.ids.Rasse_KulturID" />
+		<mapping class="dsa.common.data.mappings.Rasse_Talent_Mod" />
+		<mapping class="dsa.common.data.mappings.ids.Rasse_Talent_ModID" />
 		<!-- <mapping class="dsa.common.data.Charakter" />
 		<mapping class="dsa.common.data.Ausruestung" />
 		<mapping class="dsa.common.data.AusruestungsGegenstand" />

@@ -14,8 +14,10 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 
 import dsa.common.data.Eigenschaft;
+import dsa.common.data.Rasse;
 import dsa.common.data.Talent;
 import dsa.common.data.mappings.Probe;
+import dsa.common.data.mappings.Rasse_Eigenschaft_Mod;
 import dsa.common.data.wrapper.NameIdWrapper;
 import dsa.common.hibernate.util.HibernateUtil;
 
@@ -183,6 +185,16 @@ public class DbManager {
 		closeSession();
 		return retval;
 	}
+	
+	public Set<Rasse_Eigenschaft_Mod> getAttributeOfRasse(Rasse rasse){
+		session = getSession();
+		session.beginTransaction();
+		session.refresh(rasse);
+		Hibernate.initialize(rasse.getEigenschafts_modifikatoren());
+		Set<Rasse_Eigenschaft_Mod> retval = rasse.getEigenschafts_modifikatoren();
+		closeSession();
+		return retval;
+	}
 
 	public <T> T loadInstanceById(T obj, Serializable id) {
 		session = getSession();
@@ -207,6 +219,20 @@ public class DbManager {
 		for(Talent t : data){
 			session.refresh(t);
 			Hibernate.initialize(t.getProben());
+		}
+		closeSession();
+	}
+	
+	public void unlazyRasse(List<Rasse> data) {
+		session = getSession();
+		session.beginTransaction();
+		for(Rasse r : data){
+			session.refresh(r);
+			Hibernate.initialize(r.getEigenschafts_modifikatoren());
+			Hibernate.initialize(r.getRasse_kulturen());
+			Hibernate.initialize(r.getRasse_nachteile());
+			Hibernate.initialize(r.getRasse_talente());
+			Hibernate.initialize(r.getRasse_vorteile());
 		}
 		closeSession();
 	}
