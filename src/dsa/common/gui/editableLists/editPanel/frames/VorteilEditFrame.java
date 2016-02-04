@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -21,17 +22,16 @@ import javax.swing.undo.UndoManager;
 import dsa.common.ctrl.util.CustomUndoableEditListener;
 import dsa.common.ctrl.util.actions.RedoAction;
 import dsa.common.ctrl.util.actions.UndoAction;
-import dsa.common.ctrl.util.documentListener.LimitDocumentSizeListener;
-import dsa.common.data.Eigenschaft;
+import dsa.common.data.Vorteil;
 import dsa.common.manage.DbManager;
 
 @SuppressWarnings("serial")
-public class AttributeEditFrame extends JFrame {
-	public AttributeEditFrame(Eigenschaft eigenschaft, JTable attributeTable) {
-		if (eigenschaft.getId() == null)
-			setTitle("Neue Eigenschaft");
+public class VorteilEditFrame extends JFrame {
+	public VorteilEditFrame(Vorteil vorteil, JTable vorteilTable) {
+		if (vorteil.getId() == null)
+			setTitle("Neuer Vorteil");
 		else
-			setTitle("Eigenschaft "+ eigenschaft.getName() +" editieren");
+			setTitle("Vorteil "+ vorteil.getName() +" editieren");
 		getContentPane().setLayout(new GridBagLayout());
 		GridBagConstraints cons = new GridBagConstraints();
 		cons.fill = GridBagConstraints.HORIZONTAL;
@@ -40,12 +40,12 @@ public class AttributeEditFrame extends JFrame {
 		
 		JLabel idLabel = new JLabel("ID");
 		idLabel.setAlignmentY(0);
-		JTextField idTF = new JTextField(eigenschaft.getId()==null?"":eigenschaft.getId().toString());
+		JTextField idTF = new JTextField(vorteil.getId()==null?"":vorteil.getId().toString());
 		idTF.setEnabled(false);
 		
 		JLabel nameLabel = new JLabel("Name");
 		nameLabel.setAlignmentY(0);
-		JTextField nameTF = new JTextField(eigenschaft.getName());
+		JTextField nameTF = new JTextField(vorteil.getName());
 		UndoManager nameUndoManager = new UndoManager();
 		nameTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(nameUndoManager));
 		nameTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
@@ -53,21 +53,23 @@ public class AttributeEditFrame extends JFrame {
 		nameTF.getActionMap().put("undo",new UndoAction(nameUndoManager));
 		nameTF.getActionMap().put("redo",new RedoAction(nameUndoManager));
 		
-		JLabel kuerzelLabel = new JLabel("Kürzel");
-		kuerzelLabel.setAlignmentY(0);
-		JTextField kuerzelTF = new JTextField(eigenschaft.getKuerzel());
-		kuerzelTF.getDocument().addDocumentListener(new LimitDocumentSizeListener(2));
-		UndoManager kuerzelUndoManager = new UndoManager();
-		kuerzelTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(kuerzelUndoManager));
-		kuerzelTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
-		kuerzelTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "redo");
-		kuerzelTF.getActionMap().put("undo",new UndoAction(kuerzelUndoManager));
-		kuerzelTF.getActionMap().put("redo",new RedoAction(kuerzelUndoManager));
+		JLabel geLabel = new JLabel("Generierungskosten");
+		geLabel.setAlignmentY(0);
+		JSpinner geSP = new JSpinner();
+		geSP.setValue(vorteil.getGenerierungskosten()!=null?vorteil.getGenerierungskosten():new Integer(0));
+		JTextField geTF = new JTextField(vorteil.getKostenzusatz());
+		UndoManager geUndoManager = new UndoManager();
+		geTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(geUndoManager));
+		geTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
+		geTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "redo");
+		geTF.getActionMap().put("undo",new UndoAction(geUndoManager));
+		geTF.getActionMap().put("redo",new RedoAction(geUndoManager));
+		
 		
 		JLabel beschreibungLabel = new JLabel("Beschreibung");
 		beschreibungLabel.setAlignmentY(0);
 		
-		JTextArea beschreibungTF = new JTextArea(eigenschaft.getBeschreibung());
+		JTextArea beschreibungTF = new JTextArea(vorteil.getBeschreibung());
 		beschreibungTF.setWrapStyleWord(true);
 		beschreibungTF.setLineWrap(true);
 		UndoManager beschreibungUndoManager = new UndoManager();
@@ -82,7 +84,7 @@ public class AttributeEditFrame extends JFrame {
 		
 		JButton saveButton = new JButton("Speichern");
 		saveButton.setActionCommand("edit");
-		if (eigenschaft.getId() == null){
+		if (vorteil.getId() == null){
 			saveButton.setText("Erstellen");
 			saveButton.setActionCommand("new");
 		}
@@ -95,20 +97,22 @@ public class AttributeEditFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				switch(e.getActionCommand()){
 					case "new":
-						eigenschaft.setName(nameTF.getText());
-						eigenschaft.setKuerzel(kuerzelTF.getText());
-						eigenschaft.setBeschreibung(beschreibungTF.getText());
-						DbManager.getCurrentDbManager().createNewObject(eigenschaft);
+						vorteil.setName(nameTF.getText());
+						vorteil.setBeschreibung(beschreibungTF.getText());
+						vorteil.setGenerierungskosten((Integer)geSP.getValue());
+						vorteil.setKostenzusatz(geTF.getText());
+						DbManager.getCurrentDbManager().createNewObject(vorteil);
 						dispose();
-						((AbstractTableModel)attributeTable.getModel()).fireTableDataChanged();
+						((AbstractTableModel)vorteilTable.getModel()).fireTableDataChanged();
 						break;
 					case "edit":
-						eigenschaft.setName(nameTF.getText());
-						eigenschaft.setKuerzel(kuerzelTF.getText());
-						eigenschaft.setBeschreibung(beschreibungTF.getText());
-						DbManager.getCurrentDbManager().updateObject(eigenschaft);
+						vorteil.setName(nameTF.getText());
+						vorteil.setBeschreibung(beschreibungTF.getText());
+						vorteil.setGenerierungskosten((Integer)geSP.getValue());
+						vorteil.setKostenzusatz(geTF.getText());
+						DbManager.getCurrentDbManager().updateObject(vorteil);
 						dispose();
-						((AbstractTableModel)attributeTable.getModel()).fireTableDataChanged();
+						((AbstractTableModel)vorteilTable.getModel()).fireTableDataChanged();
 						break;
 					case "cancel":
 						dispose();
@@ -139,16 +143,16 @@ public class AttributeEditFrame extends JFrame {
 		cons.weightx = 1;
 		cons.gridx = 1;
 		getContentPane().add(nameTF,cons);
-		
+
 		cons.gridy = 2;
 		cons.gridx = 0;
 		cons.weightx = 0;
 		cons.gridwidth = 1;
-		getContentPane().add(kuerzelLabel,cons);
-		cons.gridwidth = 2;
-		cons.weightx = 1;
+		getContentPane().add(geLabel,cons);
 		cons.gridx = 1;
-		getContentPane().add(kuerzelTF,cons);
+		getContentPane().add(geSP,cons);
+		cons.gridx = 2;
+		getContentPane().add(geTF,cons);
 		
 		cons.gridy = 3;		
 		cons.gridx = 0;

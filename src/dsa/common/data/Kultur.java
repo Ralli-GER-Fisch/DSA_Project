@@ -27,7 +27,7 @@ public class Kultur {
 	@Column(name="KULTUR_ID")
 	private Long id;
 	private String name;
-	private Integer generierungskosten;
+	/*private Integer generierungskosten;
 	private Integer so_maximum;	
 	@Column(name="LE_MOD")
 	private Integer lebenspunkte_modifikator;
@@ -46,9 +46,9 @@ public class Kultur {
 	private Set<Kultur_Profession> kultur_professionen;
 	@OneToMany(mappedBy="pk.talent",cascade=CascadeType.ALL,orphanRemoval=true)
 	private Set<Kultur_Talent_Mod> kultur_talente;
+	*/
 	/*--------------------   Constructor Area --------------------*/
 	public Kultur() {
-		// TODO Auto-generated constructor stub
 	}
 	/*--------------------    Function   Area --------------------*/
 	
@@ -65,7 +65,7 @@ public class Kultur {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBeschreibung() {
+	/*public String getBeschreibung() {
 		return beschreibung;
 	}
 	public void setBeschreibung(String beschreibung) {
@@ -136,5 +136,5 @@ public class Kultur {
 	}
 	public void setKultur_talente(Set<Kultur_Talent_Mod> kultur_talente) {
 		this.kultur_talente = kultur_talente;
-	}
+	}*/
 }

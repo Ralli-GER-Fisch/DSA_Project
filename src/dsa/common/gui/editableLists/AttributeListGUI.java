@@ -27,7 +27,7 @@ public class AttributeListGUI extends JScrollPane {
 	}
 
 	public String getInformation() {
-		return "Displaying "+ DbManager.getCurrentDbManager().getRowCountOfClass(Eigenschaft.class) +" rows";
+		return "Zeige "+ DbManager.getCurrentDbManager().getRowCountOfClass(Eigenschaft.class) +" Einträge der Tabelle Eigenschaft";
 	}
 	
 	public JTable getTable(){

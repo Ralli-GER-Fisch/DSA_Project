@@ -16,8 +16,11 @@ import org.hibernate.criterion.Projections;
 import dsa.common.data.Eigenschaft;
 import dsa.common.data.Rasse;
 import dsa.common.data.Talent;
+import dsa.common.data.Vorteil;
 import dsa.common.data.mappings.Probe;
 import dsa.common.data.mappings.Rasse_Eigenschaft_Mod;
+import dsa.common.data.mappings.Rasse_Nachteil;
+import dsa.common.data.mappings.Rasse_Vorteil;
 import dsa.common.data.wrapper.NameIdWrapper;
 import dsa.common.hibernate.util.HibernateUtil;
 
@@ -173,6 +176,14 @@ public class DbManager {
 				retval.add(new NameIdWrapper(curE.getId(),curE.getKuerzel()));
 			}
 		}
+		if(t.equals(Vorteil.class)){
+			Iterator<Vorteil> iter = getAllOfClass(Vorteil.class).iterator();
+			Vorteil curV;
+			while(iter.hasNext()){
+				curV = iter.next();
+				retval.add(new NameIdWrapper(curV.getId(),curV.getName()));
+			}
+		}
 		return retval;
 	}
 
@@ -196,6 +207,26 @@ public class DbManager {
 		return retval;
 	}
 
+	public Set<Rasse_Vorteil> getVorteileOfRasse(Rasse rasse){
+		session = getSession();
+		session.beginTransaction();
+		session.refresh(rasse);
+		Hibernate.initialize(rasse.getRasse_vorteile());
+		Set<Rasse_Vorteil> retval = rasse.getRasse_vorteile();
+		closeSession();
+		return retval;
+	}
+
+	public Set<Rasse_Nachteil> getNachteileOfRasse(Rasse rasse){
+		session = getSession();
+		session.beginTransaction();
+		session.refresh(rasse);
+		Hibernate.initialize(rasse.getRasse_nachteile());
+		Set<Rasse_Nachteil> retval = rasse.getRasse_nachteile();
+		closeSession();
+		return retval;
+	}
+	
 	public <T> T loadInstanceById(T obj, Serializable id) {
 		session = getSession();
 		session.load(obj, id);

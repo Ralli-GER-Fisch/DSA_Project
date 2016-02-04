@@ -22,15 +22,19 @@ public class Nachteil {
 	@GenericGenerator(name="increment",strategy="increment")
 	@Column(name="NACHTEIL_ID")
 	private Long id;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.nachteil")
-	private List<CharakterNachteil> charakterNachteil;
+	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.nachteil")
+	//private List<CharakterNachteil> charakterNachteil;
 	private String name;
 	private String beschreibung;
+	private Integer generierungskosten;
+	private String kostenzusatz;
 	//private String auswirkung;
-	//TODO: private Wirkung auswirkung;
+	//private Wirkung auswirkung;
 	/*--------------------   Constructor Area --------------------*/
 	public Nachteil() {
-		// TODO Auto-generated constructor stub
+	}
+	public Nachteil(long id) {
+		setId(id);
 	}
 	/*--------------------    Function   Area --------------------*/
 	
@@ -41,12 +45,12 @@ public class Nachteil {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<CharakterNachteil> getCharakterNachteil() {
+	/*public List<CharakterNachteil> getCharakterNachteil() {
 		return charakterNachteil;
 	}
 	public void setCharakterNachteil(List<CharakterNachteil> charakterNachteil) {
 		this.charakterNachteil = charakterNachteil;
-	}
+	}*/
 	public String getName() {
 		return name;
 	}
@@ -58,6 +62,18 @@ public class Nachteil {
 	}
 	public void setBeschreibung(String beschreibung) {
 		this.beschreibung = beschreibung;
+	}
+	public Integer getGenerierungskosten() {
+		return generierungskosten;
+	}
+	public void setGenerierungskosten(Integer generierungskosten) {
+		this.generierungskosten = generierungskosten;
+	}
+	public String getKostenzusatz() {
+		return kostenzusatz;
+	}
+	public void setKostenzusatz(String kostenzusatz) {
+		this.kostenzusatz = kostenzusatz;
 	}
 	/*public String getAuswirkung() {
 		return auswirkung;

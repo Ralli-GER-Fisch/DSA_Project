@@ -41,13 +41,13 @@ public class MainMenuFrame extends JFrame {
 		JMenu menuFile = new JMenu("Datei");
 		JMenu menuEdit = new JMenu("Bearbeiten");
 		JMenu menuCreator = new JMenu("Tools");
+		menuCreator.getAccessibleContext().setAccessibleDescription("Tools zum Füllen der Datenbank");
 		
 		//Menu Items
 				
 		JMenuItem menuFileExit = new JMenuItem("Beenden");
 		menuFileExit.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_DOWN_MASK, true));
 		menuFileExit.addActionListener(menuBarActionListener);
-		menuFileExit.setArmed(true);
 		menuFileExit.setActionCommand(GUIControlMenuBarActionListener.ACTION_QUIT);
 		menuFile.add(menuFileExit);
 		
@@ -55,23 +55,32 @@ public class MainMenuFrame extends JFrame {
 		JMenuItem menuCreatorEigenschaft = new JMenuItem("Eigenschaften");
 		menuCreatorEigenschaft.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK, true));
 		menuCreatorEigenschaft.addActionListener(menuBarActionListener);
-		menuCreatorEigenschaft.setArmed(true);
 		menuCreatorEigenschaft.setActionCommand(GUIControlMenuBarActionListener.ACTION_OPEN_ATTRIBUTE_EDITOR);
 		menuCreator.add(menuCreatorEigenschaft);
 		
 		JMenuItem menuCreatorTalent = new JMenuItem("Talente");
 		menuCreatorTalent.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK, true));
 		menuCreatorTalent.addActionListener(menuBarActionListener);
-		menuCreatorTalent.setArmed(true);
 		menuCreatorTalent.setActionCommand(GUIControlMenuBarActionListener.ACTION_OPEN_TALENT_EDITOR);
 		menuCreator.add(menuCreatorTalent);
 
 		JMenuItem menuCreatorRasse = new JMenuItem("Rassen");
 		menuCreatorRasse.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK, true));
 		menuCreatorRasse.addActionListener(menuBarActionListener);
-		menuCreatorRasse.setArmed(true);
 		menuCreatorRasse.setActionCommand(GUIControlMenuBarActionListener.ACTION_OPEN_RASSE_EDITOR);
 		menuCreator.add(menuCreatorRasse);
+		
+		JMenuItem menuCreatorVorteil = new JMenuItem("Vorteile");
+		menuCreatorVorteil.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK, true));
+		menuCreatorVorteil.addActionListener(menuBarActionListener);
+		menuCreatorVorteil.setActionCommand(GUIControlMenuBarActionListener.ACTION_OPEN_VORTEIL_EDITOR);
+		menuCreator.add(menuCreatorVorteil);
+		
+		JMenuItem menuCreatorNachteil = new JMenuItem("Nachteile");
+		menuCreatorNachteil.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK, true));
+		menuCreatorNachteil.addActionListener(menuBarActionListener);
+		menuCreatorNachteil.setActionCommand(GUIControlMenuBarActionListener.ACTION_OPEN_NACHTEIL_EDITOR);
+		menuCreator.add(menuCreatorNachteil);
 		
 		menuBar.add(menuFile);
 		menuBar.add(menuEdit);

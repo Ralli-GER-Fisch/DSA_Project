@@ -24,7 +24,7 @@ public class RasseListGUI extends JScrollPane {
 	}
 
 	public String getInformation() {
-		return "Displaying "+ DbManager.getCurrentDbManager().getRowCountOfClass(Rasse.class) +" rows";
+		return "Zeige "+ DbManager.getCurrentDbManager().getRowCountOfClass(Rasse.class) +" Einträge der Tabelle Rasse";
 	}
 	
 	public JTable getTable(){

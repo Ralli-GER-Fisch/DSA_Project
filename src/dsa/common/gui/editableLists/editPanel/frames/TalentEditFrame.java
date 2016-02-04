@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.util.HashSet;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -27,6 +28,7 @@ import dsa.common.ctrl.util.CustomUndoableEditListener;
 import dsa.common.ctrl.util.actions.RedoAction;
 import dsa.common.ctrl.util.actions.UndoAction;
 import dsa.common.data.Talent;
+import dsa.common.data.mappings.Probe;
 import dsa.common.gui.editableLists.editPanel.AddProbePanel;
 import dsa.common.gui.util.NameIdComboBox;
 import dsa.common.manage.DbManager;
@@ -62,19 +64,19 @@ public class TalentEditFrame extends JFrame {
 		JLabel typLabel = new JLabel("Typ");
 		typLabel.setAlignmentY(0);
 		NameIdComboBox typSF = new NameIdComboBox(Talent.getTypTalentItemList());
-		typSF.setSelectedIndex(talent.getTyp().intValue());
+		typSF.setSelectedIndex(talent.getTyp()==null?0:talent.getTyp().intValue());
 		AutoCompleteDecorator.decorate(typSF);
 		
 		JLabel gruppeLabel = new JLabel("Gruppe");
 		gruppeLabel.setAlignmentY(0);
 		NameIdComboBox gruppeSF = new NameIdComboBox(Talent.getGruppeTalentItemList());
-		gruppeSF.setSelectedIndex(talent.getGruppe().intValue());
+		gruppeSF.setSelectedIndex(talent.getGruppe()==null?0:talent.getGruppe().intValue());
 		AutoCompleteDecorator.decorate(gruppeSF);
 		
 		JLabel spalteLabel = new JLabel("Spalte");
 		spalteLabel.setAlignmentY(0);
 		JComboBox<String> spalteSF = new JComboBox<String>(new String[]{"A","B","C","D","E","F","G","H"});
-		spalteSF.setSelectedItem(talent.getSpalte());
+		spalteSF.setSelectedItem(talent.getSpalte()==null?"A":talent.getSpalte());
 		AutoCompleteDecorator.decorate(spalteSF);
 		spalteSF.addMouseWheelListener(new MouseWheelListener() {
 			@Override
@@ -90,7 +92,7 @@ public class TalentEditFrame extends JFrame {
 		
 		JLabel ebeLabel = new JLabel("eBE");
 		ebeLabel.setAlignmentY(0);
-		JTextField ebeTF = new JTextField(talent.geteBe());
+		JTextField ebeTF = new JTextField(talent.geteBe()==null?"BE":talent.geteBe());
 		UndoManager ebeUndoManager = new UndoManager();
 		ebeTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(ebeUndoManager));
 		ebeTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
@@ -128,7 +130,7 @@ public class TalentEditFrame extends JFrame {
 		
 		JLabel probeLabel = new JLabel("Proben");
 		probeLabel.setAlignmentY(0);
-		AddProbePanel probeAP = new AddProbePanel(talent,DbManager.getCurrentDbManager().getProbenOfTalent(talent));
+		AddProbePanel probeAP = new AddProbePanel(talent,talent.getId()==null?(new HashSet<Probe>()):DbManager.getCurrentDbManager().getProbenOfTalent(talent));
 		JScrollPane probeScrollPane = new JScrollPane(probeAP);
 		probeScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		probeScrollPane.setPreferredSize(new Dimension(300,100));
@@ -149,8 +151,8 @@ public class TalentEditFrame extends JFrame {
 				switch(e.getActionCommand()){
 					case "new":
 						talent.setName(nameTF.getText());
-						talent.setTyp(typSF.getSelectedItem().getId());
-						talent.setGruppe(gruppeSF.getSelectedItem().getId());
+						talent.setTyp(new Long((long) typSF.getSelectedItem().getId()));
+						talent.setGruppe(new Long((long) gruppeSF.getSelectedItem().getId()));
 						talent.setSpalte(spalteSF.getSelectedItem().toString());
 						talent.seteBe(ebeTF.getText());
 						talent.setProben(probeAP.getProben());
@@ -162,8 +164,8 @@ public class TalentEditFrame extends JFrame {
 						break;
 					case "edit":
 						talent.setName(nameTF.getText());
-						talent.setTyp(typSF.getSelectedItem().getId());
-						talent.setGruppe(gruppeSF.getSelectedItem().getId());
+						talent.setTyp(new Long((long) typSF.getSelectedItem().getId()));
+						talent.setGruppe(new Long((long) gruppeSF.getSelectedItem().getId()));
 						talent.setSpalte(spalteSF.getSelectedItem().toString());
 						talent.seteBe(ebeTF.getText());
 						talent.setProben(probeAP.getProben());

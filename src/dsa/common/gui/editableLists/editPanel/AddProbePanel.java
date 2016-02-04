@@ -85,7 +85,7 @@ public class AddProbePanel extends JPanel {
 				@Override
 				public void itemStateChanged(ItemEvent e) {
 					if(e.getStateChange() == ItemEvent.SELECTED)
-						proben.get(pos).setEigenschaft1(new Eigenschaft(((NameIdWrapper)e.getItem()).getId()));
+						proben.get(pos).setEigenschaft1(new Eigenschaft((long) ((NameIdWrapper)e.getItem()).getId()));
 				}
 			});
 			e2SF.addItemListener(new ItemListener() {
@@ -93,7 +93,7 @@ public class AddProbePanel extends JPanel {
 				@Override
 				public void itemStateChanged(ItemEvent e1) {
 					if(e1.getStateChange() == ItemEvent.SELECTED)
-						proben.get(pos).setEigenschaft2(new Eigenschaft(((NameIdWrapper)e1.getItem()).getId()));
+						proben.get(pos).setEigenschaft2(new Eigenschaft((long) ((NameIdWrapper)e1.getItem()).getId()));
 				}
 			});
 			e3SF.addItemListener(new ItemListener() {
@@ -101,7 +101,7 @@ public class AddProbePanel extends JPanel {
 				@Override
 				public void itemStateChanged(ItemEvent e2) {
 					if(e2.getStateChange() == ItemEvent.SELECTED)
-						proben.get(pos).setEigenschaft3(new Eigenschaft(((NameIdWrapper)e2.getItem()).getId()));
+						proben.get(pos).setEigenschaft3(new Eigenschaft((long) ((NameIdWrapper)e2.getItem()).getId()));
 				}
 			});
 			

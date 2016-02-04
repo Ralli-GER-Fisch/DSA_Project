@@ -1,18 +1,18 @@
 package dsa.common.data.wrapper;
 
 public class NameIdWrapper {
-	private long id;
+	private Number id;
 	private String name;
 	public NameIdWrapper() {
 	}
-	public NameIdWrapper(long id, String name) {
+	public NameIdWrapper(Number id, String name) {
 		this.id = id;
 		this.name = name;
 	}
-	public long getId() {
+	public Number getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Number id) {
 		this.id = id;
 	}
 	public String getName() {

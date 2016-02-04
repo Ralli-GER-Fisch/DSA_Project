@@ -36,10 +36,10 @@ public class AddAttributePanel extends JPanel {
 	List<NameIdWrapper> attributeItems;
 	ActionListener buttonListener;
 	Rasse rasse;
-	public AddAttributePanel(Rasse r,Set<Rasse_Eigenschaft_Mod> eigenschaft_mods) {
+	public AddAttributePanel(Rasse r,Set<Rasse_Eigenschaft_Mod> eigenschaft_modsI) {
 		this.rasse = r;
-		if(!eigenschaft_mods.isEmpty())
-			this.eigenschaft_mods.addAll(eigenschaft_mods);
+		if(!eigenschaft_modsI.isEmpty())
+			this.eigenschaft_mods.addAll(eigenschaft_modsI);
 		
 		setLayout(new GridBagLayout());
 		c = new GridBagConstraints();
@@ -82,7 +82,7 @@ public class AddAttributePanel extends JPanel {
 				@Override
 				public void itemStateChanged(ItemEvent e) {
 					if(e.getStateChange() == ItemEvent.SELECTED)
-						eigenschaft_mods.get(pos).setEigenschaft(new Eigenschaft(((NameIdWrapper)e.getItem()).getId()));
+						eigenschaft_mods.get(pos).setEigenschaft(new Eigenschaft((long) ((NameIdWrapper)e.getItem()).getId()));
 				}
 			});
 			modValue.addChangeListener(new ChangeListener() {

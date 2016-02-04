@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -23,14 +24,19 @@ import dsa.common.ctrl.util.CustomUndoableEditListener;
 import dsa.common.ctrl.util.actions.RedoAction;
 import dsa.common.ctrl.util.actions.UndoAction;
 import dsa.common.data.Rasse;
+import dsa.common.data.mappings.Rasse_Eigenschaft_Mod;
+import dsa.common.data.mappings.Rasse_Nachteil;
+import dsa.common.data.mappings.Rasse_Vorteil;
 import dsa.common.gui.editableLists.editPanel.AddAttributePanel;
+import dsa.common.gui.editableLists.editPanel.AddNachteilePanel;
+import dsa.common.gui.editableLists.editPanel.AddVorteilePanel;
 import dsa.common.manage.DbManager;
 
 @SuppressWarnings("serial")
 public class RasseEditFrame extends JFrame {
 	public RasseEditFrame(Rasse rasse, JTable rasseTable) {
 		if (rasse.getId() == null)
-			setTitle("Neues Rasse");
+			setTitle("Neue Rasse");
 		else
 			setTitle("Rasse "+ rasse.getName() +" editieren");
 		getContentPane().setLayout(new GridBagLayout());
@@ -56,7 +62,7 @@ public class RasseEditFrame extends JFrame {
 
 		JLabel groesseLabel = new JLabel("Größe-Regel");
 		groesseLabel.setAlignmentY(0);
-		JTextField groesseTF = new JTextField(rasse.getName());
+		JTextField groesseTF = new JTextField(rasse.getKoerpergroesse_regel());
 		UndoManager groesseUndoManager = new UndoManager();
 		groesseTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(groesseUndoManager));
 		groesseTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
@@ -66,7 +72,7 @@ public class RasseEditFrame extends JFrame {
 		
 		JLabel gewichtLabel = new JLabel("Gewicht-Regel");
 		gewichtLabel.setAlignmentY(0);
-		JTextField gewichtTF = new JTextField(rasse.getName());
+		JTextField gewichtTF = new JTextField(rasse.getGewicht_regel());
 		UndoManager gewichtUndoManager = new UndoManager();
 		gewichtTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(gewichtUndoManager));
 		gewichtTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
@@ -97,7 +103,7 @@ public class RasseEditFrame extends JFrame {
 		JLabel herkunftLabel = new JLabel("Herkunft und Verbreitung");
 		herkunftLabel.setAlignmentY(0);
 		
-		JTextArea herkunftTF = new JTextArea(rasse.getBeschreibung());
+		JTextArea herkunftTF = new JTextArea(rasse.getHerkunft_verbreitung());
 		herkunftTF.setWrapStyleWord(true);
 		herkunftTF.setLineWrap(true);
 		UndoManager herkunftUndoManager = new UndoManager();
@@ -113,7 +119,7 @@ public class RasseEditFrame extends JFrame {
 		JLabel aussehenLabel = new JLabel("Körperbaue und Aussehen");
 		aussehenLabel.setAlignmentY(0);
 		
-		JTextArea aussehenTF = new JTextArea(rasse.getBeschreibung());
+		JTextArea aussehenTF = new JTextArea(rasse.getKoerperbau_aussehen());
 		aussehenTF.setWrapStyleWord(true);
 		aussehenTF.setLineWrap(true);
 		UndoManager aussehenUndoManager = new UndoManager();
@@ -142,21 +148,26 @@ public class RasseEditFrame extends JFrame {
 		beschreibungScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		beschreibungScrollPane.setPreferredSize(new Dimension(300,100));
 		
-		/*
 		JLabel eigenschaftLabel = new JLabel("Eigenschaft-Modifikator");
 		eigenschaftLabel.setAlignmentY(0);
-		AddAttributePanel eigenschaftAP = new AddAttributePanel(rasse,DbManager.getCurrentDbManager().getAttributeOfRasse(rasse));
+		AddAttributePanel eigenschaftAP = new AddAttributePanel(rasse,(rasse.getId()==null?(new HashSet<Rasse_Eigenschaft_Mod>()):DbManager.getCurrentDbManager().getAttributeOfRasse(rasse)));
 		JScrollPane eigenschaftScrollPane = new JScrollPane(eigenschaftAP);
-		eigenschaftScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		eigenschaftScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		eigenschaftScrollPane.setPreferredSize(new Dimension(300,100));
-		*/
+
+		JLabel vorteilLabel = new JLabel("Vorteile");
+		vorteilLabel.setAlignmentY(0);
+		AddVorteilePanel vorteilAP = new AddVorteilePanel(rasse,(rasse.getId()==null?(new HashSet<Rasse_Vorteil>()):DbManager.getCurrentDbManager().getVorteileOfRasse(rasse)));
+		JScrollPane vorteilScrollPane = new JScrollPane(vorteilAP);
+		vorteilScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		vorteilScrollPane.setPreferredSize(new Dimension(300,100));
 		
-		JLabel eigenschaftLabel = new JLabel("Eigenschaft-Modifikator");
-		eigenschaftLabel.setAlignmentY(0);
-		AddAttributePanel eigenschaftAP = new AddAttributePanel(rasse,DbManager.getCurrentDbManager().getAttributeOfRasse(rasse));
-		JScrollPane eigenschaftScrollPane = new JScrollPane(eigenschaftAP);
-		eigenschaftScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		eigenschaftScrollPane.setPreferredSize(new Dimension(300,100));
+		JLabel nachteilLabel = new JLabel("Nachteile");
+		nachteilLabel.setAlignmentY(0);
+		AddNachteilePanel nachteilAP = new AddNachteilePanel(rasse,(rasse.getId()==null?(new HashSet<Rasse_Nachteil>()):DbManager.getCurrentDbManager().getNachteileOfRasse(rasse)));
+		JScrollPane nachteilScrollPane = new JScrollPane(nachteilAP);
+		nachteilScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		nachteilScrollPane.setPreferredSize(new Dimension(300,100));
 		
 		JButton saveButton = new JButton("Speichern");
 		saveButton.setActionCommand("edit");
@@ -184,6 +195,8 @@ public class RasseEditFrame extends JFrame {
 						rasse.setKoerperbau_aussehen(aussehenTF.getText());
 						rasse.setBeschreibung(beschreibungTF.getText());
 						rasse.setEigenschafts_modifikatoren(eigenschaftAP.getRasse_Eigenschaft_Mods());
+						rasse.setRasse_vorteile(vorteilAP.getRasse_Vorteile());
+						rasse.setRasse_nachteile(nachteilAP.getRasse_Nachteile());
 						DbManager.getCurrentDbManager().createNewObject(rasse);
 						dispose();
 						((AbstractTableModel)rasseTable.getModel()).fireTableDataChanged();
@@ -200,6 +213,8 @@ public class RasseEditFrame extends JFrame {
 						rasse.setKoerperbau_aussehen(aussehenTF.getText());
 						rasse.setBeschreibung(beschreibungTF.getText());
 						rasse.setEigenschafts_modifikatoren(eigenschaftAP.getRasse_Eigenschaft_Mods());
+						rasse.setRasse_vorteile(vorteilAP.getRasse_Vorteile());
+						rasse.setRasse_nachteile(nachteilAP.getRasse_Nachteile());
 						DbManager.getCurrentDbManager().mergeObject(rasse);
 						dispose();
 						((AbstractTableModel)rasseTable.getModel()).fireTableDataChanged();
@@ -214,6 +229,7 @@ public class RasseEditFrame extends JFrame {
 		saveButton.addActionListener(buttonListener);
 		cancelButton.addActionListener(buttonListener);
 		
+		cons.fill = GridBagConstraints.HORIZONTAL;
 		cons.gridy = 0;
 		cons.gridx = 0;
 		cons.weightx = 0;
@@ -324,17 +340,30 @@ public class RasseEditFrame extends JFrame {
 		cons.gridx = 1;
 		getContentPane().add(beschreibungScrollPane,cons);
 		
-		cons.gridy = 11;		
-		cons.gridx = 0;
+		cons.gridy = 0;		
+		cons.gridx = 3;
 		cons.weightx = 0;
+		cons.gridheight = 4;
 		cons.gridwidth = 1;
 		getContentPane().add(eigenschaftLabel,cons);
 		cons.gridwidth = 2;
 		cons.weightx = 1;
-		cons.gridx = 1;
-		getContentPane().add(eigenschaftAP,cons);
+		cons.gridx = 4;
+		getContentPane().add(eigenschaftScrollPane,cons);
 		
-		cons.gridy = 12;
+		cons.gridy = 4;		
+		cons.gridx = 3;
+		cons.weightx = 0;
+		cons.gridheight = 4;
+		cons.gridwidth = 1;
+		getContentPane().add(vorteilLabel,cons);
+		cons.gridwidth = 2;
+		cons.weightx = 1;
+		cons.gridx = 4;
+		getContentPane().add(vorteilScrollPane,cons);
+		
+		cons.gridheight = 1;
+		cons.gridy = 11;
 		cons.gridx = 0;
 		cons.weightx = 0;
 		cons.gridwidth = 1;

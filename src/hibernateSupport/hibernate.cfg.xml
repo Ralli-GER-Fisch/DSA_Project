@@ -16,6 +16,9 @@
 		<mapping class="dsa.common.data.Eigenschaft" />
 		<mapping class="dsa.common.data.Talent" />
 		<mapping class="dsa.common.data.Rasse" />
+		<mapping class="dsa.common.data.Kultur" />
+		<mapping class="dsa.common.data.Nachteil" />
+		<mapping class="dsa.common.data.Vorteil" />
 		<mapping class="dsa.common.data.mappings.Probe" />
 		<mapping class="dsa.common.data.mappings.ids.ProbeID" />
 		<mapping class="dsa.common.data.mappings.Rasse_Eigenschaft_Mod" />
@@ -33,13 +36,8 @@
 		<mapping class="dsa.common.data.AusruestungsGegenstand" />
 		<mapping class="dsa.common.data.Behaelter" />
 		<mapping class="dsa.common.data.Geld" />
-		<mapping class="dsa.common.data.Kultur" />
-		<mapping class="dsa.common.data.Nachteil" />
 		<mapping class="dsa.common.data.Profession" />
-		<mapping class="dsa.common.data.Rasse" />
 		<mapping class="dsa.common.data.Sonderfertigkeit" />
-		
-		<mapping class="dsa.common.data.Vorteil" />
 		<mapping class="dsa.common.data.Wirkung" /> -->
 		
 		

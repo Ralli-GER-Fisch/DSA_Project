@@ -24,7 +24,7 @@ public class TalentListGUI extends JScrollPane {
 	}
 
 	public String getInformation() {
-		return "Displaying "+ DbManager.getCurrentDbManager().getRowCountOfClass(Talent.class) +" rows";
+		return "Zeige "+ DbManager.getCurrentDbManager().getRowCountOfClass(Talent.class) +" Einträge der Tabelle Talent";
 	}
 	
 	public JTable getTable(){

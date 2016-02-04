@@ -10,7 +10,9 @@ import javax.swing.table.TableCellRenderer;
 
 import dsa.common.data.mappings.Probe;
 import dsa.common.data.mappings.Rasse_Eigenschaft_Mod;
+import dsa.common.data.mappings.Rasse_Kultur;
 import dsa.common.data.mappings.Rasse_Nachteil;
+import dsa.common.data.mappings.Rasse_Talent_Mod;
 import dsa.common.data.mappings.Rasse_Vorteil;
 import dsa.common.data.wrapper.CollectionGenericWrapper;
 import dsa.common.gui.editableLists.tables.CustomRenderedTable;
@@ -103,6 +105,36 @@ public class GenericCollectionTCR implements TableCellRenderer {
 							break;
 					}
 					retvalString += autoRet+"|"+posRet+"|"+badRet;
+				}
+			}
+			if(valueClass.equals(Rasse_Kultur.class)){
+				String uebRet="",moegRet="";
+				for(Rasse_Kultur v: ((Collection<Rasse_Kultur>)valueData)){
+					switch(v.getTyp().byteValue()){
+						case Rasse_Kultur.RASSE_KULTUR_UEBLICH:
+							if(!uebRet.isEmpty())
+								uebRet += ", ";
+							else
+								uebRet += "Üblich: ";
+							uebRet += v.getKultur().getName();
+							break;
+						case Rasse_Kultur.RASSE_KULTUR_MOEGLICH:
+							if(!moegRet.isEmpty())
+								moegRet += ", ";
+							else
+								moegRet += "Möglich: ";
+							moegRet += v.getKultur().getName();
+							break;
+					}
+					retvalString += uebRet+"|"+moegRet;
+				}
+			}
+			if(valueClass.equals(Rasse_Talent_Mod.class)){
+				
+				for(Rasse_Talent_Mod t: ((Collection<Rasse_Talent_Mod>)valueData)){
+					if(!retvalString.isEmpty())
+						retvalString += ", ";
+					retvalString += t.getTalent().getName()+": "+t.getModifikator().toString();
 				}
 			}
 		}

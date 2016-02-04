@@ -19,8 +19,8 @@ import dsa.common.data.mappings.ids.Rasse_KulturID;
 	@AssociationOverride(name = "pk.kultur", 
 		joinColumns = @JoinColumn(name = "KULTUR_ID"))})
 public class Rasse_Kultur {
-	public static Byte	RASSE_KULTUR_UEBLICH = 0,
-						RASSE_KULTUR_MOEGLICH = 1;
+	public final static byte	RASSE_KULTUR_UEBLICH = 0,
+								RASSE_KULTUR_MOEGLICH = 1;
 	private Byte typ;
 	private String information;
 	

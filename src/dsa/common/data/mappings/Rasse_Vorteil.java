@@ -1,5 +1,8 @@
 package dsa.common.data.mappings;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
 import javax.persistence.EmbeddedId;
@@ -10,6 +13,7 @@ import javax.persistence.Table;
 import dsa.common.data.Vorteil;
 import dsa.common.data.Rasse;
 import dsa.common.data.mappings.ids.Rasse_VorteilID;
+import dsa.common.data.wrapper.NameIdWrapper;
 
 @Entity
 @Table(name="rasse_vorteil_mod")
@@ -22,6 +26,9 @@ public class Rasse_Vorteil {
 	public final static byte	RASSE_VORTEIL_AUTOMATISCH = 0,
 								RASSE_VORTEIL_EMPFOHLEN = 1,
 								RASSE_VORTEIL_UNGEEIGNET = 2;
+	public final static String	RASSE_VORTEIL_AUTOMATISCH_STR = "Automatisch",
+								RASSE_VORTEIL_EMPFOHLEN_STR = "Empfohlen",
+								RASSE_VORTEIL_UNGEEIGNET_STR = "Ungeeignet";
 	private Integer wert;
 	private String information;
 	private Byte typ;
@@ -77,5 +84,13 @@ public class Rasse_Vorteil {
 		if(obj instanceof Rasse_Vorteil)
 			return pk.equals(((Rasse_Vorteil)obj).pk);
 		return false;
+	}
+	
+	public static List<NameIdWrapper> getTypNameIdWrapper() {
+		List<NameIdWrapper> retval = new ArrayList<NameIdWrapper>();
+		retval.add(new NameIdWrapper(RASSE_VORTEIL_AUTOMATISCH, RASSE_VORTEIL_AUTOMATISCH_STR));
+		retval.add(new NameIdWrapper(RASSE_VORTEIL_EMPFOHLEN, RASSE_VORTEIL_EMPFOHLEN_STR));
+		retval.add(new NameIdWrapper(RASSE_VORTEIL_UNGEEIGNET, RASSE_VORTEIL_UNGEEIGNET_STR));
+		return retval;
 	}
 }

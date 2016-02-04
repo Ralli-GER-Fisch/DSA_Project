@@ -1,5 +1,8 @@
 package dsa.common.data.mappings;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
 import javax.persistence.EmbeddedId;
@@ -10,6 +13,7 @@ import javax.persistence.Table;
 import dsa.common.data.Nachteil;
 import dsa.common.data.Rasse;
 import dsa.common.data.mappings.ids.Rasse_NachteilID;
+import dsa.common.data.wrapper.NameIdWrapper;
 
 @Entity
 @Table(name="rasse_nachteil_mod")
@@ -22,6 +26,9 @@ public class Rasse_Nachteil {
 	public final static byte	RASSE_NACHTEIL_AUTOMATISCH = 0,
 								RASSE_NACHTEIL_EMPFOHLEN = 1,
 								RASSE_NACHTEIL_UNGEEIGNET = 2;
+	public final static String	RASSE_NACHTEIL_AUTOMATISCH_STR = "Automatisch",
+								RASSE_NACHTEIL_EMPFOHLEN_STR = "Empfohlen",
+								RASSE_NACHTEIL_UNGEEIGNET_STR = "Ungeeignet";
 	private Integer wert;
 	private String information;
 	private Byte typ;
@@ -77,5 +84,12 @@ public class Rasse_Nachteil {
 		if(obj instanceof Rasse_Nachteil)
 			return pk.equals(((Rasse_Nachteil)obj).pk);
 		return false;
+	}
+	public static List<NameIdWrapper> getTypNameIdWrapper() {
+		List<NameIdWrapper> retval = new ArrayList<NameIdWrapper>();
+		retval.add(new NameIdWrapper(RASSE_NACHTEIL_AUTOMATISCH, RASSE_NACHTEIL_AUTOMATISCH_STR));
+		retval.add(new NameIdWrapper(RASSE_NACHTEIL_EMPFOHLEN, RASSE_NACHTEIL_EMPFOHLEN_STR));
+		retval.add(new NameIdWrapper(RASSE_NACHTEIL_UNGEEIGNET, RASSE_NACHTEIL_UNGEEIGNET_STR));
+		return retval;
 	}
 }
