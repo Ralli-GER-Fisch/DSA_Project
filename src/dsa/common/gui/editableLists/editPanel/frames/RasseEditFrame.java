@@ -28,10 +28,10 @@ import dsa.common.data.mappings.Rasse_Eigenschaft_Mod;
 import dsa.common.data.mappings.Rasse_Nachteil;
 import dsa.common.data.mappings.Rasse_Talent_Mod;
 import dsa.common.data.mappings.Rasse_Vorteil;
-import dsa.common.gui.editableLists.editPanel.AddAttributePanel;
-import dsa.common.gui.editableLists.editPanel.AddNachteilePanel;
-import dsa.common.gui.editableLists.editPanel.AddTalentPanel;
-import dsa.common.gui.editableLists.editPanel.AddVorteilePanel;
+import dsa.common.gui.editableLists.editPanel.AddRasse_EigenschaftPanel;
+import dsa.common.gui.editableLists.editPanel.AddRasse_NachteilPanel;
+import dsa.common.gui.editableLists.editPanel.AddRasse_TalentPanel;
+import dsa.common.gui.editableLists.editPanel.AddRasse_VorteilPanel;
 import dsa.common.manage.DbManager;
 
 @SuppressWarnings("serial")
@@ -152,28 +152,28 @@ public class RasseEditFrame extends JFrame {
 		
 		JLabel eigenschaftLabel = new JLabel("Eigenschaft-Modifikator");
 		eigenschaftLabel.setAlignmentY(0);
-		AddAttributePanel eigenschaftAP = new AddAttributePanel(rasse,(rasse.getId()==null?(new HashSet<Rasse_Eigenschaft_Mod>()):DbManager.getCurrentDbManager().getAttributeOfRasse(rasse)));
+		AddRasse_EigenschaftPanel eigenschaftAP = new AddRasse_EigenschaftPanel(rasse,(rasse.getId()==null?(new HashSet<Rasse_Eigenschaft_Mod>()):DbManager.getCurrentDbManager().getEigenschaftOfRasse(rasse)));
 		JScrollPane eigenschaftScrollPane = new JScrollPane(eigenschaftAP);
 		eigenschaftScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		eigenschaftScrollPane.setPreferredSize(new Dimension(300,100));
 
 		JLabel vorteilLabel = new JLabel("Vorteile");
 		vorteilLabel.setAlignmentY(0);
-		AddVorteilePanel vorteilAP = new AddVorteilePanel(rasse,(rasse.getId()==null?(new HashSet<Rasse_Vorteil>()):DbManager.getCurrentDbManager().getVorteileOfRasse(rasse)));
+		AddRasse_VorteilPanel vorteilAP = new AddRasse_VorteilPanel(rasse,(rasse.getId()==null?(new HashSet<Rasse_Vorteil>()):DbManager.getCurrentDbManager().getVorteilOfRasse(rasse)));
 		JScrollPane vorteilScrollPane = new JScrollPane(vorteilAP);
 		vorteilScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		vorteilScrollPane.setPreferredSize(new Dimension(300,100));
 		
 		JLabel nachteilLabel = new JLabel("Nachteile");
 		nachteilLabel.setAlignmentY(0);
-		AddNachteilePanel nachteilAP = new AddNachteilePanel(rasse,(rasse.getId()==null?(new HashSet<Rasse_Nachteil>()):DbManager.getCurrentDbManager().getNachteileOfRasse(rasse)));
+		AddRasse_NachteilPanel nachteilAP = new AddRasse_NachteilPanel(rasse,(rasse.getId()==null?(new HashSet<Rasse_Nachteil>()):DbManager.getCurrentDbManager().getNachteilOfRasse(rasse)));
 		JScrollPane nachteilScrollPane = new JScrollPane(nachteilAP);
 		nachteilScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		nachteilScrollPane.setPreferredSize(new Dimension(300,100));
 
 		JLabel talentLabel = new JLabel("Talente");
 		talentLabel.setAlignmentY(0);
-		AddTalentPanel talentAP = new AddTalentPanel(rasse,(rasse.getId()==null?(new HashSet<Rasse_Talent_Mod>()):DbManager.getCurrentDbManager().getTalentOfRasse(rasse)));
+		AddRasse_TalentPanel talentAP = new AddRasse_TalentPanel(rasse,(rasse.getId()==null?(new HashSet<Rasse_Talent_Mod>()):DbManager.getCurrentDbManager().getTalentOfRasse(rasse)));
 		JScrollPane talentScrollPane = new JScrollPane(talentAP);
 		talentScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		talentScrollPane.setPreferredSize(new Dimension(300,100));

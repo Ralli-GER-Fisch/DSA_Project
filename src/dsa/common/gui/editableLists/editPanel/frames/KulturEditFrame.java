@@ -30,6 +30,8 @@ import dsa.common.data.mappings.Kultur_Nachteil;
 import dsa.common.data.mappings.Kultur_Talent_Mod;
 import dsa.common.data.mappings.Kultur_Vorteil;
 import dsa.common.gui.editableLists.editPanel.AddAttributePanel;
+import dsa.common.gui.editableLists.editPanel.AddKultur_NachteilPanel;
+import dsa.common.gui.editableLists.editPanel.AddKultur_VorteilPanel;
 import dsa.common.gui.editableLists.editPanel.AddNachteilePanel;
 import dsa.common.gui.editableLists.editPanel.AddTalentPanel;
 import dsa.common.gui.editableLists.editPanel.AddVorteilePanel;
@@ -63,26 +65,11 @@ public class KulturEditFrame extends JFrame {
 		nameTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "redo");
 		nameTF.getActionMap().put("undo",new UndoAction(nameUndoManager));
 		nameTF.getActionMap().put("redo",new RedoAction(nameUndoManager));
-
-		JLabel groesseLabel = new JLabel("Größe-Regel");
-		groesseLabel.setAlignmentY(0);
-		JTextField groesseTF = new JTextField(kultur.getKoerpergroesse_regel());
-		UndoManager groesseUndoManager = new UndoManager();
-		groesseTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(groesseUndoManager));
-		groesseTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
-		groesseTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "redo");
-		groesseTF.getActionMap().put("undo",new UndoAction(groesseUndoManager));
-		groesseTF.getActionMap().put("redo",new RedoAction(groesseUndoManager));
 		
-		JLabel gewichtLabel = new JLabel("Gewicht-Regel");
-		gewichtLabel.setAlignmentY(0);
-		JTextField gewichtTF = new JTextField(kultur.getGewicht_regel());
-		UndoManager gewichtUndoManager = new UndoManager();
-		gewichtTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(gewichtUndoManager));
-		gewichtTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
-		gewichtTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "redo");
-		gewichtTF.getActionMap().put("undo",new UndoAction(gewichtUndoManager));
-		gewichtTF.getActionMap().put("redo",new RedoAction(gewichtUndoManager));
+		JLabel somaxLabel = new JLabel("Maximaler Sozialstatus");
+		somaxLabel.setAlignmentY(0);
+		JSpinner somaxSP = new JSpinner();
+		somaxSP.setValue(kultur.getSozialstatus_maximum()!=null?kultur.getSozialstatus_maximum():new Integer(0));
 		
 		JLabel gemodLabel = new JLabel("Generierungskosten");
 		gemodLabel.setAlignmentY(0);
@@ -103,39 +90,7 @@ public class KulturEditFrame extends JFrame {
 		mrmodLabel.setAlignmentY(0);
 		JSpinner mrmodSP = new JSpinner();
 		mrmodSP.setValue(kultur.getMagieresistenz_modifikator()!=null?kultur.getMagieresistenz_modifikator():new Integer(0));
-		
-		JLabel herkunftLabel = new JLabel("Herkunft und Verbreitung");
-		herkunftLabel.setAlignmentY(0);
-		
-		JTextArea herkunftTF = new JTextArea(kultur.getHerkunft_verbreitung());
-		herkunftTF.setWrapStyleWord(true);
-		herkunftTF.setLineWrap(true);
-		UndoManager herkunftUndoManager = new UndoManager();
-		herkunftTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(herkunftUndoManager));
-		herkunftTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
-		herkunftTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "redo");
-		herkunftTF.getActionMap().put("undo",new UndoAction(herkunftUndoManager));
-		herkunftTF.getActionMap().put("redo",new RedoAction(herkunftUndoManager));
-		JScrollPane herkunftScrollPane = new JScrollPane(herkunftTF);
-		herkunftScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		herkunftScrollPane.setPreferredSize(new Dimension(300,100));
-		
-		JLabel aussehenLabel = new JLabel("Körperbaue und Aussehen");
-		aussehenLabel.setAlignmentY(0);
-		
-		JTextArea aussehenTF = new JTextArea(kultur.getKoerperbau_aussehen());
-		aussehenTF.setWrapStyleWord(true);
-		aussehenTF.setLineWrap(true);
-		UndoManager aussehenUndoManager = new UndoManager();
-		aussehenTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(aussehenUndoManager));
-		aussehenTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
-		aussehenTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "redo");
-		aussehenTF.getActionMap().put("undo",new UndoAction(aussehenUndoManager));
-		aussehenTF.getActionMap().put("redo",new RedoAction(aussehenUndoManager));
-		JScrollPane aussehenScrollPane = new JScrollPane(aussehenTF);
-		aussehenScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		aussehenScrollPane.setPreferredSize(new Dimension(300,100));
-		
+				
 		JLabel beschreibungLabel = new JLabel("Beschreibung");
 		beschreibungLabel.setAlignmentY(0);
 		
@@ -154,28 +109,28 @@ public class KulturEditFrame extends JFrame {
 		
 		JLabel eigenschaftLabel = new JLabel("Eigenschaft-Modifikator");
 		eigenschaftLabel.setAlignmentY(0);
-		AddAttributePanel eigenschaftAP = new AddAttributePanel(kultur,(kultur.getId()==null?(new HashSet<Kultur_Eigenschaft_Mod>()):DbManager.getCurrentDbManager().getAttributeOfKultur(kultur)));
+		AddKultur_EigenschaftPanel eigenschaftAP = new AddKultur_EigenschaftPanel(kultur,(kultur.getId()==null?(new HashSet<Kultur_Eigenschaft_Mod>()):DbManager.getCurrentDbManager().getEigenschaftOfKultur(kultur)));
 		JScrollPane eigenschaftScrollPane = new JScrollPane(eigenschaftAP);
 		eigenschaftScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		eigenschaftScrollPane.setPreferredSize(new Dimension(300,100));
 
 		JLabel vorteilLabel = new JLabel("Vorteile");
 		vorteilLabel.setAlignmentY(0);
-		AddVorteilePanel vorteilAP = new AddVorteilePanel(kultur,(kultur.getId()==null?(new HashSet<Kultur_Vorteil>()):DbManager.getCurrentDbManager().getVorteileOfKultur(kultur)));
+		AddKultur_VorteilPanel vorteilAP = new AddKultur_VorteilPanel(kultur,(kultur.getId()==null?(new HashSet<Kultur_Vorteil>()):DbManager.getCurrentDbManager().getVorteilOfKultur(kultur)));
 		JScrollPane vorteilScrollPane = new JScrollPane(vorteilAP);
 		vorteilScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		vorteilScrollPane.setPreferredSize(new Dimension(300,100));
 		
 		JLabel nachteilLabel = new JLabel("Nachteile");
 		nachteilLabel.setAlignmentY(0);
-		AddNachteilePanel nachteilAP = new AddNachteilePanel(kultur,(kultur.getId()==null?(new HashSet<Kultur_Nachteil>()):DbManager.getCurrentDbManager().getNachteileOfKultur(kultur)));
+		AddKultur_NachteilPanel nachteilAP = new AddKultur_NachteilPanel(kultur,(kultur.getId()==null?(new HashSet<Kultur_Nachteil>()):DbManager.getCurrentDbManager().getNachteilOfKultur(kultur)));
 		JScrollPane nachteilScrollPane = new JScrollPane(nachteilAP);
 		nachteilScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		nachteilScrollPane.setPreferredSize(new Dimension(300,100));
 
 		JLabel talentLabel = new JLabel("Talente");
 		talentLabel.setAlignmentY(0);
-		AddTalentPanel talentAP = new AddTalentPanel(kultur,(kultur.getId()==null?(new HashSet<Kultur_Talent_Mod>()):DbManager.getCurrentDbManager().getTalentOfKultur(kultur)));
+		AddKultur_TalentPanel talentAP = new AddKultur_TalentPanel(kultur,(kultur.getId()==null?(new HashSet<Kultur_Talent_Mod>()):DbManager.getCurrentDbManager().getTalentOfKultur(kultur)));
 		JScrollPane talentScrollPane = new JScrollPane(talentAP);
 		talentScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		talentScrollPane.setPreferredSize(new Dimension(300,100));

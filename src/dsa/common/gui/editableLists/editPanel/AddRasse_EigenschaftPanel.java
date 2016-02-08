@@ -29,14 +29,14 @@ import dsa.common.gui.util.NameIdComboBox;
 import dsa.common.manage.DbManager;
 
 @SuppressWarnings("serial")
-public class AddAttributePanel extends JPanel {
+public class AddRasse_EigenschaftPanel extends JPanel {
 	List<Rasse_Eigenschaft_Mod> eigenschaft_mods = new ArrayList<Rasse_Eigenschaft_Mod>();
 	GridBagConstraints c;
 	int ii;
 	List<NameIdWrapper> attributeItems;
 	ActionListener buttonListener;
 	Rasse rasse;
-	public AddAttributePanel(Rasse r,Set<Rasse_Eigenschaft_Mod> eigenschaft_modsI) {
+	public AddRasse_EigenschaftPanel(Rasse r,Set<Rasse_Eigenschaft_Mod> eigenschaft_modsI) {
 		this.rasse = r;
 		if(!eigenschaft_modsI.isEmpty())
 			this.eigenschaft_mods.addAll(eigenschaft_modsI);

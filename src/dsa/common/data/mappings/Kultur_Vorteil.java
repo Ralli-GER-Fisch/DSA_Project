@@ -1,5 +1,8 @@
 package dsa.common.data.mappings;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
 import javax.persistence.EmbeddedId;
@@ -10,6 +13,7 @@ import javax.persistence.Table;
 import dsa.common.data.Vorteil;
 import dsa.common.data.Kultur;
 import dsa.common.data.mappings.ids.Kultur_VorteilID;
+import dsa.common.data.wrapper.NameIdWrapper;
 
 @Entity
 @Table(name="kultur_vorteil_mod")
@@ -19,9 +23,12 @@ import dsa.common.data.mappings.ids.Kultur_VorteilID;
 	@AssociationOverride(name = "pk.vorteil", 
 		joinColumns = @JoinColumn(name = "VORTEIL_ID"))})
 public class Kultur_Vorteil {
-	public static Byte	KULTUR_VORTEIL_AUTOMATISCH = 0,
-						KULTUR_VORTEIL_EMPFOHLEN = 1,
-						KULTUR_VORTEIL_UNGEEIGNET = 2;
+	public final static byte	KULTUR_VORTEIL_AUTOMATISCH = 0,
+								KULTUR_VORTEIL_EMPFOHLEN = 1,
+								KULTUR_VORTEIL_UNGEEIGNET = 2;
+	public final static String	KULTUR_VORTEIL_AUTOMATISCH_STR = "Automatisch",
+								KULTUR_VORTEIL_EMPFOHLEN_STR = "Empfohlen",
+								KULTUR_VORTEIL_UNGEEIGNET_STR = "Ungeeignet";
 	private Integer wert;
 	private String information;
 	private Byte typ;
@@ -77,5 +84,12 @@ public class Kultur_Vorteil {
 		if(obj instanceof Kultur_Vorteil)
 			return pk.equals(((Kultur_Vorteil)obj).pk);
 		return false;
+	}
+	public static List<NameIdWrapper> getTypNameIdWrapper() {
+		List<NameIdWrapper> retval = new ArrayList<NameIdWrapper>();
+		retval.add(new NameIdWrapper(KULTUR_VORTEIL_AUTOMATISCH, KULTUR_VORTEIL_AUTOMATISCH_STR));
+		retval.add(new NameIdWrapper(KULTUR_VORTEIL_EMPFOHLEN, KULTUR_VORTEIL_EMPFOHLEN_STR));
+		retval.add(new NameIdWrapper(KULTUR_VORTEIL_UNGEEIGNET, KULTUR_VORTEIL_UNGEEIGNET_STR));
+		return retval;
 	}
 }

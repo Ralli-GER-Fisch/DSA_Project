@@ -29,14 +29,14 @@ import dsa.common.gui.util.NameIdComboBox;
 import dsa.common.manage.DbManager;
 
 @SuppressWarnings("serial")
-public class AddTalentPanel extends JPanel {
+public class AddRasse_TalentPanel extends JPanel {
 	List<Rasse_Talent_Mod> talent_mods = new ArrayList<Rasse_Talent_Mod>();
 	GridBagConstraints c;
 	int ii;
 	List<NameIdWrapper> talentItems;
 	ActionListener buttonListener;
 	Rasse rasse;
-	public AddTalentPanel(Rasse r,Set<Rasse_Talent_Mod> talent_modsI) {
+	public AddRasse_TalentPanel(Rasse r,Set<Rasse_Talent_Mod> talent_modsI) {
 		this.rasse = r;
 		if(!talent_modsI.isEmpty())
 			this.talent_mods.addAll(talent_modsI);

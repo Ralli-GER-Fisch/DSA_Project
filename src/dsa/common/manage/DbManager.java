@@ -14,9 +14,15 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 
 import dsa.common.data.Eigenschaft;
+import dsa.common.data.Kultur;
+import dsa.common.data.Profession;
 import dsa.common.data.Rasse;
 import dsa.common.data.Talent;
 import dsa.common.data.Vorteil;
+import dsa.common.data.mappings.Kultur_Eigenschaft_Mod;
+import dsa.common.data.mappings.Kultur_Nachteil;
+import dsa.common.data.mappings.Kultur_TalentGruppe_Mod;
+import dsa.common.data.mappings.Kultur_Vorteil;
 import dsa.common.data.mappings.Probe;
 import dsa.common.data.mappings.Rasse_Eigenschaft_Mod;
 import dsa.common.data.mappings.Rasse_Nachteil;
@@ -198,7 +204,7 @@ public class DbManager {
 		return retval;
 	}
 	
-	public Set<Rasse_Eigenschaft_Mod> getAttributeOfRasse(Rasse rasse){
+	public Set<Rasse_Eigenschaft_Mod> getEigenschaftOfRasse(Rasse rasse){
 		session = getSession();
 		session.beginTransaction();
 		session.refresh(rasse);
@@ -218,7 +224,7 @@ public class DbManager {
 		return retval;
 	}
 	
-	public Set<Rasse_Vorteil> getVorteileOfRasse(Rasse rasse){
+	public Set<Rasse_Vorteil> getVorteilOfRasse(Rasse rasse){
 		session = getSession();
 		session.beginTransaction();
 		session.refresh(rasse);
@@ -228,12 +234,52 @@ public class DbManager {
 		return retval;
 	}
 
-	public Set<Rasse_Nachteil> getNachteileOfRasse(Rasse rasse){
+	public Set<Rasse_Nachteil> getNachteilOfRasse(Rasse rasse){
 		session = getSession();
 		session.beginTransaction();
 		session.refresh(rasse);
 		Hibernate.initialize(rasse.getRasse_nachteile());
 		Set<Rasse_Nachteil> retval = rasse.getRasse_nachteile();
+		closeSession();
+		return retval;
+	}
+	
+	public Set<Kultur_Eigenschaft_Mod> getEigenschaftOfKultur(Kultur kultur){
+		session = getSession();
+		session.beginTransaction();
+		session.refresh(kultur);
+		Hibernate.initialize(kultur.getEigenschafts_modifikatoren());
+		Set<Kultur_Eigenschaft_Mod> retval = kultur.getEigenschafts_modifikatoren();
+		closeSession();
+		return retval;
+	}
+
+	public Set<Kultur_TalentGruppe_Mod> getTalentOfKultur(Kultur kultur){
+		session = getSession();
+		session.beginTransaction();
+		session.refresh(kultur);
+		Hibernate.initialize(kultur.getKultur_talente());
+		Set<Kultur_TalentGruppe_Mod> retval = kultur.getKultur_talente();
+		closeSession();
+		return retval;
+	}
+	
+	public Set<Kultur_Vorteil> getVorteilOfKultur(Kultur kultur){
+		session = getSession();
+		session.beginTransaction();
+		session.refresh(kultur);
+		Hibernate.initialize(kultur.getKultur_vorteile());
+		Set<Kultur_Vorteil> retval = kultur.getKultur_vorteile();
+		closeSession();
+		return retval;
+	}
+
+	public Set<Kultur_Nachteil> getNachteilOfKultur(Kultur kultur){
+		session = getSession();
+		session.beginTransaction();
+		session.refresh(kultur);
+		Hibernate.initialize(kultur.getKultur_nachteile());
+		Set<Kultur_Nachteil> retval = kultur.getKultur_nachteile();
 		closeSession();
 		return retval;
 	}
@@ -275,6 +321,34 @@ public class DbManager {
 			Hibernate.initialize(r.getRasse_nachteile());
 			Hibernate.initialize(r.getRasse_talente());
 			Hibernate.initialize(r.getRasse_vorteile());
+		}
+		closeSession();
+	}
+	public void unlazyProfession(List<Profession> data) {
+		session = getSession();
+		session.beginTransaction();
+		for(Profession p : data){
+			session.refresh(p);
+			Hibernate.initialize(p.getProfession_nachteile());
+			Hibernate.initialize(p.getProfession_vorteile());
+			Hibernate.initialize(p.getTalente());
+			Hibernate.initialize(p.getVarianteVon());
+			Hibernate.initialize(p.getProfession_sonderfertigkeiten());
+			Hibernate.initialize(p.getVoraussetzung_eigenschaft());
+		}
+		closeSession();
+	}
+	public void unlazyKultur(List<Kultur> data) {
+		session = getSession();
+		session.beginTransaction();
+		for(Kultur k : data){
+			session.refresh(k);
+			Hibernate.initialize(k.getEigenschafts_modifikatoren());
+			Hibernate.initialize(k.getKultur_nachteile());
+			Hibernate.initialize(k.getKultur_professionen());
+			Hibernate.initialize(k.getKultur_talente());
+			Hibernate.initialize(k.getKultur_vorteile());
+			Hibernate.initialize(k.getVarianteVon());
 		}
 		closeSession();
 	}

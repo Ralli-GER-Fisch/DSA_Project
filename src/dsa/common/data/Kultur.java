@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -15,8 +16,8 @@ import org.hibernate.annotations.GenericGenerator;
 import dsa.common.data.mappings.Kultur_Eigenschaft_Mod;
 import dsa.common.data.mappings.Kultur_Nachteil;
 import dsa.common.data.mappings.Kultur_Profession;
+import dsa.common.data.mappings.Kultur_Sonderfertigkeit;
 import dsa.common.data.mappings.Kultur_TalentGruppe_Mod;
-import dsa.common.data.mappings.Kultur_Variante;
 import dsa.common.data.mappings.Kultur_Vorteil;
 
 @Entity
@@ -46,8 +47,9 @@ public class Kultur {
 	private Set<Kultur_Profession> kultur_professionen;
 	@OneToMany(mappedBy="kultur",cascade=CascadeType.ALL,orphanRemoval=true)
 	private Set<Kultur_TalentGruppe_Mod> kultur_talente;
-	@OneToMany(mappedBy="kultur",cascade=CascadeType.ALL,orphanRemoval=true)
-	private Set<Kultur_Variante> kultur_varianten;
+	@ManyToOne(optional=true)
+	private Kultur varianteVon;
+	private Set<Kultur_Sonderfertigkeit> kultur_sonderfertigkeiten;
 	//sonderfertigkeiten, verbilligte sonderfertigkeiten
 	
 	/*--------------------   Constructor Area --------------------*/
@@ -71,23 +73,17 @@ public class Kultur {
 	public void setName(String name) {
 		this.name = name;
 	}
-	/*public String getBeschreibung() {
-		return beschreibung;
-	}
-	public void setBeschreibung(String beschreibung) {
-		this.beschreibung = beschreibung;
-	}
 	public Integer getGenerierungskosten() {
 		return generierungskosten;
 	}
 	public void setGenerierungskosten(Integer generierungskosten) {
 		this.generierungskosten = generierungskosten;
 	}
-	public Integer getSo_maximum() {
-		return so_maximum;
+	public Integer getSozialstatus_maximum() {
+		return sozialstatus_maximum;
 	}
-	public void setSo_maximum(Integer so_maximum) {
-		this.so_maximum = so_maximum;
+	public void setSozialstatus_maximum(Integer sozialstatus_maximum) {
+		this.sozialstatus_maximum = sozialstatus_maximum;
 	}
 	public Integer getLebenspunkte_modifikator() {
 		return lebenspunkte_modifikator;
@@ -107,11 +103,11 @@ public class Kultur {
 	public void setMagieresistenz_modifikator(Integer magieresistenz_modifikator) {
 		this.magieresistenz_modifikator = magieresistenz_modifikator;
 	}
-	public Integer getSozialstatus_maximum() {
-		return sozialstatus_maximum;
+	public String getBeschreibung() {
+		return beschreibung;
 	}
-	public void setSozialstatus_maximum(Integer sozialstatus_maximum) {
-		this.sozialstatus_maximum = sozialstatus_maximum;
+	public void setBeschreibung(String beschreibung) {
+		this.beschreibung = beschreibung;
 	}
 	public Set<Kultur_Eigenschaft_Mod> getEigenschafts_modifikatoren() {
 		return eigenschafts_modifikatoren;
@@ -137,10 +133,22 @@ public class Kultur {
 	public void setKultur_professionen(Set<Kultur_Profession> kultur_professionen) {
 		this.kultur_professionen = kultur_professionen;
 	}
-	public Set<Kultur_Talent_Mod> getKultur_talente() {
+	public Set<Kultur_TalentGruppe_Mod> getKultur_talente() {
 		return kultur_talente;
 	}
-	public void setKultur_talente(Set<Kultur_Talent_Mod> kultur_talente) {
+	public void setKultur_talente(Set<Kultur_TalentGruppe_Mod> kultur_talente) {
 		this.kultur_talente = kultur_talente;
-	}*/
+	}
+	public Kultur getVarianteVon() {
+		return varianteVon;
+	}
+	public void setVarianteVon(Kultur varianteVon) {
+		this.varianteVon = varianteVon;
+	}
+	public Set<Kultur_Sonderfertigkeit> getKultur_sonderfertigkeiten() {
+		return kultur_sonderfertigkeiten;
+	}
+	public void setKultur_sonderfertigkeiten(Set<Kultur_Sonderfertigkeit> kultur_sonderfertigkeiten) {
+		this.kultur_sonderfertigkeiten = kultur_sonderfertigkeiten;
+	}
 }

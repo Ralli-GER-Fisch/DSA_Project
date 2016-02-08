@@ -4,10 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import dsa.common.data.Profession;
-import dsa.common.data.Sonderfertigkeit;
 import dsa.common.data.mappings.Profession_Eigenschaft_Voraussetzung;
+import dsa.common.data.mappings.Profession_Nachteil;
+import dsa.common.data.mappings.Profession_Sonderfertigkeit;
 import dsa.common.data.mappings.Profession_TalentGruppe_Mod;
-import dsa.common.data.mappings.Rasse_Kultur;
+import dsa.common.data.mappings.Profession_Vorteil;
 import dsa.common.data.wrapper.CollectionGenericWrapper;
 import dsa.common.manage.DbManager;
 
@@ -17,15 +18,15 @@ public class ProfessionTableModel extends AbstractCustomTableModel<Profession> {
 	private List<String> columnNames = Arrays.asList("ID","Name","Generierungskosten",
 			"Zeitaufwendig","Erstprofession",
 			"Voraussetzungen","Modifikatoren",
-			"Talente","Verbilligte Sonderfertigkeiten",
+			"Talente","Sonderfertigkeiten",
 			"Nachteile","Vorteile",
-			"Varianten","Beschreibung");
+			"Varianten von","Beschreibung");
 	private List<Class<?>> columnClasses = Arrays.asList(Long.class,String.class,Integer.class,
 			Boolean.class,Boolean.class,
 			String.class,String.class,
 			CollectionGenericWrapper.class,CollectionGenericWrapper.class,
 			CollectionGenericWrapper.class,CollectionGenericWrapper.class,
-			CollectionGenericWrapper.class,String.class);
+			String.class,String.class);
 	
 	public static final int COL_ID = 0,
 							COL_NAME = 1,
@@ -38,7 +39,7 @@ public class ProfessionTableModel extends AbstractCustomTableModel<Profession> {
 							COL_SONDERFERTIGKEITEN = 8,
 							COL_NACHTEILE = 9,
 							COL_VORTEILE = 10,
-							COL_VARIANTEN = 11,
+							COL_VARIANTENVON = 11,
 							COL_BESCHREIBUNG = 12;							
 	
 	public ProfessionTableModel(List<Profession> data) {
@@ -100,7 +101,7 @@ public class ProfessionTableModel extends AbstractCustomTableModel<Profession> {
 			retval = new <Profession_TalentGruppe_Mod>CollectionGenericWrapper(data.get(row).getTalente(),Profession_TalentGruppe_Mod.class);
 			break;
 		case COL_SONDERFERTIGKEITEN:
-			retval = new <Sonderfertigkeit>CollectionGenericWrapper(data.get(row).getVerbilligteSonderfertigkeiten(),Sonderfertigkeit.class);
+			retval = new <Profession_Sonderfertigkeit>CollectionGenericWrapper(data.get(row).getProfession_sonderfertigkeiten(),Profession_Sonderfertigkeit.class);
 			break;
 		case COL_NACHTEILE:
 			retval = new <Profession_Nachteil>CollectionGenericWrapper(data.get(row).getProfession_nachteile(),Profession_Nachteil.class);
@@ -108,8 +109,8 @@ public class ProfessionTableModel extends AbstractCustomTableModel<Profession> {
 		case COL_VORTEILE:
 			retval = new <Profession_Vorteil>CollectionGenericWrapper(data.get(row).getProfession_vorteile(),Profession_Vorteil.class);
 			break;
-		case COL_VARIANTEN:
-			retval = new <Profession_Variante>CollectionGenericWrapper(data.get(row).getVarianten(),Profession_Variante.class);
+		case COL_VARIANTENVON:
+			retval = data.get(row).getVarianteVon();
 			break;
 		case COL_BESCHREIBUNG:
 			retval = data.get(row).getBeschreibung();

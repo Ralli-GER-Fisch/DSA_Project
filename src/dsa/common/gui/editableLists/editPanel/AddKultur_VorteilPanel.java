@@ -21,24 +21,24 @@ import javax.swing.event.ChangeListener;
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-import dsa.common.data.Rasse;
+import dsa.common.data.Kultur;
 import dsa.common.data.Vorteil;
-import dsa.common.data.mappings.Rasse_Vorteil;
+import dsa.common.data.mappings.Kultur_Vorteil;
 import dsa.common.data.wrapper.NameIdWrapper;
 import dsa.common.gui.util.NameIdComboBox;
 import dsa.common.manage.DbManager;
 
 @SuppressWarnings("serial")
-public class AddVorteilePanel extends JPanel {
-	List<Rasse_Vorteil> vorteile = new ArrayList<Rasse_Vorteil>();
+public class AddKultur_VorteilPanel extends JPanel {
+	List<Kultur_Vorteil> vorteile = new ArrayList<Kultur_Vorteil>();
 	GridBagConstraints c;
 	int ii;
 	List<NameIdWrapper> vorteilItems;
 	List<NameIdWrapper> typItems;
 	ActionListener buttonListener;
-	Rasse rasse;
-	public AddVorteilePanel(Rasse r,Set<Rasse_Vorteil> vorteileI) {
-		this.rasse = r;
+	Kultur kultur;
+	public AddKultur_VorteilPanel(Kultur k,Set<Kultur_Vorteil> vorteileI) {
+		this.kultur = k;
 		if(!vorteileI.isEmpty())
 			this.vorteile.addAll(vorteileI);
 		
@@ -47,12 +47,12 @@ public class AddVorteilePanel extends JPanel {
 		c.gridwidth = 1;
 		c.weightx = 0;
 		vorteilItems = DbManager.getCurrentDbManager().getNameIdWrapperByClass(Vorteil.class);
-		typItems = Rasse_Vorteil.getTypNameIdWrapper();
+		typItems = Kultur_Vorteil.getTypNameIdWrapper();
 		buttonListener = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().startsWith("add")){
-					vorteile.add(new Rasse_Vorteil(rasse));
+					vorteile.add(new Kultur_Vorteil(kultur));
 				}
 				else if(e.getActionCommand().startsWith("del")){
 					vorteile.remove(new Integer(e.getActionCommand().split("_")[1]).intValue());
@@ -65,10 +65,10 @@ public class AddVorteilePanel extends JPanel {
 	}
 	private void reCreate() {
 		removeAll();
-		Iterator<Rasse_Vorteil> iter = vorteile.iterator();
+		Iterator<Kultur_Vorteil> iter = vorteile.iterator();
 		ii = 0;
 		while(iter.hasNext()){
-			Rasse_Vorteil curV = iter.next();
+			Kultur_Vorteil curV = iter.next();
 			
 			NameIdComboBox vSF = new NameIdComboBox(vorteilItems);
 			vSF.setSelectedIndex(curV.getVorteil().getId()!=null?curV.getVorteil().getId().intValue()-1:0);
@@ -134,11 +134,11 @@ public class AddVorteilePanel extends JPanel {
 			super.repaint();
 	}
 
-	public Set<Rasse_Vorteil> getRasse_Vorteile() {
-		Set<Rasse_Vorteil> retval = new HashSet<Rasse_Vorteil>();
-		Iterator<Rasse_Vorteil> iter = vorteile.iterator();
+	public Set<Kultur_Vorteil> getKultur_Vorteile() {
+		Set<Kultur_Vorteil> retval = new HashSet<Kultur_Vorteil>();
+		Iterator<Kultur_Vorteil> iter = vorteile.iterator();
 		while(iter.hasNext()){
-			Rasse_Vorteil curV = iter.next();
+			Kultur_Vorteil curV = iter.next();
 			curV.setVorteil(DbManager.getCurrentDbManager().loadInstanceById(curV.getVorteil(), curV.getVorteil().getId()));
 			curV.setTyp(new Byte(curV.getTyp()));
 			curV.setWert(new Integer(curV.getWert()));

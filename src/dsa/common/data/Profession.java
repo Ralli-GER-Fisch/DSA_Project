@@ -3,16 +3,22 @@ package dsa.common.data;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.omg.IOP.TAG_ALTERNATE_IIOP_ADDRESS;
 
 import dsa.common.data.mappings.Profession_Eigenschaft_Voraussetzung;
+import dsa.common.data.mappings.Profession_Nachteil;
+import dsa.common.data.mappings.Profession_Sonderfertigkeit;
+import dsa.common.data.mappings.Profession_Sozialstatus_Voraussetzung;
 import dsa.common.data.mappings.Profession_TalentGruppe_Mod;
+import dsa.common.data.mappings.Profession_Vorteil;
 
 @Entity
 @Table(name="profession")
@@ -28,19 +34,23 @@ public class Profession {
 	private boolean zeitaufwendig;
 	private Integer generierungskosten;
 	private Set<Profession_Eigenschaft_Voraussetzung> voraussetzung_eigenschaft;
-	private Integer voraussetzung_sozialstatus;
+	@Embedded
+	private Profession_Sozialstatus_Voraussetzung voraussetzung_sozialstatus;
 	private Integer ausdauer_modifikator;
 	private Set<Profession_TalentGruppe_Mod> talente;
-	private Set<Sonderfertigkeit> verbilligteSonderfertigkeiten;
+	private Set<Profession_Sonderfertigkeit> profession_sonderfertigkeiten;
 	private Set<Profession_Nachteil> profession_nachteile;
 	private Set<Profession_Vorteil> profession_vorteile;
 	//private Set<Profession_Ausruestung> ausruestung;
 	//private Set<Profession_Ausruestung> besondererBesitz;
-	private Set<Profession_Variante> varianten;
+	@ManyToOne(optional=true)
+	private Profession varianteVon;
 	
 	/*--------------------   Constructor Area --------------------*/
 	public Profession() {
-		// TODO Auto-generated constructor stub
+	}
+	public Profession(long id) {
+		setId(id);
 	}
 	/*--------------------    Function   Area --------------------*/
 	
@@ -96,11 +106,11 @@ public class Profession {
 		this.voraussetzung_eigenschaft = voraussetzung_eigenschaft;
 	}
 
-	public Integer getVoraussetzung_sozialstatus() {
+	public Profession_Sozialstatus_Voraussetzung getVoraussetzung_sozialstatus() {
 		return voraussetzung_sozialstatus;
 	}
 
-	public void setVoraussetzung_sozialstatus(Integer voraussetzung_sozialstatus) {
+	public void setVoraussetzung_sozialstatus(Profession_Sozialstatus_Voraussetzung voraussetzung_sozialstatus) {
 		this.voraussetzung_sozialstatus = voraussetzung_sozialstatus;
 	}
 
@@ -120,35 +130,45 @@ public class Profession {
 		this.talente = talente;
 	}
 
-	public Set<Sonderfertigkeit> getVerbilligteSonderfertigkeiten() {
-		return verbilligteSonderfertigkeiten;
-	}
-
-	public void setVerbilligteSonderfertigkeiten(Set<Sonderfertigkeit> verbilligteSonderfertigkeiten) {
-		this.verbilligteSonderfertigkeiten = verbilligteSonderfertigkeiten;
-	}
-
-	public Set<Profession_Nachteil_Mod> getProfession_nachteile() {
+	public Set<Profession_Nachteil> getProfession_nachteile() {
 		return profession_nachteile;
 	}
 
-	public void setProfession_nachteile(Set<Profession_Nachteil_Mod> profession_nachteile) {
+	public void setProfession_nachteile(Set<Profession_Nachteil> profession_nachteile) {
 		this.profession_nachteile = profession_nachteile;
 	}
 
-	public Set<Profession_Vorteil_Mod> getProfession_vorteile() {
+	public Set<Profession_Vorteil> getProfession_vorteile() {
 		return profession_vorteile;
 	}
 
-	public void setProfession_vorteile(Set<Profession_Vorteil_Mod> profession_vorteile) {
+	public void setProfession_vorteile(Set<Profession_Vorteil> profession_vorteile) {
 		this.profession_vorteile = profession_vorteile;
 	}
-
-	public Set<Profession_Variante> getVarianten() {
-		return varianten;
+	@Transient
+	public Integer getMin_SO() {
+		return getVoraussetzung_sozialstatus().getMin_SO();
 	}
-
-	public void setVarianten(Set<Profession_Variante> varianten) {
-		this.varianten = varianten;
+	public void setMin_SO(Integer min_SO) {
+		this.getVoraussetzung_sozialstatus().setMin_SO(min_SO);
+	}
+	@Transient
+	public Integer getMax_SO() {
+		return getVoraussetzung_sozialstatus().getMax_SO();
+	}
+	public void setMax_SO(Integer max_SO) {
+		this.getVoraussetzung_sozialstatus().setMax_SO(max_SO);
+	}
+	public Profession getVarianteVon() {
+		return varianteVon;
+	}
+	public void setVarianteVon(Profession varianteVon) {
+		this.varianteVon = varianteVon;
+	}
+	public Set<Profession_Sonderfertigkeit> getProfession_sonderfertigkeiten() {
+		return profession_sonderfertigkeiten;
+	}
+	public void setProfession_sonderfertigkeiten(Set<Profession_Sonderfertigkeit> profession_sonderfertigkeiten) {
+		this.profession_sonderfertigkeiten = profession_sonderfertigkeiten;
 	}
 }

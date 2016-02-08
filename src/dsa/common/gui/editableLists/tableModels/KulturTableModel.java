@@ -5,9 +5,10 @@ import java.util.List;
 
 import dsa.common.data.Kultur;
 import dsa.common.data.mappings.Kultur_Eigenschaft_Mod;
-import dsa.common.data.mappings.Kultur_Kultur;
 import dsa.common.data.mappings.Kultur_Nachteil;
-import dsa.common.data.mappings.Kultur_Talent_Mod;
+import dsa.common.data.mappings.Kultur_Profession;
+import dsa.common.data.mappings.Kultur_Sonderfertigkeit;
+import dsa.common.data.mappings.Kultur_TalentGruppe_Mod;
 import dsa.common.data.mappings.Kultur_Vorteil;
 import dsa.common.data.wrapper.CollectionGenericWrapper;
 import dsa.common.manage.DbManager;
@@ -15,25 +16,34 @@ import dsa.common.manage.DbManager;
 @SuppressWarnings("serial")
 public class KulturTableModel extends AbstractCustomTableModel<Kultur> {
 	private List<Kultur> data;
-	private List<String> columnNames = Arrays.asList("ID","Name","Generierungskosten","Körpergröße","Gewicht","LE","AU","MR","Herkunft und Verbreitung","Körperbau und Aussehen","Beschreibung","Eigenschaftsmodifikatore","Vorteile","Nachteile","Talente","Kulturen");
-	private List<Class<?>> columnClasses = Arrays.asList(Long.class,String.class,Integer.class,String.class,String.class,Integer.class,Integer.class,Integer.class,String.class,String.class,String.class,CollectionGenericWrapper.class,CollectionGenericWrapper.class,CollectionGenericWrapper.class,CollectionGenericWrapper.class,CollectionGenericWrapper.class);
+	private List<String> columnNames = Arrays.asList("ID","Name","Generierungskosten",
+			"Maximaler Sozialstatus","LE",
+			"AU","MR","Beschreibung",
+			"Eigenschaftsmodifikatore","Vorteile","Nachteile",
+			"Talente","Professionen","Sonderfertigkeiten",
+			"Variante von");
+	private List<Class<?>> columnClasses = Arrays.asList(Long.class,String.class,Integer.class,
+			Integer.class,Integer.class,
+			Integer.class,Integer.class,String.class,
+			CollectionGenericWrapper.class,CollectionGenericWrapper.class,CollectionGenericWrapper.class,
+			CollectionGenericWrapper.class,CollectionGenericWrapper.class,CollectionGenericWrapper.class,
+			Kultur.class);
 	
 	public static final int COL_ID = 0,
 							COL_NAME = 1,
 							COL_GENERIERUNG = 2,
-							COL_GROESSE = 3,
-							COL_GEWICHT = 4,
-							COL_LE = 5,
-							COL_AU = 6,
-							COL_MR = 7,
-							COL_HERKUNFT = 8,
-							COL_AUSSEHEN = 9,
-							COL_BESCHREIBUNG = 10,
-							COL_EIGENSCHAFT = 11,
-							COL_VORTEIL = 12,
-							COL_NACHTEIL = 13,
-							COL_KULTUR = 14,
-							COL_TALENT = 15;//,COL_SONDERFERTIGKEIT = 16;
+							COL_MAXSO = 3,
+							COL_LE = 4,
+							COL_AU = 5,
+							COL_MR = 6,
+							COL_BESCHREIBUNG = 7,
+							COL_EIGENSCHAFT = 8,
+							COL_VORTEIL = 9,
+							COL_NACHTEIL = 10,
+							COL_TALENT = 11,
+							COL_PROFESSION = 12,
+							COL_SONDERFERTIGKEIT = 13,
+							COL_VARIANTEVON = 14;
 							
 	
 	public KulturTableModel(List<Kultur> data) {
@@ -68,11 +78,8 @@ public class KulturTableModel extends AbstractCustomTableModel<Kultur> {
 		case COL_GENERIERUNG:
 			retval = data.get(row).getGenerierungskosten();
 			break;
-		case COL_GROESSE:
-			retval = data.get(row).getKoerpergroesse_regel();
-			break;
-		case COL_GEWICHT:
-			retval = data.get(row).getGewicht_regel();
+		case COL_MAXSO:
+			retval = data.get(row).getSozialstatus_maximum();
 			break;
 		case COL_LE:
 			retval = data.get(row).getLebenspunkte_modifikator();
@@ -82,12 +89,6 @@ public class KulturTableModel extends AbstractCustomTableModel<Kultur> {
 			break;
 		case COL_MR:
 			retval = data.get(row).getMagieresistenz_modifikator();
-			break;
-		case COL_HERKUNFT:
-			retval = data.get(row).getHerkunft_verbreitung();
-			break;
-		case COL_AUSSEHEN:
-			retval = data.get(row).getKoerperbau_aussehen();
 			break;
 		case COL_BESCHREIBUNG:
 			retval = data.get(row).getBeschreibung();
@@ -101,11 +102,17 @@ public class KulturTableModel extends AbstractCustomTableModel<Kultur> {
 		case COL_NACHTEIL:
 			retval = new <Kultur_Nachteil>CollectionGenericWrapper(data.get(row).getKultur_nachteile(),Kultur_Nachteil.class);
 			break;
-		case COL_KULTUR:
-			retval = new <Kultur_Kultur>CollectionGenericWrapper(data.get(row).getKultur_kulturen(),Kultur_Kultur.class);
-			break;
 		case COL_TALENT:
-			retval = new <Kultur_Talent_Mod>CollectionGenericWrapper(data.get(row).getKultur_talente(),Kultur_Talent_Mod.class);
+			retval = new <Kultur_TalentGruppe_Mod>CollectionGenericWrapper(data.get(row).getKultur_talente(),Kultur_TalentGruppe_Mod.class);
+			break;
+		case COL_PROFESSION:
+			retval = new <Kultur_Profession>CollectionGenericWrapper(data.get(row).getKultur_professionen(), Kultur_Profession.class);
+			break;
+		case COL_SONDERFERTIGKEIT:
+			retval = new <Kultur_Sonderfertigkeit>CollectionGenericWrapper(data.get(row).getKultur_sonderfertigkeiten(),Kultur_Sonderfertigkeit.class);
+			break;
+		case COL_VARIANTEVON:
+			retval = data.get(row).getVarianteVon();
 			break;
 		}
 		return retval;

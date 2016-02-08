@@ -29,7 +29,7 @@ import dsa.common.gui.util.NameIdComboBox;
 import dsa.common.manage.DbManager;
 
 @SuppressWarnings("serial")
-public class AddNachteilePanel extends JPanel {
+public class AddRasse_NachteilPanel extends JPanel {
 	List<Rasse_Nachteil> nachteile = new ArrayList<Rasse_Nachteil>();
 	GridBagConstraints c;
 	int ii;
@@ -37,7 +37,7 @@ public class AddNachteilePanel extends JPanel {
 	List<NameIdWrapper> typItems;
 	ActionListener buttonListener;
 	Rasse rasse;
-	public AddNachteilePanel(Rasse r,Set<Rasse_Nachteil> nachteileI) {
+	public AddRasse_NachteilPanel(Rasse r,Set<Rasse_Nachteil> nachteileI) {
 		this.rasse = r;
 		if(!nachteileI.isEmpty())
 			this.nachteile.addAll(nachteileI);
