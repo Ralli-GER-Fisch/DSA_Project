@@ -64,7 +64,9 @@ public class Rasse {
 	
 	/*--------------------   Constructor Area --------------------*/
 	public Rasse() {
-		// TODO Auto-generated constructor stub
+	}
+	public Rasse(long id) {
+		setId(id);
 	}
 	/*--------------------    Function   Area --------------------*/
 	

@@ -11,5 +11,7 @@ public class Constants {
 	public static final Color SELECTED_ROW_TEXT_COLOR	= Color.BLACK;
 	public static final Color MOUSEOVER_ROW_BG_COLOR	= Color.decode("#eeeeee");
 	public static final Color MOUSEOVER_ROW_TEXT_COLOR	= Color.BLACK;
+	
+	//public static final Color LIGHT_BORDER_COLOR		= Color.decode("#cccccc");
 
 }

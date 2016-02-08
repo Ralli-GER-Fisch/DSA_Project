@@ -20,6 +20,7 @@ import dsa.common.data.Vorteil;
 import dsa.common.data.mappings.Probe;
 import dsa.common.data.mappings.Rasse_Eigenschaft_Mod;
 import dsa.common.data.mappings.Rasse_Nachteil;
+import dsa.common.data.mappings.Rasse_Talent_Mod;
 import dsa.common.data.mappings.Rasse_Vorteil;
 import dsa.common.data.wrapper.NameIdWrapper;
 import dsa.common.hibernate.util.HibernateUtil;
@@ -207,6 +208,16 @@ public class DbManager {
 		return retval;
 	}
 
+	public Set<Rasse_Talent_Mod> getTalentOfRasse(Rasse rasse){
+		session = getSession();
+		session.beginTransaction();
+		session.refresh(rasse);
+		Hibernate.initialize(rasse.getRasse_talente());
+		Set<Rasse_Talent_Mod> retval = rasse.getRasse_talente();
+		closeSession();
+		return retval;
+	}
+	
 	public Set<Rasse_Vorteil> getVorteileOfRasse(Rasse rasse){
 		session = getSession();
 		session.beginTransaction();

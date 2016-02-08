@@ -32,8 +32,6 @@ public class Talent {
 	@GenericGenerator(name="increment",strategy="increment")
 	@Column(name="TALENT_ID")
 	private Long id;
-	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.talent")
-	//private List<CharakterTalent> charakterTalent;
 	private String name;
 	private String kurzinfo;
 	private String beschreibung;
@@ -43,7 +41,6 @@ public class Talent {
 	@Column(name="EFFEKTIVE_BEHINDERUNG")
 	private String eBe;
 	@MapsId("talent")
-	//@JoinColumn(name = "TALENT_ID", referencedColumnName = "TALENT_ID")
 	@OneToMany(mappedBy="pk.talent",cascade=CascadeType.ALL,orphanRemoval=true)
 	private Set<Probe> proben;
 	
@@ -74,6 +71,9 @@ public class Talent {
 	
 	/*--------------------   Constructor Area --------------------*/
 	public Talent() {
+	}
+	public Talent(long id) {
+		setId(id);
 	}
 	/*--------------------    Function   Area --------------------*/
 	
@@ -165,12 +165,6 @@ public class Talent {
 	public void setId(Long id) {
 		this.id = id;
 	}
-//	public List<CharakterTalent> getCharakterTalent() {
-//		return charakterTalent;
-//	}
-//	public void setCharakterTalent(List<CharakterTalent> charakterTalent) {
-//		this.charakterTalent = charakterTalent;
-//	}
 	public String getName() {
 		return name;
 	}

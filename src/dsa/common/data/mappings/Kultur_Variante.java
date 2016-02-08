@@ -1,4 +1,4 @@
-package dsa.common.data;
+package dsa.common.data.mappings;
 
 import java.util.Set;
 
@@ -12,32 +12,45 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import dsa.common.data.Profession;
 import dsa.common.data.mappings.Kultur_Eigenschaft_Mod;
 import dsa.common.data.mappings.Kultur_Nachteil;
 import dsa.common.data.mappings.Kultur_Profession;
 import dsa.common.data.mappings.Kultur_TalentGruppe_Mod;
-import dsa.common.data.mappings.Kultur_Variante;
 import dsa.common.data.mappings.Kultur_Vorteil;
 
 @Entity
-@Table(name="kultur")
-public class Kultur {
+@Table(name="kultur_variante")
+public class Kultur_Variante {
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment",strategy="increment")
-	@Column(name="KULTUR_ID")
+	@Column(name="KULTUR_VARIANTE_ID")
 	private Long id;
 	private String name;
+	private String zusatzinformation;
 	private Integer generierungskosten;
-	private Integer sozialstatus_maximum;	
+	private Integer sozialstatus_minimum;
+	private Set<Profession> zusatzProfessionen;
+	private Set<Kultur_TalentGruppe_Mod> zusatzTalente;
+	private Set<Kultur_Varianten_Talent_Mod> talent_varianten;
+	
+	//private Set<Vorteil> vorteile;
+	//private Set<Nachteil> nachteile;
+	//private Set<Sonderfertigkeit> sonderfertigkeiten;
+	
+	
 	@Column(name="LE_MOD")
-	private Integer lebenspunkte_modifikator;
+	private Integer zusatz_lebenspunkte_modifikator;
 	@Column(name="AU_MOD")
-	private Integer ausdauer_modifikator;
+	private Integer zusatz_ausdauer_modifikator;
 	@Column(name="MR_MOD")
-	private Integer magieresistenz_modifikator;
+	private Integer zusatz_magieresistenz_modifikator;
 	private String beschreibung;
-	private Set<Kultur_Eigenschaft_Mod> eigenschafts_modifikatoren;
+	
+	private Set<Kultur_Eigenschaft_Mod> zusatz_eigenschafts_modifikatoren;
+	
+	
 	@OneToMany(mappedBy="pk.kultur",cascade=CascadeType.ALL,orphanRemoval=true)
 	private Set<Kultur_Vorteil> kultur_vorteile;
 	@OneToMany(mappedBy="pk.kultur",cascade=CascadeType.ALL,orphanRemoval=true)
@@ -51,9 +64,9 @@ public class Kultur {
 	//sonderfertigkeiten, verbilligte sonderfertigkeiten
 	
 	/*--------------------   Constructor Area --------------------*/
-	public Kultur() {
+	public Kultur_Variante() {
 	}
-	public Kultur(long id) {
+	public Kultur_Variante(long id) {
 		setId(id);
 	}
 	/*--------------------    Function   Area --------------------*/

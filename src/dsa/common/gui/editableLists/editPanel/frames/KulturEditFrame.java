@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,24 +24,25 @@ import javax.swing.undo.UndoManager;
 import dsa.common.ctrl.util.CustomUndoableEditListener;
 import dsa.common.ctrl.util.actions.RedoAction;
 import dsa.common.ctrl.util.actions.UndoAction;
-import dsa.common.data.Rasse;
-import dsa.common.data.mappings.Rasse_Eigenschaft_Mod;
-import dsa.common.data.mappings.Rasse_Nachteil;
-import dsa.common.data.mappings.Rasse_Talent_Mod;
-import dsa.common.data.mappings.Rasse_Vorteil;
+import dsa.common.data.Kultur;
+import dsa.common.data.mappings.Kultur_Eigenschaft_Mod;
+import dsa.common.data.mappings.Kultur_Nachteil;
+import dsa.common.data.mappings.Kultur_Talent_Mod;
+import dsa.common.data.mappings.Kultur_Vorteil;
 import dsa.common.gui.editableLists.editPanel.AddAttributePanel;
 import dsa.common.gui.editableLists.editPanel.AddNachteilePanel;
 import dsa.common.gui.editableLists.editPanel.AddTalentPanel;
 import dsa.common.gui.editableLists.editPanel.AddVorteilePanel;
+import dsa.common.main.constants.Constants;
 import dsa.common.manage.DbManager;
 
 @SuppressWarnings("serial")
-public class RasseEditFrame extends JFrame {
-	public RasseEditFrame(Rasse rasse, JTable rasseTable) {
-		if (rasse.getId() == null)
-			setTitle("Neue Rasse");
+public class KulturEditFrame extends JFrame {
+	public KulturEditFrame(Kultur kultur, JTable kulturTable) {
+		if (kultur.getId() == null)
+			setTitle("Neue Kultur");
 		else
-			setTitle("Rasse "+ rasse.getName() +" editieren");
+			setTitle("Kultur "+ kultur.getName() +" editieren");
 		getContentPane().setLayout(new GridBagLayout());
 		GridBagConstraints cons = new GridBagConstraints();
 		cons.fill = GridBagConstraints.HORIZONTAL;
@@ -49,12 +51,12 @@ public class RasseEditFrame extends JFrame {
 		
 		JLabel idLabel = new JLabel("ID");
 		idLabel.setAlignmentY(0);
-		JTextField idTF = new JTextField(rasse.getId()==null?"":rasse.getId().toString());
+		JTextField idTF = new JTextField(kultur.getId()==null?"":kultur.getId().toString());
 		idTF.setEnabled(false);
 		
 		JLabel nameLabel = new JLabel("Name");
 		nameLabel.setAlignmentY(0);
-		JTextField nameTF = new JTextField(rasse.getName());
+		JTextField nameTF = new JTextField(kultur.getName());
 		UndoManager nameUndoManager = new UndoManager();
 		nameTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(nameUndoManager));
 		nameTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
@@ -64,7 +66,7 @@ public class RasseEditFrame extends JFrame {
 
 		JLabel groesseLabel = new JLabel("Größe-Regel");
 		groesseLabel.setAlignmentY(0);
-		JTextField groesseTF = new JTextField(rasse.getKoerpergroesse_regel());
+		JTextField groesseTF = new JTextField(kultur.getKoerpergroesse_regel());
 		UndoManager groesseUndoManager = new UndoManager();
 		groesseTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(groesseUndoManager));
 		groesseTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
@@ -74,7 +76,7 @@ public class RasseEditFrame extends JFrame {
 		
 		JLabel gewichtLabel = new JLabel("Gewicht-Regel");
 		gewichtLabel.setAlignmentY(0);
-		JTextField gewichtTF = new JTextField(rasse.getGewicht_regel());
+		JTextField gewichtTF = new JTextField(kultur.getGewicht_regel());
 		UndoManager gewichtUndoManager = new UndoManager();
 		gewichtTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(gewichtUndoManager));
 		gewichtTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
@@ -85,27 +87,27 @@ public class RasseEditFrame extends JFrame {
 		JLabel gemodLabel = new JLabel("Generierungskosten");
 		gemodLabel.setAlignmentY(0);
 		JSpinner gemodSP = new JSpinner();
-		gemodSP.setValue(rasse.getGenerierungskosten()!=null?rasse.getGenerierungskosten():new Integer(0));
+		gemodSP.setValue(kultur.getGenerierungskosten()!=null?kultur.getGenerierungskosten():new Integer(0));
 		
 		JLabel lemodLabel = new JLabel("Lebenspunkte-Modifikator");
 		lemodLabel.setAlignmentY(0);
 		JSpinner lemodSP = new JSpinner();
-		lemodSP.setValue(rasse.getLebenspunkte_modifikator()!=null?rasse.getLebenspunkte_modifikator():new Integer(0));
+		lemodSP.setValue(kultur.getLebenspunkte_modifikator()!=null?kultur.getLebenspunkte_modifikator():new Integer(0));
 		
 		JLabel aumodLabel = new JLabel("Ausdauer-Modifikator");
 		aumodLabel.setAlignmentY(0);
 		JSpinner aumodSP = new JSpinner();
-		aumodSP.setValue(rasse.getAusdauer_modifikator()!=null?rasse.getAusdauer_modifikator():new Integer(0));
+		aumodSP.setValue(kultur.getAusdauer_modifikator()!=null?kultur.getAusdauer_modifikator():new Integer(0));
 		
 		JLabel mrmodLabel = new JLabel("Magieresistenz-Modifikator");
 		mrmodLabel.setAlignmentY(0);
 		JSpinner mrmodSP = new JSpinner();
-		mrmodSP.setValue(rasse.getMagieresistenz_modifikator()!=null?rasse.getMagieresistenz_modifikator():new Integer(0));
+		mrmodSP.setValue(kultur.getMagieresistenz_modifikator()!=null?kultur.getMagieresistenz_modifikator():new Integer(0));
 		
 		JLabel herkunftLabel = new JLabel("Herkunft und Verbreitung");
 		herkunftLabel.setAlignmentY(0);
 		
-		JTextArea herkunftTF = new JTextArea(rasse.getHerkunft_verbreitung());
+		JTextArea herkunftTF = new JTextArea(kultur.getHerkunft_verbreitung());
 		herkunftTF.setWrapStyleWord(true);
 		herkunftTF.setLineWrap(true);
 		UndoManager herkunftUndoManager = new UndoManager();
@@ -121,7 +123,7 @@ public class RasseEditFrame extends JFrame {
 		JLabel aussehenLabel = new JLabel("Körperbaue und Aussehen");
 		aussehenLabel.setAlignmentY(0);
 		
-		JTextArea aussehenTF = new JTextArea(rasse.getKoerperbau_aussehen());
+		JTextArea aussehenTF = new JTextArea(kultur.getKoerperbau_aussehen());
 		aussehenTF.setWrapStyleWord(true);
 		aussehenTF.setLineWrap(true);
 		UndoManager aussehenUndoManager = new UndoManager();
@@ -137,7 +139,7 @@ public class RasseEditFrame extends JFrame {
 		JLabel beschreibungLabel = new JLabel("Beschreibung");
 		beschreibungLabel.setAlignmentY(0);
 		
-		JTextArea beschreibungTF = new JTextArea(rasse.getBeschreibung());
+		JTextArea beschreibungTF = new JTextArea(kultur.getBeschreibung());
 		beschreibungTF.setWrapStyleWord(true);
 		beschreibungTF.setLineWrap(true);
 		UndoManager beschreibungUndoManager = new UndoManager();
@@ -152,28 +154,28 @@ public class RasseEditFrame extends JFrame {
 		
 		JLabel eigenschaftLabel = new JLabel("Eigenschaft-Modifikator");
 		eigenschaftLabel.setAlignmentY(0);
-		AddAttributePanel eigenschaftAP = new AddAttributePanel(rasse,(rasse.getId()==null?(new HashSet<Rasse_Eigenschaft_Mod>()):DbManager.getCurrentDbManager().getAttributeOfRasse(rasse)));
+		AddAttributePanel eigenschaftAP = new AddAttributePanel(kultur,(kultur.getId()==null?(new HashSet<Kultur_Eigenschaft_Mod>()):DbManager.getCurrentDbManager().getAttributeOfKultur(kultur)));
 		JScrollPane eigenschaftScrollPane = new JScrollPane(eigenschaftAP);
 		eigenschaftScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		eigenschaftScrollPane.setPreferredSize(new Dimension(300,100));
 
 		JLabel vorteilLabel = new JLabel("Vorteile");
 		vorteilLabel.setAlignmentY(0);
-		AddVorteilePanel vorteilAP = new AddVorteilePanel(rasse,(rasse.getId()==null?(new HashSet<Rasse_Vorteil>()):DbManager.getCurrentDbManager().getVorteileOfRasse(rasse)));
+		AddVorteilePanel vorteilAP = new AddVorteilePanel(kultur,(kultur.getId()==null?(new HashSet<Kultur_Vorteil>()):DbManager.getCurrentDbManager().getVorteileOfKultur(kultur)));
 		JScrollPane vorteilScrollPane = new JScrollPane(vorteilAP);
 		vorteilScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		vorteilScrollPane.setPreferredSize(new Dimension(300,100));
 		
 		JLabel nachteilLabel = new JLabel("Nachteile");
 		nachteilLabel.setAlignmentY(0);
-		AddNachteilePanel nachteilAP = new AddNachteilePanel(rasse,(rasse.getId()==null?(new HashSet<Rasse_Nachteil>()):DbManager.getCurrentDbManager().getNachteileOfRasse(rasse)));
+		AddNachteilePanel nachteilAP = new AddNachteilePanel(kultur,(kultur.getId()==null?(new HashSet<Kultur_Nachteil>()):DbManager.getCurrentDbManager().getNachteileOfKultur(kultur)));
 		JScrollPane nachteilScrollPane = new JScrollPane(nachteilAP);
 		nachteilScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		nachteilScrollPane.setPreferredSize(new Dimension(300,100));
 
 		JLabel talentLabel = new JLabel("Talente");
 		talentLabel.setAlignmentY(0);
-		AddTalentPanel talentAP = new AddTalentPanel(rasse,(rasse.getId()==null?(new HashSet<Rasse_Talent_Mod>()):DbManager.getCurrentDbManager().getTalentOfRasse(rasse)));
+		AddTalentPanel talentAP = new AddTalentPanel(kultur,(kultur.getId()==null?(new HashSet<Kultur_Talent_Mod>()):DbManager.getCurrentDbManager().getTalentOfKultur(kultur)));
 		JScrollPane talentScrollPane = new JScrollPane(talentAP);
 		talentScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		talentScrollPane.setPreferredSize(new Dimension(300,100));
@@ -181,7 +183,7 @@ public class RasseEditFrame extends JFrame {
 		
 		JButton saveButton = new JButton("Speichern");
 		saveButton.setActionCommand("edit");
-		if (rasse.getId() == null){
+		if (kultur.getId() == null){
 			saveButton.setText("Erstellen");
 			saveButton.setActionCommand("new");
 		}
@@ -194,42 +196,42 @@ public class RasseEditFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				switch(e.getActionCommand()){
 					case "new":
-						rasse.setName(nameTF.getText());
-						rasse.setGenerierungskosten((Integer)gemodSP.getValue());
-						rasse.setKoerpergroesse_regel(groesseTF.getText());
-						rasse.setGewicht_regel(gewichtTF.getText());
-						rasse.setLebenspunkte_modifikator((Integer)lemodSP.getValue());
-						rasse.setAusdauer_modifikator((Integer)aumodSP.getValue());
-						rasse.setMagieresistenz_modifikator((Integer)mrmodSP.getValue());
-						rasse.setHerkunft_verbreitung(herkunftTF.getText());
-						rasse.setKoerperbau_aussehen(aussehenTF.getText());
-						rasse.setBeschreibung(beschreibungTF.getText());
-						rasse.setEigenschafts_modifikatoren(eigenschaftAP.getRasse_Eigenschaft_Mods());
-						rasse.setRasse_vorteile(vorteilAP.getRasse_Vorteile());
-						rasse.setRasse_nachteile(nachteilAP.getRasse_Nachteile());
-						rasse.setRasse_talente(talentAP.getRasse_Talent_Mods());
-						DbManager.getCurrentDbManager().createNewObject(rasse);
+						kultur.setName(nameTF.getText());
+						kultur.setGenerierungskosten((Integer)gemodSP.getValue());
+						kultur.setKoerpergroesse_regel(groesseTF.getText());
+						kultur.setGewicht_regel(gewichtTF.getText());
+						kultur.setLebenspunkte_modifikator((Integer)lemodSP.getValue());
+						kultur.setAusdauer_modifikator((Integer)aumodSP.getValue());
+						kultur.setMagieresistenz_modifikator((Integer)mrmodSP.getValue());
+						kultur.setHerkunft_verbreitung(herkunftTF.getText());
+						kultur.setKoerperbau_aussehen(aussehenTF.getText());
+						kultur.setBeschreibung(beschreibungTF.getText());
+						kultur.setEigenschafts_modifikatoren(eigenschaftAP.getKultur_Eigenschaft_Mods());
+						kultur.setKultur_vorteile(vorteilAP.getKultur_Vorteile());
+						kultur.setKultur_nachteile(nachteilAP.getKultur_Nachteile());
+						kultur.setKultur_talente(talentAP.getKultur_Talent_Mods());
+						DbManager.getCurrentDbManager().createNewObject(kultur);
 						dispose();
-						((AbstractTableModel)rasseTable.getModel()).fireTableDataChanged();
+						((AbstractTableModel)kulturTable.getModel()).fireTableDataChanged();
 						break;
 					case "edit":
-						rasse.setName(nameTF.getText());
-						rasse.setGenerierungskosten((Integer)gemodSP.getValue());
-						rasse.setKoerpergroesse_regel(groesseTF.getText());
-						rasse.setGewicht_regel(gewichtTF.getText());
-						rasse.setLebenspunkte_modifikator((Integer)lemodSP.getValue());
-						rasse.setAusdauer_modifikator((Integer)aumodSP.getValue());
-						rasse.setMagieresistenz_modifikator((Integer)mrmodSP.getValue());
-						rasse.setHerkunft_verbreitung(herkunftTF.getText());
-						rasse.setKoerperbau_aussehen(aussehenTF.getText());
-						rasse.setBeschreibung(beschreibungTF.getText());
-						rasse.setEigenschafts_modifikatoren(eigenschaftAP.getRasse_Eigenschaft_Mods());
-						rasse.setRasse_vorteile(vorteilAP.getRasse_Vorteile());
-						rasse.setRasse_nachteile(nachteilAP.getRasse_Nachteile());
-						rasse.setRasse_talente(talentAP.getRasse_Talent_Mods());
-						DbManager.getCurrentDbManager().mergeObject(rasse);
+						kultur.setName(nameTF.getText());
+						kultur.setGenerierungskosten((Integer)gemodSP.getValue());
+						kultur.setKoerpergroesse_regel(groesseTF.getText());
+						kultur.setGewicht_regel(gewichtTF.getText());
+						kultur.setLebenspunkte_modifikator((Integer)lemodSP.getValue());
+						kultur.setAusdauer_modifikator((Integer)aumodSP.getValue());
+						kultur.setMagieresistenz_modifikator((Integer)mrmodSP.getValue());
+						kultur.setHerkunft_verbreitung(herkunftTF.getText());
+						kultur.setKoerperbau_aussehen(aussehenTF.getText());
+						kultur.setBeschreibung(beschreibungTF.getText());
+						kultur.setEigenschafts_modifikatoren(eigenschaftAP.getKultur_Eigenschaft_Mods());
+						kultur.setKultur_vorteile(vorteilAP.getKultur_Vorteile());
+						kultur.setKultur_nachteile(nachteilAP.getKultur_Nachteile());
+						kultur.setKultur_talente(talentAP.getKultur_Talent_Mods());
+						DbManager.getCurrentDbManager().mergeObject(kultur);
 						dispose();
-						((AbstractTableModel)rasseTable.getModel()).fireTableDataChanged();
+						((AbstractTableModel)kulturTable.getModel()).fireTableDataChanged();
 						break;
 					case "cancel":
 						dispose();
