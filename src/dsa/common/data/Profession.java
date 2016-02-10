@@ -32,6 +32,7 @@ public class Profession {
 	private String beschreibung;
 	private boolean erstprofession;
 	private boolean zeitaufwendig;
+	private byte typ; //TODO: Einzelne Typen klassifizieren
 	private Integer generierungskosten;
 	private Set<Profession_Eigenschaft_Voraussetzung> voraussetzung_eigenschaft;
 	@Embedded

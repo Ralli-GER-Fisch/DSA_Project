@@ -19,9 +19,12 @@ import dsa.common.data.mappings.ids.Kultur_SonderfertigkeitID;
 	@AssociationOverride(name = "pk.sonderfertigkeit", 
 		joinColumns = @JoinColumn(name = "SONDERFERTIGKEIT_ID"))})
 public class Kultur_Sonderfertigkeit {
-	public static Byte	KULTUR_SONDERFERTIGKEIT_AUTOMATISCH = 0,
-						KULTUR_SONDERFERTIGKEIT_VERBILLIGT = 1,
-						KULTUR_SONDERFERTIGKEIT_HALBEKOSTEN = 2;
+	public final static byte	KULTUR_SONDERFERTIGKEIT_AUTOMATISCH = 0,
+								KULTUR_SONDERFERTIGKEIT_VERBILLIGT = 1,
+								KULTUR_SONDERFERTIGKEIT_HALBEKOSTEN = 2;
+	public final static String	KULTUR_SONDERFERTIGKEIT_AUTOMATISCH_STR = "automatisch",
+								KULTUR_SONDERFERTIGKEIT_VERBILLIGT_STR = "verbilligt",
+								KULTUR_SONDERFERTIGKEIT_HALBEKOSTEN_STR = "zu halben Kosten";
 	private Integer wert;
 	private String information;
 	private Byte typ;

@@ -19,9 +19,12 @@ import dsa.common.data.mappings.ids.Kultur_ProfessionID;
 	@AssociationOverride(name = "pk.profession", 
 		joinColumns = @JoinColumn(name = "PROFESSION_ID"))})
 public class Kultur_Profession {
-	public static Byte	KULTUR_PROFESSION_AUTOMATISCH = 0,
-						KULTUR_PROFESSION_EMPFOHLEN = 1,
-						KULTUR_PROFESSION_UNGEEIGNET = 2;
+	public final static byte	KULTUR_PROFESSION_AUTOMATISCH = 0,
+								KULTUR_PROFESSION_EMPFOHLEN = 1,
+								KULTUR_PROFESSION_UNGEEIGNET = 2;
+	public final static String	KULTUR_PROFESSION_AUTOMATISCH_STR = "automatisch",
+								KULTUR_PROFESSION_EMPFOHLEN_STR = "empfohlen",
+								KULTUR_PROFESSION_UNGEEIGNET_STR = "ungeeignet";
 	private Integer wert;
 	private String information;
 	private Byte typ;

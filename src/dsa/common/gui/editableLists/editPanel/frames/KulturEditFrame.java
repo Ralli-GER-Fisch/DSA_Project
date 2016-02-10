@@ -128,6 +128,13 @@ public class KulturEditFrame extends JFrame {
 		nachteilScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		nachteilScrollPane.setPreferredSize(new Dimension(300,100));
 
+		JLabel professionLabel = new JLabel("Professionen");
+		professionLabel.setAlignmentY(0);
+		AddKultur_ProfessionPanel professionAP = new AddKultur_ProfessionPanel(kultur,(kultur.getId()==null?(new HashSet<Kultur_Profession>()):DbManager.getCurrentDbManager().getProfessionOfKultur(kultur)));
+		JScrollPane professionScrollPane = new JScrollPane(professionAP);
+		professionScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		professionScrollPane.setPreferredSize(new Dimension(300,100));
+		
 		JLabel talentLabel = new JLabel("Talente");
 		talentLabel.setAlignmentY(0);
 		AddKultur_TalentPanel talentAP = new AddKultur_TalentPanel(kultur,(kultur.getId()==null?(new HashSet<Kultur_Talent_Mod>()):DbManager.getCurrentDbManager().getTalentOfKultur(kultur)));

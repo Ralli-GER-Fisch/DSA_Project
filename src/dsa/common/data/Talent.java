@@ -35,8 +35,8 @@ public class Talent {
 	private String name;
 	private String kurzinfo;
 	private String beschreibung;
-	private Long typ;
-	private Long gruppe;
+	private Byte typ;
+	private Byte gruppe;
 	private String spalte;
 	@Column(name="EFFEKTIVE_BEHINDERUNG")
 	private String eBe;
@@ -177,16 +177,16 @@ public class Talent {
 	public void setBeschreibung(String beschreibung) {
 		this.beschreibung = beschreibung;
 	}
-	public Long getTyp() {
+	public Byte getTyp() {
 		return typ;
 	}
-	public void setTyp(Long typ) {
+	public void setTyp(Byte typ) {
 		this.typ = typ;
 	}
-	public Long getGruppe() {
+	public Byte getGruppe() {
 		return gruppe;
 	}
-	public void setGruppe(Long gruppe) {
+	public void setGruppe(Byte gruppe) {
 		this.gruppe = gruppe;
 	}
 	public String getSpalte() {

@@ -65,26 +65,40 @@ public class AddKultur_TalentPanel extends JPanel {
 		removeAll();
 		Iterator<Kultur_TalentGruppe_Mod> iter = talent_mods.iterator();
 		ii = 0;
+		int maxIndex = 0;
 		while(iter.hasNext()){
 			Kultur_TalentGruppe_Mod curEM = iter.next();
 			
-			NameIdComboBox eSF = new NameIdComboBox(talentItems);
-			eSF.setSelectedIndex(curEM.getTalent().getId()!=null?curEM.getTalent().getId().intValue()-1:0);
-			AutoCompleteDecorator.decorate(eSF);
-			eSF.setPreferredSize(new Dimension(75,25));
+			JPanel groupPanel = new JPanel();
+			int j = 0;
+			//iterate over Talents in Group
+			Iterator<Talent> talentIter = curEM.getTalentAlternativen().iterator();
+			while(talentIter.hasNext()){
+				Talent t = talentIter.next();
+
+				NameIdComboBox eSF = new NameIdComboBox(talentItems);
+				eSF.setSelectedIndex(t.getId()!=null?t.getId().intValue()-1:0);
+				AutoCompleteDecorator.decorate(eSF);
+				eSF.setPreferredSize(new Dimension(75,25));
+
+				eSF.addItemListener(new ItemListener() {
+					int pos = ii;
+					int posB = jj;
+					@Override
+					public void itemStateChanged(ItemEvent e) {
+						if(e.getStateChange() == ItemEvent.SELECTED)
+							//iterate to index posB, then change index
+							talent_mods.get(pos).getTalentAlternativen().setTalent(new Talent((long) ((NameIdWrapper)e.getItem()).getId()));
+					}
+				});
+				j++;
+			}
 			
 			JSpinner modValue = new JSpinner();
 			modValue.setValue(curEM.getModifikator()!=null?curEM.getModifikator().intValue():0);
 			modValue.setPreferredSize(new Dimension(50, 25));
 			
-			eSF.addItemListener(new ItemListener() {
-				int pos = ii;
-				@Override
-				public void itemStateChanged(ItemEvent e) {
-					if(e.getStateChange() == ItemEvent.SELECTED)
-						talent_mods.get(pos).setTalent(new Talent((long) ((NameIdWrapper)e.getItem()).getId()));
-				}
-			});
+
 			modValue.addChangeListener(new ChangeListener() {
 				int pos = ii;
 				@Override

@@ -63,26 +63,6 @@ public class ProfessionEditFrame extends JFrame {
 		nameTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "redo");
 		nameTF.getActionMap().put("undo",new UndoAction(nameUndoManager));
 		nameTF.getActionMap().put("redo",new RedoAction(nameUndoManager));
-
-		JLabel groesseLabel = new JLabel("Größe-Regel");
-		groesseLabel.setAlignmentY(0);
-		JTextField groesseTF = new JTextField(profession.getKoerpergroesse_regel());
-		UndoManager groesseUndoManager = new UndoManager();
-		groesseTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(groesseUndoManager));
-		groesseTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
-		groesseTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "redo");
-		groesseTF.getActionMap().put("undo",new UndoAction(groesseUndoManager));
-		groesseTF.getActionMap().put("redo",new RedoAction(groesseUndoManager));
-		
-		JLabel gewichtLabel = new JLabel("Gewicht-Regel");
-		gewichtLabel.setAlignmentY(0);
-		JTextField gewichtTF = new JTextField(profession.getGewicht_regel());
-		UndoManager gewichtUndoManager = new UndoManager();
-		gewichtTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(gewichtUndoManager));
-		gewichtTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
-		gewichtTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "redo");
-		gewichtTF.getActionMap().put("undo",new UndoAction(gewichtUndoManager));
-		gewichtTF.getActionMap().put("redo",new RedoAction(gewichtUndoManager));
 		
 		JLabel gemodLabel = new JLabel("Generierungskosten");
 		gemodLabel.setAlignmentY(0);
@@ -103,38 +83,6 @@ public class ProfessionEditFrame extends JFrame {
 		mrmodLabel.setAlignmentY(0);
 		JSpinner mrmodSP = new JSpinner();
 		mrmodSP.setValue(profession.getMagieresistenz_modifikator()!=null?profession.getMagieresistenz_modifikator():new Integer(0));
-		
-		JLabel herkunftLabel = new JLabel("Herkunft und Verbreitung");
-		herkunftLabel.setAlignmentY(0);
-		
-		JTextArea herkunftTF = new JTextArea(profession.getHerkunft_verbreitung());
-		herkunftTF.setWrapStyleWord(true);
-		herkunftTF.setLineWrap(true);
-		UndoManager herkunftUndoManager = new UndoManager();
-		herkunftTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(herkunftUndoManager));
-		herkunftTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
-		herkunftTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "redo");
-		herkunftTF.getActionMap().put("undo",new UndoAction(herkunftUndoManager));
-		herkunftTF.getActionMap().put("redo",new RedoAction(herkunftUndoManager));
-		JScrollPane herkunftScrollPane = new JScrollPane(herkunftTF);
-		herkunftScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		herkunftScrollPane.setPreferredSize(new Dimension(300,100));
-		
-		JLabel aussehenLabel = new JLabel("Körperbaue und Aussehen");
-		aussehenLabel.setAlignmentY(0);
-		
-		JTextArea aussehenTF = new JTextArea(profession.getKoerperbau_aussehen());
-		aussehenTF.setWrapStyleWord(true);
-		aussehenTF.setLineWrap(true);
-		UndoManager aussehenUndoManager = new UndoManager();
-		aussehenTF.getDocument().addUndoableEditListener(new CustomUndoableEditListener(aussehenUndoManager));
-		aussehenTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "undo");
-		aussehenTF.getInputMap().put(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK, true), "redo");
-		aussehenTF.getActionMap().put("undo",new UndoAction(aussehenUndoManager));
-		aussehenTF.getActionMap().put("redo",new RedoAction(aussehenUndoManager));
-		JScrollPane aussehenScrollPane = new JScrollPane(aussehenTF);
-		aussehenScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		aussehenScrollPane.setPreferredSize(new Dimension(300,100));
 		
 		JLabel beschreibungLabel = new JLabel("Beschreibung");
 		beschreibungLabel.setAlignmentY(0);
