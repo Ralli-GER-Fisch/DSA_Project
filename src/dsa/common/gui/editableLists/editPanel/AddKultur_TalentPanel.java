@@ -49,6 +49,7 @@ public class AddKultur_TalentPanel extends JPanel {
 		c.gridwidth = 1;
 		c.weightx = 0;
 		talentItems = DbManager.getCurrentDbManager().getNameIdWrapperByClass(Talent.class);
+		talentItems.add(new NameIdWrapper(-1, "remove Talent"));
 		buttonListener = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -92,8 +93,13 @@ public class AddKultur_TalentPanel extends JPanel {
 					@SuppressWarnings("unchecked")
 					@Override
 					public void itemStateChanged(ItemEvent e) {
-						if(e.getStateChange() == ItemEvent.SELECTED)
-							((LinkedList<Talent>)talent_mods.get(posA).getTalentAlternativen()).set(eSF.getIndex(),new Talent((long) ((NameIdWrapper)e.getItem()).getId()));
+						if(e.getStateChange() == ItemEvent.SELECTED){
+							if(((NameIdWrapper)e.getItem()).getId().longValue()==new Long(-1).longValue()){
+								((LinkedList<Talent>)talent_mods.get(posA).getTalentAlternativen()).remove(eSF.getIndex());
+								reCreate();
+							} else
+								((LinkedList<Talent>)talent_mods.get(posA).getTalentAlternativen()).set(eSF.getIndex(),new Talent((long) ((NameIdWrapper)e.getItem()).getId()));
+						}
 					}
 				});
 				groupPanel.add(eSF);

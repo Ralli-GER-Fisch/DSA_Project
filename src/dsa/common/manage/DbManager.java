@@ -21,6 +21,7 @@ import dsa.common.data.Talent;
 import dsa.common.data.Vorteil;
 import dsa.common.data.mappings.Kultur_Eigenschaft_Mod;
 import dsa.common.data.mappings.Kultur_Nachteil;
+import dsa.common.data.mappings.Kultur_Profession;
 import dsa.common.data.mappings.Kultur_TalentGruppe_Mod;
 import dsa.common.data.mappings.Kultur_Vorteil;
 import dsa.common.data.mappings.Probe;
@@ -280,6 +281,16 @@ public class DbManager {
 		session.refresh(kultur);
 		Hibernate.initialize(kultur.getKultur_nachteile());
 		Set<Kultur_Nachteil> retval = kultur.getKultur_nachteile();
+		closeSession();
+		return retval;
+	}
+
+	public Set<Kultur_Profession> getProfessionOfKultur(Kultur kultur){
+		session = getSession();
+		session.beginTransaction();
+		session.refresh(kultur);
+		Hibernate.initialize(kultur.getKultur_professionen());
+		Set<Kultur_Profession> retval = kultur.getKultur_professionen();
 		closeSession();
 		return retval;
 	}
