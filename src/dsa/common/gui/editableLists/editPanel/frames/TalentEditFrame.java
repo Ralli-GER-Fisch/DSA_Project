@@ -151,8 +151,8 @@ public class TalentEditFrame extends JFrame {
 				switch(e.getActionCommand()){
 					case "new":
 						talent.setName(nameTF.getText());
-						talent.setTyp(new Long((long) typSF.getSelectedItem().getId()));
-						talent.setGruppe(new Long((long) gruppeSF.getSelectedItem().getId()));
+						talent.setTyp(new Byte((byte) typSF.getSelectedItem().getId()));
+						talent.setGruppe(new Byte((byte) gruppeSF.getSelectedItem().getId()));
 						talent.setSpalte(spalteSF.getSelectedItem().toString());
 						talent.seteBe(ebeTF.getText());
 						talent.setProben(probeAP.getProben());
@@ -164,8 +164,8 @@ public class TalentEditFrame extends JFrame {
 						break;
 					case "edit":
 						talent.setName(nameTF.getText());
-						talent.setTyp(new Long((long) typSF.getSelectedItem().getId()));
-						talent.setGruppe(new Long((long) gruppeSF.getSelectedItem().getId()));
+						talent.setTyp(new Byte((byte) typSF.getSelectedItem().getId()));
+						talent.setGruppe(new Byte((byte) gruppeSF.getSelectedItem().getId()));
 						talent.setSpalte(spalteSF.getSelectedItem().toString());
 						talent.seteBe(ebeTF.getText());
 						talent.setProben(probeAP.getProben());

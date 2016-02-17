@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,18 +28,12 @@ import dsa.common.data.mappings.Kultur_Eigenschaft_Mod;
 import dsa.common.data.mappings.Kultur_Nachteil;
 import dsa.common.data.mappings.Kultur_Profession;
 import dsa.common.data.mappings.Kultur_TalentGruppe_Mod;
-import dsa.common.data.mappings.Kultur_Talent_Mod;
 import dsa.common.data.mappings.Kultur_Vorteil;
-import dsa.common.gui.editableLists.editPanel.AddAttributePanel;
 import dsa.common.gui.editableLists.editPanel.AddKultur_EigenschaftPanel;
 import dsa.common.gui.editableLists.editPanel.AddKultur_NachteilPanel;
 import dsa.common.gui.editableLists.editPanel.AddKultur_ProfessionPanel;
 import dsa.common.gui.editableLists.editPanel.AddKultur_TalentPanel;
 import dsa.common.gui.editableLists.editPanel.AddKultur_VorteilPanel;
-import dsa.common.gui.editableLists.editPanel.AddNachteilePanel;
-import dsa.common.gui.editableLists.editPanel.AddTalentPanel;
-import dsa.common.gui.editableLists.editPanel.AddVorteilePanel;
-import dsa.common.main.constants.Constants;
 import dsa.common.manage.DbManager;
 
 @SuppressWarnings("serial")
@@ -243,33 +236,13 @@ public class KulturEditFrame extends JFrame {
 		cons.gridx = 0;
 		cons.weightx = 0;
 		cons.gridwidth = 1;
-		getContentPane().add(groesseLabel,cons);
-		cons.gridwidth = 2;
-		cons.weightx = 1;
-		cons.gridx = 1;
-		getContentPane().add(groesseTF,cons);
-		
-		cons.gridy = 4;
-		cons.gridx = 0;
-		cons.weightx = 0;
-		cons.gridwidth = 1;
-		getContentPane().add(gewichtLabel,cons);
-		cons.gridwidth = 2;
-		cons.weightx = 1;
-		cons.gridx = 1;
-		getContentPane().add(gewichtTF,cons);
-		
-		cons.gridy = 5;
-		cons.gridx = 0;
-		cons.weightx = 0;
-		cons.gridwidth = 1;
 		getContentPane().add(lemodLabel,cons);
 		cons.gridwidth = 2;
 		cons.weightx = 1;
 		cons.gridx = 1;
 		getContentPane().add(lemodSP,cons);
 		
-		cons.gridy = 6;
+		cons.gridy = 4;
 		cons.gridx = 0;
 		cons.weightx = 0;
 		cons.gridwidth = 1;
@@ -279,7 +252,7 @@ public class KulturEditFrame extends JFrame {
 		cons.gridx = 1;
 		getContentPane().add(aumodSP,cons);
 		
-		cons.gridy = 7;
+		cons.gridy = 5;
 		cons.gridx = 0;
 		cons.weightx = 0;
 		cons.gridwidth = 1;
@@ -288,30 +261,18 @@ public class KulturEditFrame extends JFrame {
 		cons.weightx = 1;
 		cons.gridx = 1;
 		getContentPane().add(mrmodSP,cons);
-
-		cons.gridy = 8;		
+		
+		cons.gridy = 6;
 		cons.gridx = 0;
 		cons.weightx = 0;
-		cons.gridheight = 4;
 		cons.gridwidth = 1;
-		getContentPane().add(herkunftLabel,cons);
+		getContentPane().add(somaxLabel,cons);
 		cons.gridwidth = 2;
 		cons.weightx = 1;
 		cons.gridx = 1;
-		getContentPane().add(herkunftScrollPane,cons);
+		getContentPane().add(somaxSP,cons);
 		
-		cons.gridy = 12;		
-		cons.gridx = 0;
-		cons.weightx = 0;
-		cons.gridheight = 4;
-		cons.gridwidth = 1;
-		getContentPane().add(aussehenLabel,cons);
-		cons.gridwidth = 2;
-		cons.weightx = 1;
-		cons.gridx = 1;
-		getContentPane().add(aussehenScrollPane,cons);
-		
-		cons.gridy = 16;		
+		cons.gridy = 7;		
 		cons.gridx = 0;
 		cons.weightx = 0;
 		cons.gridheight = 4;
@@ -321,19 +282,19 @@ public class KulturEditFrame extends JFrame {
 		cons.weightx = 1;
 		cons.gridx = 1;
 		getContentPane().add(beschreibungScrollPane,cons);
-		
-		cons.gridy = 0;		
-		cons.gridx = 3;
+				
+		cons.gridy = 11;		
+		cons.gridx = 0;
 		cons.weightx = 0;
 		cons.gridheight = 4;
 		cons.gridwidth = 1;
 		getContentPane().add(eigenschaftLabel,cons);
 		cons.gridwidth = 2;
 		cons.weightx = 1;
-		cons.gridx = 4;
+		cons.gridx = 1;
 		getContentPane().add(eigenschaftScrollPane,cons);
 		
-		cons.gridy = 4;
+		cons.gridy = 0;
 		cons.gridx = 3;
 		cons.weightx = 0;
 		cons.gridheight = 4;
@@ -344,7 +305,7 @@ public class KulturEditFrame extends JFrame {
 		cons.gridx = 4;
 		getContentPane().add(vorteilScrollPane,cons);
 		
-		cons.gridy = 8;
+		cons.gridy = 4;
 		cons.gridx = 3;
 		cons.weightx = 0;
 		cons.gridheight = 4;
@@ -355,7 +316,7 @@ public class KulturEditFrame extends JFrame {
 		cons.gridx = 4;
 		getContentPane().add(nachteilScrollPane,cons);
 
-		cons.gridy = 12;
+		cons.gridy = 8;
 		cons.gridx = 3;
 		cons.weightx = 0;
 		cons.gridheight = 4;
@@ -365,6 +326,17 @@ public class KulturEditFrame extends JFrame {
 		cons.weightx = 1;
 		cons.gridx = 4;
 		getContentPane().add(talentScrollPane,cons);
+		
+		cons.gridy = 12;
+		cons.gridx = 3;
+		cons.weightx = 0;
+		cons.gridheight = 4;
+		cons.gridwidth = 1;
+		getContentPane().add(professionLabel,cons);
+		cons.gridwidth = 2;
+		cons.weightx = 1;
+		cons.gridx = 4;
+		getContentPane().add(professionScrollPane,cons);
 		
 		cons.gridheight = 1;
 		cons.gridy = 17;

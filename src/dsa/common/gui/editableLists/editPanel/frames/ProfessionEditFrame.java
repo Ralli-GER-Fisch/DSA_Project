@@ -68,22 +68,22 @@ public class ProfessionEditFrame extends JFrame {
 		gemodLabel.setAlignmentY(0);
 		JSpinner gemodSP = new JSpinner();
 		gemodSP.setValue(profession.getGenerierungskosten()!=null?profession.getGenerierungskosten():new Integer(0));
-		
+		/*
 		JLabel lemodLabel = new JLabel("Lebenspunkte-Modifikator");
 		lemodLabel.setAlignmentY(0);
 		JSpinner lemodSP = new JSpinner();
 		lemodSP.setValue(profession.getLebenspunkte_modifikator()!=null?profession.getLebenspunkte_modifikator():new Integer(0));
-		
+		*/
 		JLabel aumodLabel = new JLabel("Ausdauer-Modifikator");
 		aumodLabel.setAlignmentY(0);
 		JSpinner aumodSP = new JSpinner();
 		aumodSP.setValue(profession.getAusdauer_modifikator()!=null?profession.getAusdauer_modifikator():new Integer(0));
-		
+		/*
 		JLabel mrmodLabel = new JLabel("Magieresistenz-Modifikator");
 		mrmodLabel.setAlignmentY(0);
 		JSpinner mrmodSP = new JSpinner();
 		mrmodSP.setValue(profession.getMagieresistenz_modifikator()!=null?profession.getMagieresistenz_modifikator():new Integer(0));
-		
+		*/
 		JLabel beschreibungLabel = new JLabel("Beschreibung");
 		beschreibungLabel.setAlignmentY(0);
 		

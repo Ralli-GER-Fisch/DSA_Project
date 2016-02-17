@@ -44,7 +44,7 @@ public class Talent {
 	@OneToMany(mappedBy="pk.talent",cascade=CascadeType.ALL,orphanRemoval=true)
 	private Set<Probe> proben;
 	
-	public final static int		TYP_KAMPF = 0,
+	public final static byte	TYP_KAMPF = 0,
 								TYP_KOERPERLICH = 1,
 								TYP_GESELLSCHAFTLICH = 2,
 								TYP_NATUR = 3,
@@ -53,7 +53,7 @@ public class Talent {
 								TYP_SPRACHE = 6,
 								TYP_SCHRIFT = 7,
 								TYP_GABE = 8;
-	public final static int		GRUPPE_BASIS = 0,
+	public final static byte	GRUPPE_BASIS = 0,
 								GRUPPE_SPEZIAL = 1,
 								GRUPPE_BERUF = 2;
 	public final static String	TYP_KAMPF_STR = "Kampf-Talent",
@@ -78,8 +78,8 @@ public class Talent {
 	/*--------------------    Function   Area --------------------*/
 	
 	/**#################### util ####################**/
-	public static String getGruppeStringById(Long id){
-		switch(id.intValue()){
+	public static String getGruppeStringById(Byte id){
+		switch(id.byteValue()){
 			case GRUPPE_BASIS:
 				return GRUPPE_BASIS_STR;
 			case GRUPPE_BERUF:
@@ -90,7 +90,7 @@ public class Talent {
 				return null;
 		}
 	}
-	public static int getGruppeIdByString(String name){
+	public static byte getGruppeIdByString(String name){
 		switch(name){
 			case GRUPPE_BASIS_STR:
 				return GRUPPE_BASIS;
@@ -102,8 +102,8 @@ public class Talent {
 				return -1;
 		}
 	}
-	public static String getTypStringById(Long id){
-		switch(id.intValue()){
+	public static String getTypStringById(Byte id){
+		switch(id.byteValue()){
 			case TYP_GABE:
 				return TYP_GABE_STR;
 			case TYP_GESELLSCHAFTLICH:
@@ -126,7 +126,7 @@ public class Talent {
 				return null;
 		}
 	}
-	public static int getTypIdByString(String name){
+	public static byte getTypIdByString(String name){
 		switch(name){
 			case TYP_GABE_STR:
 				return TYP_GABE;
